@@ -1,0 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Application.TretmaniCourse
+{
+    public class TretmaniDto
+    {
+        public int Id { get; set; }
+        public string Emri { get; set; }
+        public string Pershkrimi { get; set; }
+        public float Cmimi { get; set; }
+    }
+}
