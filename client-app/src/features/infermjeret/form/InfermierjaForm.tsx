@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
@@ -17,7 +17,7 @@ import { Infermierja } from "../../../app/models/infermierja";
 
 
 export default observer( function InfermierjaForm (){
-    const history = useHistory();
+    const navigate = useNavigate();
     const {infermierjaStore} = useStore();
     const {createInfermierja, updateInfermierja, loadInfermierja, 
     loading, loadingInitial} = infermierjaStore;
@@ -59,9 +59,9 @@ export default observer( function InfermierjaForm (){
                 ...infermierja,
                 id: uuid()
             };
-            createInfermierja(newInfermierja).then(() => history.push(`/infermjeret/${newInfermierja.id}`))
+            createInfermierja(newInfermierja).then(() => navigate(`/infermjeret/${newInfermierja.id}`))
             }else{
-                updateInfermierja(infermierja).then(() => history.push(`/infermjeret/${infermierja.id}`))  
+                updateInfermierja(infermierja).then(() => navigate(`/infermjeret/${infermierja.id}`))  
     }
 }
     

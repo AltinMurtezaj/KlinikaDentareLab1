@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
@@ -10,14 +10,15 @@ import * as Yup from 'yup';
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MyDateInput from "./MyDateInput";
 import { Termini } from "../../../app/models/termini";
+import MySelectInput from "./MySelectInput";
 
 
 
 
 
 export default observer( function TerminiForm (){
-    const history = useHistory();
-    const {terminiStore} = useStore();
+    const navigate = useNavigate();
+    const {terminiStore, doktoriStore} = useStore();
     const {createTermini, updateTermini, loadTermini, 
     loading, loadingInitial} = terminiStore;
     const {id} = useParams<{id: string}>();
@@ -48,9 +49,9 @@ export default observer( function TerminiForm (){
                 ...termini,
                 id: uuid()
             };
-            createTermini(newTermini).then(() => history.push(`/terminet/${newTermini.id}`))
+            createTermini(newTermini).then(() => navigate(`/terminet/${newTermini.id}`))
             }else{
-                updateTermini(termini).then(() => history.push(`/terminet/${termini.id}`))
+                updateTermini(termini).then(() => navigate(`/terminet/${termini.id}`))
             }
         
     }
@@ -74,8 +75,11 @@ export default observer( function TerminiForm (){
                         name='data'
                         showTimeSelect
                         timeCaption='time'
-                        dateFormat='MMMM d, yyyy h:mm aa'
+                        dateFormat='MMMM d, yyyy'
                     />
+                    {/* <MySelectInput options={doktoriStore.doktoriByEmri.map((doktori)=>{
+                            return {text:doktori.emri,value:doktori.id}
+                        })}  placeholder='doktori' name="doktoriId"/> */}
                     <MyTextInput placeholder='Orari' name='orari'/>
                     <MyTextInput placeholder='Pershkrimi' name='pershkrimi'/>
                     <Button 

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
@@ -14,7 +14,7 @@ import { Laboranti } from "../../../app/models/laboranti";
 
 
 export default observer( function LaborantiForm (){
-    const history = useHistory();
+    const navigate = useNavigate();
     const {laborantiStore} = useStore();
     const {createLaboranti, updateLaboranti, loadLaboranti, 
     loading, loadingInitial} = laborantiStore;
@@ -59,9 +59,9 @@ export default observer( function LaborantiForm (){
                 ...laboranti,
                 id: uuid()
             };
-            createLaboranti(newLaboranti).then(() => history.push(`/laborantet/${newLaboranti.id}`))
+            createLaboranti(newLaboranti).then(() => navigate(`/laborantet/${newLaboranti.id}`))
             }else{
-                updateLaboranti(laboranti).then(() => history.push(`/laborantet/${laboranti.id}`))
+                updateLaboranti(laboranti).then(() => navigate(`/laborantet/${laboranti.id}`))
             }
         
     }

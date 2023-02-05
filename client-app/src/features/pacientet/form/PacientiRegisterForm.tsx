@@ -8,14 +8,14 @@ import MySelectInput from "./MySelectInput";
 import MyDateInput from "./MyDateInput";
 import { gjiniaOption } from "../../../app/common/options/gjiniaOptions";
 import ValidationErrors from "../../errors/ValidationErrors";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { specializimiOptions } from "../../../app/common/options/specializimiOptions";
 
 
 
 export default observer( function PacientiRegisterForm (){
     const {userStore} = useStore();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const validationSchema = Yup.object({
         emri: Yup.string().required('This field must need to be filled'),
@@ -44,7 +44,7 @@ export default observer( function PacientiRegisterForm (){
         gjinia: '',
         error:null}}
         onSubmit={(values,{setErrors})=>userStore.registerPacienti(values).then(()=>{
-            history.push('/pacientet');
+            navigate('/pacientet');
         }).catch(
             error=>{setErrors({error});console.log(error);}
         )}

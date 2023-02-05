@@ -1,5 +1,7 @@
 import { User, UserFormValues } from "./user";
 
+
+
 export interface Doktori extends User {
     kualifikimi: string;
     specializimi: string;

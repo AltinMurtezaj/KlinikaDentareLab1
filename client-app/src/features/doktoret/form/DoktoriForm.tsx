@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
@@ -17,7 +17,7 @@ import { Doktori } from "../../../app/models/doktori";
 
 
 export default observer( function DoktoriForm (){
-    const history = useHistory();
+    const navigate = useNavigate();
     const {doktoriStore} = useStore();
     const {createDoktori, updateDoktori, loadDoktori, 
     loading, loadingInitial} = doktoriStore;
@@ -58,9 +58,9 @@ export default observer( function DoktoriForm (){
                 ...doktori,
                 id: uuid()
             };
-            createDoktori(newDoktori).then(() => history.push(`/doktoret/${newDoktori.id}`))
+            createDoktori(newDoktori).then(() => navigate(`/doktoret/${newDoktori.id}`))
             }else{
-                updateDoktori(doktori).then(() => history.push(`/doktoret/${doktori.id}`))
+                updateDoktori(doktori).then(() => navigate(`/doktoret/${doktori.id}`))
             }
         
     }

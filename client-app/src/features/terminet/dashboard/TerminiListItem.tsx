@@ -28,6 +28,7 @@ export default function TerminiListItem({termini}: Props){
                     <Icon name ='time'/> {format (termini.data!, 'dd MMM yyyy h:mm aa')}
                     <Icon name ='marker'/> {termini.orari}
                     <Icon name ='marker'/> {termini.pershkrimi}
+                    <Icon name ='marker'/> {}
                 </span>
             </Segment>
             <Segment clearing>

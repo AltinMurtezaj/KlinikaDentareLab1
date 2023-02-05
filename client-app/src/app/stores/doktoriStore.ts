@@ -28,6 +28,20 @@ export default class DoktoriStore{
             }, {} as {[key: string]: Doktori[]})
         )
     }
+    get doktoriByEmri(){
+        return Array.from(this.doktoriRegistry.values()).sort((a,b) =>{
+            let fa = a.emri!.toLowerCase(),
+                fb = b.emri!.toLowerCase();
+
+                if(fa<fb){
+                    return -1;
+                }
+                if(fa>fb){
+                    return 1;
+                }
+                return 0;
+        });
+    }
 
     loadDoktoret = async () => { 
         this.loadingInitial = true;

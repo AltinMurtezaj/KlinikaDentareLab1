@@ -7,22 +7,24 @@ import LoginForm from "../users/LoginForm";
 import RegisterForm from "../users/RegisterForm";
 
 export default observer(function HomePage(){
-    const {userStore, modalStore} = useStore();
+    const {userStore, userStore:{user}, modalStore} = useStore();
     return(
         <Segment inverted textAlign="center" vertical className="masthead">
             <Container text>
                 <Header as='h1' inverted>
                     <Image size ='massive' src='/assets/dhambi.png' alt='logo' style={{marginBottom:12}} />
                     Dental+
+                    
                 </Header>
                 {userStore.isLoggedIn ? (
                     <>
                     <Header as='h2' inverted content='Welcome to Dental Clinic'/>
-
+                    {user?.discriminator==="Pacienti" ?(
                         <Button as ={Link} to='/terminet' size='huge' inverted>
                                 Go to Appointments
                         </Button>
-
+                            ):
+                            <>
                         <Button as ={Link} to='/doktoret' size='huge' inverted>
                             Go to Doctors
                         </Button>
@@ -50,15 +52,14 @@ export default observer(function HomePage(){
                         <Button as ={Link} to='/pastruset' size='huge' inverted>
                             Go to Cleaner's
                         </Button>
+                        </>
+                        }
                     </>
                     
                 ) : (
                     <>
                     <Button onClick={() => modalStore.openModal(<LoginForm />)}  size='huge' inverted>
                             Login!
-                    </Button>
-                    <Button onClick={() => modalStore.openModal(<RegisterForm/>)}  size='huge' inverted>
-                            Register!
                     </Button>
                     </>
                 )}

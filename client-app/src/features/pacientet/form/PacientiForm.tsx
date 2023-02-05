@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
@@ -15,7 +15,7 @@ import { Pacienti } from "../../../app/models/pacienti";
 
 
 export default observer( function PacientiForm (){
-    const history = useHistory();
+    const navigate = useNavigate();
     const {pacientiStore} = useStore();
     const {createPacienti, updatePacienti, loadPacienti, 
     loading, loadingInitial} = pacientiStore;
@@ -54,9 +54,9 @@ export default observer( function PacientiForm (){
                 ...pacienti,
                 id: uuid()
             };
-            createPacienti(newPacienti).then(() => history.push(`/pacientet/${newPacienti.id}`))
+            createPacienti(newPacienti).then(() => navigate(`/pacientet/${newPacienti.id}`))
             }else{
-                updatePacienti(pacienti).then(() => history.push(`/pacientet/${pacienti.id}`))
+                updatePacienti(pacienti).then(() => navigate(`/pacientet/${pacienti.id}`))
             }
         
     }

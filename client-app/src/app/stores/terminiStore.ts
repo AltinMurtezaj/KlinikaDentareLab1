@@ -64,7 +64,7 @@ export default class TerminiStore{
         }
     }
     private setTermini = (termini: Termini) => {
-        termini.data = new Date(termini.data!);
+        
         this.terminiRegistry.set(termini.id, termini);
     }
 

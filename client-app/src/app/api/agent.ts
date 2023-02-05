@@ -1,14 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { history } from "../..";
-import { Accountant } from "../models/accountant";
 import { Doktori, DoktoriFormValues } from "../models/doktori";
-import { Farmacisti } from "../models/farmacisti";
 import { Infermierja, InfermierjaFormValues } from "../models/infermierja";
 import { Laboranti } from "../models/laboranti";
 import { Pacienti, PacientiFormValues } from "../models/pacienti";
-import { Pastruesi } from "../models/pastruesi";
-import { Terapisti } from "../models/terapisti";
 import { Termini } from "../models/termini";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
@@ -35,7 +30,7 @@ axios.interceptors.response.use(async response => {
     switch (status) {
         case 400:
            if(config.method === 'get' && data.errors.hasOwnProperty('id')){
-            history.push('/not-found');
+            return 'error';
            }
            if(data.errors){
             const modalStateErrors = [];
@@ -51,11 +46,12 @@ axios.interceptors.response.use(async response => {
             toast.error('unauthorized');
             break;
         case 404:
-            history.push('/not-found');
+            console.log(error.response);
             break;
         case 500:
+            toast.error('/server-error');
             store.commonStore.setServerError(data);
-            history.push('/server-error');
+            
             break;
     }
     return Promise.reject(error);
@@ -109,13 +105,6 @@ const Terminet = {
     delete: (id: string) => axios.delete<void>(`Termini/${id}`)
 }
 
-const Pastrueset = {
-    list: () => requests.get<Pastruesi[]>('Pastruesi'),
-    details: (id: string) => requests.get<Pastruesi>(`Pastruesi/${id}`),
-    create: (pastruesi: Pastruesi) => axios.post<void>('Pastruesi', pastruesi),
-    update: (pastruesi: Pastruesi) => axios.put<void>(`Pastruesi/${pastruesi.id}`,pastruesi),
-    delete: (id: string) => axios.delete<void>(`Pastruesi/${id}`)
-}
 
 const Account = {
     current: () => requests.get<User>('/account'),
@@ -133,33 +122,6 @@ const AccountPacienti = {
     register : (user:PacientiFormValues)=> requests.post<PacientiFormValues>('PacientiAccount/register', user),
 }
 
-const Terapistet = {
-    list: () => requests.get<Terapisti[]>('Terapist'),
-    details: (id: string) => requests.get<Terapisti>(`Terapist/${id}`),
-    create: (terapisti: Terapisti) => axios.post<void>('Terapist', terapisti),
-    update: (terapisti: Terapisti) => axios.put<void>(`Terapist/${terapisti.id}`,terapisti),
-    delete: (id: string) => axios.delete<void>(`Pacient/${id}`)
-}
-
-const Accountants = {
-    list: () => requests.get<Accountant[]>('Accountant'),
-    details: (id: string) => requests.get<Accountant>(`Accountant/${id}`),
-    create: (accountant: Accountant) => axios.post<void>('Accountant', accountant),
-    update: (accountant: Accountant) => axios.put<void>(`Accountant/${accountant.id}`,accountant),
-    delete: (id: string) => axios.delete<void>(`Accountant/${id}`)
-}
-
-const Farmacistet = {
-    list: () => requests.get<Farmacisti[]>('Farmacisti'),
-    details: (id: string) => requests.get<Farmacisti>(`Farmacisti/${id}`),
-    create: (farmacisti: Farmacisti) => axios.post<void>('Farmacisti', farmacisti),
-    update: (farmacisti: Farmacisti) => axios.put<void>(`Farmacisti/${farmacisti.id}`,farmacisti),
-    delete: (id: string) => axios.delete<void>(`Farmacisti/${id}`)
-}
-
-
-
-
 const agent = {
     AccountPacienti,
     AccountDoktori,
@@ -170,10 +132,6 @@ const agent = {
     Doktoret,
     Pacientet,
     Terminet,
-    Pastrueset,
-    Terapistet,
-    Accountants,
-    Farmacistet
 }
 
 export default agent;

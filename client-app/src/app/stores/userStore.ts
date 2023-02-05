@@ -1,5 +1,4 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { history } from "../..";
 import agent from "../api/agent";
 import { DoktoriFormValues } from "../models/doktori";
 import { InfermierjaFormValues } from "../models/infermierja";
@@ -35,7 +34,7 @@ export default class userStore{
         store.commonStore.setToken(null);
         window.localStorage.removeItem('jwt');
         this.user = null;
-        history.push('/');
+       
     }
 
     getUser = async () => {
@@ -52,7 +51,6 @@ export default class userStore{
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
-            history.push('/infermjeret');
             store.modalStore.closeModal();
         }catch(error){
             throw error;
@@ -61,8 +59,6 @@ export default class userStore{
     registerInfermierja = async (creds:InfermierjaFormValues)=>{
         try{
              await agent.AccountInfermierja.register(creds);
-             history.push('/infermjeret');
-            
             
         }catch(error){
             throw error;
@@ -71,8 +67,6 @@ export default class userStore{
     registerDoktori = async (creds:DoktoriFormValues)=>{
         try{
              await agent.AccountDoktori.register(creds);
-             history.push('/doktoret');
-            
             
         }catch(error){
             throw error;
@@ -81,7 +75,6 @@ export default class userStore{
     registerPacienti = async (creds:PacientiFormValues)=>{
         try{
              await agent.AccountPacienti.register(creds);
-             history.push('/pacientet');
             
             
         }catch(error){

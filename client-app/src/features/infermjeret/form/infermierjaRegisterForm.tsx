@@ -9,13 +9,14 @@ import { specializimiOptions } from "../../../app/common/options/specializimiOpt
 import MyDateInput from "./MyDateInput";
 import { gjiniaOption } from "../../../app/common/options/gjiniaOptions";
 import ValidationErrors from "../../errors/ValidationErrors";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 
 
 export default observer( function InfermierjaRegisterForm (){
     const {userStore} = useStore();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const validationSchema = Yup.object({
         emri: Yup.string().required('This field must need to be filled'),
@@ -49,7 +50,7 @@ export default observer( function InfermierjaRegisterForm (){
         gjinia: '',
         error:null}}
         onSubmit={(values,{setErrors})=>userStore.registerInfermierja(values).then(()=>{
-            history.push('/infermjeret');
+            navigate('/infermjeret');
         }).catch(
             error=>{setErrors({error});console.log(error);}
         )}
