@@ -5,8 +5,15 @@ import { Infermierja, InfermierjaFormValues } from "../models/infermierja";
 import { Laboranti } from "../models/laboranti";
 import { Pacienti, PacientiFormValues } from "../models/pacienti";
 import { Termini } from "../models/termini";
+import { Kontrolla } from "../models/kontrolla";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
+import { Laboratori } from "../models/laboratori";
+import { Tretmani } from "../models/tretmani";
+import { Udhezimi } from "../models/ushezimi";
+import { XRay } from "../models/xray";
+import { Pagesa } from "../models/pagesa";
+import { PacientiDoktori } from "../models/PacientiDoktori";
 
 const sleep=(delay: number) =>{
     return new Promise ((resolve) => {
@@ -14,7 +21,7 @@ const sleep=(delay: number) =>{
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api/';
+axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
@@ -67,43 +74,96 @@ const requests = {
 }
 
 const Infermjeret = {
-    list: () => requests.get<Infermierja[]>('Infermierja'),
-    details: (id: string) => requests.get<Infermierja>(`Infermierja/${id}`),
-    create: (infermierja: Infermierja) => axios.post<void>('Infermierja', infermierja),
-    update: (infermierja: Infermierja) => axios.put<void>(`Infermierja/${infermierja.id}`,infermierja),
-    delete: (id: string) => axios.delete<void>(`Infermierja/${id}`)
+    list: () => requests.get<Infermierja[]>('/Infermierja'),
+    details: (id: string) => requests.get<Infermierja>(`/Infermierja/${id}`),
+    create: (infermierja: Infermierja) => axios.post<void>('/Infermierja', infermierja),
+    update: (infermierja: Infermierja) => axios.put<void>(`/Infermierja/${infermierja.id}`,infermierja),
+    delete: (id: string) => axios.delete<void>(`/Infermierja/${id}`)
 }
 const Doktoret = {
-    list: () => requests.get<Doktori[]>('Doktori'),
-    details: (id: string) => requests.get<Doktori>(`Doktori/${id}`),
-    create: (doktori: Doktori) => axios.post<void>('Doktori', doktori),
-    update: (doktori: Doktori) => axios.put<void>(`Doktori/${doktori.id}`,doktori),
-    delete: (id: string) => axios.delete<void>(`Doktori/${id}`)
+    list: () => requests.get<Doktori[]>('/Doktori'),
+    details: (id: string) => requests.get<Doktori>(`/Doktori/${id}`),
+    create: (doktori: Doktori) => axios.post<void>('/Doktori', doktori),
+    update: (doktori: Doktori) => axios.put<void>(`/Doktori/${doktori.id}`,doktori),
+    delete: (id: string) => axios.delete<void>(`/Doktori/${id}`)
 }
 
 const Pacientet = {
-    list: () => requests.get<Pacienti[]>('Pacient'),
-    details: (id: string) => requests.get<Pacienti>(`Pacient/${id}`),
-    create: (pacienti: Pacienti) => axios.post<void>('Pacient', pacienti),
-    update: (pacienti: Pacienti) => axios.put<void>(`Pacient/${pacienti.id}`,pacienti),
-    delete: (id: string) => axios.delete<void>(`Pacient/${id}`)
+    list: () => requests.get<Pacienti[]>('/Pacient'),
+    details: (id: string) => requests.get<Pacienti>(`/Pacient/${id}`),
+    create: (pacienti: Pacienti) => axios.post<void>('/Pacient', pacienti),
+    update: (pacienti: Pacienti) => axios.put<void>(`/Pacient/${pacienti.id}`,pacienti),
+    delete: (id: string) => axios.delete<void>(`/Pacient/${id}`)
 }
 
 const Laborantet = {
-    list: () => requests.get<Laboranti[]>('Laboranti'),
-    details: (id: string) => requests.get<Laboranti>(`Laboranti/${id}`),
-    create: (laboranti: Laboranti) => axios.post<void>('Laboranti', laboranti),
-    update: (laboranti: Laboranti) => axios.put<void>(`Laboranti/${laboranti.id}`,laboranti),
-    delete: (id: string) => axios.delete<void>(`Laboranti/${id}`)
+    list: () => requests.get<Laboranti[]>('/Laboranti'),
+    details: (id: string) => requests.get<Laboranti>(`/Laboranti/${id}`),
+    create: (laboranti: Laboranti) => axios.post<void>('/Laboranti', laboranti),
+    update: (laboranti: Laboranti) => axios.put<void>(`/Laboranti/${laboranti.id}`,laboranti),
+    delete: (id: string) => axios.delete<void>(`/Laboranti/${id}`)
 }
 
 const Terminet = {
-    list: () => requests.get<Termini[]>('Termini'),
-    details: (id: string) => requests.get<Termini>(`Termini/${id}`),
-    create: (termini: Termini) => axios.post<void>('Termini', termini),
-    update: (termini: Termini) => axios.put<void>(`Termini/${termini.id}`,termini),
-    delete: (id: string) => axios.delete<void>(`Termini/${id}`)
+    list: () => requests.get<Termini[]>('/Termini'),
+    details: (id: string) => requests.get<Termini>(`/Termini/${id}`),
+    create: (termini: Termini) => axios.post<void>('/Termini', termini),
+    update: (termini: Termini) => axios.put<void>(`/Termini/${termini.id}`,termini),
+    delete: (id: string) => axios.delete<void>(`/Termini/${id}`)
 }
+const Kontrollat = {
+    list: () => requests.get<Kontrolla[]>('/Kontrolla'),
+    details: (id: string) => requests.get<Kontrolla>(`/Kontrolla/${id}`),
+    create: (kontrolla: Kontrolla) => axios.post<void>('/Kontrolla', kontrolla),
+    update: (kontrolla: Kontrolla) => axios.put<void>(`/Kontrolla/${kontrolla.id}`,kontrolla),
+    delete: (id: string) => axios.delete<void>(`/Kontrolla/${id}`)
+}
+const Pagesat = {
+    list: () => requests.get<Pagesa[]>('/Pagesa'),
+    details: (id: string) => requests.get<Pagesa>(`/Pagesa/${id}`),
+    create: (pagesa: Pagesa) => axios.post<void>('/Pagesa', pagesa),
+    update: (pagesa: Pagesa) => axios.put<void>(`/Pagesa/${pagesa.id}`,pagesa),
+    delete: (id: string) => axios.delete<void>(`/Pagesa/${id}`)
+}
+const XRays = {
+    list: () => requests.get<XRay[]>('/XRay'),
+    details: (id: string) => requests.get<XRay>(`/XRay/${id}`),
+    create: (xray: XRay) => axios.post<void>('/XRay', xray),
+    update: (xray: XRay) => axios.put<void>(`/XRay/${xray.Id}`,xray),
+    delete: (id: string) => axios.delete<void>(`/XRay/${id}`)
+}
+const Udhezimet = {
+    list: () => requests.get<Udhezimi[]>('/Udhezimi'),
+    details: (id: string) => requests.get<Udhezimi>(`/Udhezimi/${id}`),
+    create: (udhezimi: Udhezimi) => axios.post<void>('/Udhezimi', udhezimi),
+    update: (udhezimi: Udhezimi) => axios.put<void>(`/Udhezimi/${udhezimi.Id}`,udhezimi),
+    delete: (id: string) => axios.delete<void>(`/Udhezimi/${id}`)
+}
+const Tretmanet = {
+    list: () => requests.get<Tretmani[]>('/Tretmani'),
+    details: (id: string) => requests.get<Tretmani>(`/Tretmani/${id}`),
+    create: (tretmani: Tretmani) => axios.post<void>('/Tretmani', tretmani),
+    update: (tretmani: Tretmani) => axios.put<void>(`/Tretmani/${tretmani.id}`,tretmani),
+    delete: (id: string) => axios.delete<void>(`/Tretmani/${id}`)
+}
+const Laboratoret = {
+    list: () => requests.get<Laboratori[]>('/Laboratori'),
+    details: (id: string) => requests.get<Laboratori>(`/Laboratori/${id}`),
+    create: (laboratori: Laboratori) => axios.post<void>('/Laboratori', laboratori),
+    update: (laboratori: Laboratori) => axios.put<void>(`/Laboratori/${laboratori.id}`,laboratori),
+    delete: (id: string) => axios.delete<void>(`/Laboratori/${id}`)
+}
+// const PacientiDoktori = {
+//     list: () => requests.get<PacientiDoktori[]>('PacientiDoktori'),
+//     details: (id: string) => requests.get<Laboratori>(`PacientiDoktori/${id}`),
+//     create: (laboratori: Laboratori) => axios.post<void>('PacientiDoktori', laboratori),
+//     update: (laboratori: Laboratori) => axios.put<void>(`Laboratori/${laboratori.id}`,laboratori),
+//     detailsById:(id:number)=>request.get<ProfesoriLendaDto>(`/ProfesoriLenda/${id}`),
+//     delete: (id: string) => axios.delete<void>(`Laboratori/${id}`) detailsByProfesoriId:(ProfesoriId:string)=>request.get<ProfesoriLendaDto>(`/ProfesoriLenda/${ProfesoriId}/profesori`)
+// }
+
+
+
 
 
 const Account = {
@@ -132,6 +192,13 @@ const agent = {
     Doktoret,
     Pacientet,
     Terminet,
+    Kontrollat,
+    Pagesat,
+    XRays,
+    Udhezimet,
+    Tretmanet,
+    Laboratoret
+    // PacientiDoktori
 }
 
 export default agent;

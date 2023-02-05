@@ -1,5 +1,8 @@
+import internal from "stream";
+import { Laboratori } from "./laboratori";
+
 export interface Laboranti {
-  id: string;
+  id?: string;
   emri: string;
   datelindja: Date | null;
   kualifikimi: string;
@@ -11,5 +14,5 @@ export interface Laboranti {
   email: string;
   password: string;
   gjinia: string;
-  laboratori: string;
+  laboratori?: Laboratori[];
   }

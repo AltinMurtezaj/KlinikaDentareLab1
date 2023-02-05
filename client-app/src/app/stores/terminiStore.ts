@@ -63,9 +63,8 @@ export default class TerminiStore{
             }
         }
     }
-    private setTermini = (termini: Termini) => {
-        
-        this.terminiRegistry.set(termini.id, termini);
+    private setTermini = (termini: Termini) => { 
+        this.terminiRegistry.set(termini.id!, termini);
     }
 
     private getTermini= (id: string) => {
@@ -82,7 +81,7 @@ export default class TerminiStore{
         try {
             await agent.Terminet.create(termini);
             runInAction(() =>{
-                this.terminiRegistry.set(termini.id, termini);
+                this.terminiRegistry.set(termini.id!, termini);
                 this.selectedTermini = termini;
                 this.editMode = false;
                 this.loading = false;
@@ -100,7 +99,7 @@ export default class TerminiStore{
         try{
             await agent.Terminet.update(termini);
             runInAction(() =>{
-                this.terminiRegistry.set(termini.id, termini);
+                this.terminiRegistry.set(termini.id!, termini);
                 this.selectedTermini = termini;
                 this.editMode = false;
                 this.loading = false;

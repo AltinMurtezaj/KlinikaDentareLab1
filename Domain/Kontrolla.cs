@@ -14,7 +14,6 @@ namespace Domain
         public Pacienti Pacienti { get; set; }
         public int TretmaniId { get; set; }
         public Tretmani Tretmani { get; set; }
-
         public int TerminiId { get; set; }
         public Termini Termini { get; set; }
     }
