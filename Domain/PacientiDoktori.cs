@@ -12,5 +12,6 @@ namespace Domain
         public Pacienti Pacienti { get; set; }
         public string DoktoriId { get; set; }
         public Doktori Doktori { get; set; }
+        public ICollection<XRay> XRay = new List<XRay>();
     }
 }

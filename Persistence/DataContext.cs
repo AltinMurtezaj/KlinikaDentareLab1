@@ -2,6 +2,7 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Domain.Relationships;
 
 namespace Persistence
 {
@@ -22,8 +23,10 @@ public class DataContext : IdentityDbContext<AppUser>
         public DbSet<Tretmani> Tretmanet { get; set; }
         public DbSet<XRay> XRays { get; set; }
         public DbSet<Udhezimi> Udhezimet { get; set; }
-
         public DbSet<PacientiDoktori> PacientiDoktoret { get; set; }
+        public DbSet<PacientiXRay> PacientiXRays { get; set; }
+
+
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
