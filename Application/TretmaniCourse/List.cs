@@ -8,25 +8,35 @@ using Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using Microsoft.Extensions.Logging;
+using Application.Core;
+using AutoMapper;
 
 namespace Application.TretmaniCourse
 {
     public class List
     {
-        public class Query : IRequest<List<Tretmani>>{}
+        public class Query : IRequest<Result<List<TretmaniDto>>>{}
 
-        public class Handler : IRequestHandler<Query, List<Tretmani>>
+        public class Handler : IRequestHandler<Query, Result <List<TretmaniDto>>>
         {
 
             private readonly DataContext _context;
+            private readonly IMapper _mapper;
 
-            public Handler(DataContext context)
+            public Handler(DataContext context, IMapper mapper)
             {
                     _context = context;
+                    _mapper = mapper;
             }
-            public async Task<List<Tretmani>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<TretmaniDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Tretmanet.ToListAsync(cancellationToken);
+                var tretmani = await _context.Tretmanet.Include(x => x.Doktori)
+                                                        .Include(x => x.Pagesa)
+                                                        .Include(x => x.Pacienti)
+                                                        .Include(x => x.Kontrollat)
+                                                        .ToListAsync();
+                var tretmanetList = _mapper.Map<List<TretmaniDto>>(tretmani);
+                return Result<List<TretmaniDto>>.Success(tretmanetList);
             }
             
         }

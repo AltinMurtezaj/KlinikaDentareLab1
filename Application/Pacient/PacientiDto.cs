@@ -2,20 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.AppUserCourse;
+using Application.PacientiDoktoriDTOsss;
+using Application.Payment;
+using Application.TretmaniCourse;
+using Application.TerminiFolder;
+using Application.KontrollaFolder;
 
 namespace Application.Pacient
 {
-    public class PacientiDto
+    public class PacientiDto: AppUserDto
     {
-        public string Id { get; set; }
-        public string Emri { get; set; }
-        public string Mbiemri { get; set; }
-        public string Datelindja { get; set; }
-        public string Gjinia { get; set; }
-        public string Vendbanimi { get; set; }
-        public string Username { get; set; }
-        public string NrKontaktues { get; set; }
-        public string Email { get; set; }
-        public string Discriminator { get; set; }
+        public ICollection<PacientiDoktoriDto> PacientiDoktoret { get; set; } = new List<PacientiDoktoriDto>();
+        public ICollection<KontrollaDto> Kontrollat { get; set; } = new List<KontrollaDto>();
+        public ICollection<TerminiDto> Terminet { get; set; } = new List<TerminiDto>();
+        public ICollection<PagesaDto> Pagesat { get; set; } = new List<PagesaDto>();
+        public ICollection<TretmaniDto> Tretmanet { get; set; } = new List<TretmaniDto>();
     }
 }

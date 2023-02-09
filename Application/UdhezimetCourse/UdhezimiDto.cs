@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.TretmaniCourse;
 
 namespace Application.UdhezimetCourse
 {
@@ -11,5 +12,6 @@ namespace Application.UdhezimetCourse
         public string Emri { get; set; }
         public string Doza { get; set; }
         public int TretmaniId { get; set; }
+        public TretmaniDto Tretmani { get; set; }
     }
 }

@@ -8,25 +8,32 @@ using Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
+using Application.Core;
 
 namespace Application.LaborPerson
 {
     public class List
     {
-        public class Query : IRequest<List<Laboranti>>{}
+        public class Query : IRequest<Result<List<LaborantiDto>>>{}
 
-        public class Handler : IRequestHandler<Query, List<Laboranti>>
+        public class Handler : IRequestHandler<Query, Result <List<LaborantiDto>>>
         {
 
             private readonly DataContext _context;
+            private readonly IMapper _mapper;
 
-            public Handler(DataContext context)
+            public Handler(DataContext context, IMapper mapper)
             {
                     _context = context;
+                    _mapper = mapper;
             }
-            public async Task<List<Laboranti>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<LaborantiDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Laborantet.ToListAsync(cancellationToken);
+                var laborantet = await _context.Laborantet.Include(x => x.Laboratori)
+                                                        .ToListAsync();
+                var laborantetList = _mapper.Map<List<LaborantiDto>>(laborantet);
+                return Result<List<LaborantiDto>>.Success(laborantetList);
             }
             
         }

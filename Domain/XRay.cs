@@ -11,5 +11,6 @@ namespace Domain
         public DateTime Data { get; set; }
         public int TretmaniId { get; set; }
         public Tretmani Tretmani { get; set; }
+        
     }
 }

@@ -15,9 +15,9 @@ namespace Application.Doctor
 {
     public class List
     {
-        public class Query : IRequest<Result<List<Doktori>>>{}
+        public class Query : IRequest<Result<List<DoktoriDto>>>{}
 
-        public class Handler : IRequestHandler<Query, Result<List<Doktori>>>
+        public class Handler : IRequestHandler<Query, Result<List<DoktoriDto>>>
         {
 
             private readonly DataContext _context;
@@ -26,11 +26,16 @@ namespace Application.Doctor
             public Handler(DataContext context, IMapper mapper)
             {
                     _context = context;
+                    _mapper = mapper;
             }
-            public async Task<Result<List<Doktori>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<DoktoriDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var doktori = await _context.Doktoret.ToListAsync();
-                return Result<List<Doktori>>.Success(doktori);
+                var doktoret = await _context.Doktoret.Include(x => x.PacientiDoktoret)
+                                                        .Include(x => x.Tretmanet)
+                                                        .Include(x => x.Terminet)
+                                                        .ToListAsync();
+                var doktoretList = _mapper.Map<List<DoktoriDto>>(doktoret);
+                return Result<List<DoktoriDto>>.Success(doktoretList);
             }
             
         }

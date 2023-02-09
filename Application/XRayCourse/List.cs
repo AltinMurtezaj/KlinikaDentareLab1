@@ -8,27 +8,33 @@ using Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using Microsoft.Extensions.Logging;
+using Application.Core;
+using AutoMapper;
 
 namespace Application.XRayCourse
 {
     public class List
     {
-        public class Query : IRequest<List<XRay>>{}
+        public class Query : IRequest<Result<List<XRayDto>>>{}
 
-        public class Handler : IRequestHandler<Query, List<XRay>>
+        public class Handler : IRequestHandler<Query, Result <List<XRayDto>>>
         {
 
             private readonly DataContext _context;
-
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            
+            public Handler(DataContext context, IMapper mapper)
             {
                     _context = context;
+                    _mapper = mapper;
             }
-            public async Task<List<XRay>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<XRayDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.XRays.ToListAsync(cancellationToken);
+                var xray = await _context.XRays.Include(x => x.Tretmani)
+                                                        .ToListAsync();
+                var xrayList = _mapper.Map<List<XRayDto>>(xray);
+                return Result<List<XRayDto>>.Success(xrayList);
             }
-            
         }
     }
 }

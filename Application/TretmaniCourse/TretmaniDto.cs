@@ -11,5 +11,7 @@ namespace Application.TretmaniCourse
         public string Emri { get; set; }
         public string Pershkrimi { get; set; }
         public float Cmimi { get; set; }
+        public string DoktoriId { get; set; }
+        
     }
 }
