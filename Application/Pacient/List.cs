@@ -22,7 +22,6 @@ namespace Application.Pacient
 
             private readonly DataContext _context;
             private readonly IMapper _mapper;
-
             public Handler(DataContext context, IMapper mapper)
             {
                     _context = context;

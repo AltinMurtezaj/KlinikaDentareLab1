@@ -4,10 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.KontrollaFolder;
 using Application.Pacient;
+using Application.PacientiDoktoriConnection;
+using Application.Relationships.PacientiXRay;
 using Application.TerminiFolder;
 using Application.TretmaniCourse;
+using Application.XRayCourse;
 using AutoMapper;
 using Domain;
+using Domain.Relationships;
 
 namespace Application.Core
 {
@@ -31,6 +35,14 @@ namespace Application.Core
             CreateMap<TretmaniDto, Tretmani>();
             CreateMap<Termini, TerminiDto>();
             CreateMap<TerminiDto, Termini>();
+            CreateMap<XRay, PacientiXRayDto>();
+            CreateMap<Pacienti, PacientiXRayDto>();
+            CreateMap<Pacienti, XRay>();
+            CreateMap<PacientiDto, XRay>();
+            CreateMap<PacientiXRay, PacientiXRayDto>();
+            CreateMap<XRay, XRayDto>();
+            CreateMap<PacientiDoktori, PacientiDoktoriDTO>();
+            CreateMap<PacientiDoktoriDTO, PacientiDoktori>();
             
          
          

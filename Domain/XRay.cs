@@ -8,6 +8,7 @@ namespace Domain
     public class XRay
     {
         public int Id { get; set; }
+        public PacientiDoktori PacientiDoktori { get; set; }
         public DateTime Data { get; set; }
         public int TretmaniId { get; set; }
         public Tretmani Tretmani { get; set; }
