@@ -21,7 +21,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Udhezimi>>> GetUdhezimi()
         {
-            return await Mediator.Send(new List.Query());
+            return HandleResult(await Mediator.Send(new List.Query()));
         }
 
         [HttpGet("{id}")]
