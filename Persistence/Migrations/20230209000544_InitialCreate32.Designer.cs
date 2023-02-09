@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230209000544_InitialCreate32")]
+    partial class InitialCreate32
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,7 +110,10 @@ namespace Persistence.Migrations
                     b.Property<float>("Kosto")
                         .HasColumnType("real");
 
-                    b.Property<string>("PacientiId")
+                    b.Property<int>("PacientiId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PacientiId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("TerminiId")
@@ -119,7 +124,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PacientiId");
+                    b.HasIndex("PacientiId1");
 
                     b.HasIndex("TerminiId")
                         .IsUnique();
@@ -480,7 +485,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Pacienti", "Pacienti")
                         .WithMany("Kontrollat")
-                        .HasForeignKey("PacientiId");
+                        .HasForeignKey("PacientiId1");
 
                     b.HasOne("Domain.Termini", "Termini")
                         .WithOne("Kontrolla")

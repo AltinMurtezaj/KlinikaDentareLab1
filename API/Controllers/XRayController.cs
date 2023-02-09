@@ -9,9 +9,11 @@ using Persistence;
 using MediatR;
 using Application.XRayCourse;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
+    [AllowAnonymous]
     public class XRayController : BaseApiController
     {
         

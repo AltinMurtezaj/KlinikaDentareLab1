@@ -9,5 +9,6 @@ namespace Application.TerminiFolder
     {
         public int Id {get;set;}
         public string Koha {get;set;}
+        public DateTime Data {get;set;}
     }
 }

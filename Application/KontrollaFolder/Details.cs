@@ -14,7 +14,7 @@ namespace Application.KontrollaFolder
     {
         public class Query : IRequest<Kontrolla>
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, Kontrolla>

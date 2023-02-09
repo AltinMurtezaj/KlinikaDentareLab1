@@ -10,11 +10,11 @@ namespace Domain
         public int Id {get;set;}
         public string Koha {get;set;}
         public DateTime Data {get;set;}
-        public int PacientId { get; set; }
+        public string PacientId { get; set; }
         public Pacienti Pacienti { get; set; }
-        public int DoktoriId { get; set; }
+        public string DoktoriId { get; set; }
         public Doktori Doktori { get; set; }
-        public int TerminiId { get; set; }
+        public int KontrollaId { get; set; }
         public Kontrolla Kontrolla { get; set; }
     }
 }

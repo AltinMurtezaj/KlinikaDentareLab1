@@ -1,7 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Domain;
+using Application.Pacient;
+using Application.TerminiFolder;
+using Application.TretmaniCourse;
 
 namespace Application.KontrollaFolder
 {
@@ -9,6 +10,12 @@ namespace Application.KontrollaFolder
     {
         public int Id { get; set; }
         public string EmriKontrolles { get; set; }
-        public int PacientiId { get; set; } 
+        public float Kosto { get; set ; }
+        public string PacientiId { get; set; } 
+        public PacientiDto Pacienti { get; set; }
+        public int TretmaniId { get; set; }
+        public TretmaniDto Tretmani { get; set; }
+        public int TerminiId { get; set; }
+        public TerminiDto Termini { get; set; }
     }
 }

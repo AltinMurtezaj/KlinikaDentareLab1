@@ -10,7 +10,7 @@ namespace Application.Pacient
         public string Id { get; set; }
         public string Emri { get; set; }
         public string Mbiemri { get; set; }
-        public string Mosha { get; set; }
+        public string Datelindja { get; set; }
         public string Gjinia { get; set; }
         public string Vendbanimi { get; set; }
         public string Username { get; set; }

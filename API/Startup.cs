@@ -22,6 +22,7 @@ using FluentValidation.AspNetCore;
 using API.Middleware;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Text.Json.Serialization;
 
 namespace API
 {
@@ -51,6 +52,11 @@ namespace API
             });
             services.AddApplicationServices(_config);
             services.AddIdentityServices(_config);
+            services.AddControllersWithViews();
+             services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
         }
 
         private void AddFluentValidation()
@@ -69,6 +75,7 @@ namespace API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+                
             }
 
             //app.UseHttpsRedirection();

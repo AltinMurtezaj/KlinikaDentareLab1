@@ -57,10 +57,35 @@ public class DataContext : IdentityDbContext<AppUser>
             .WithMany(t => t.Kontrollat)
             .HasForeignKey(p => p.TretmaniId);
 
+            builder.Entity<Kontrolla>()
+            .HasOne(p => p.Pacienti)
+            .WithMany(t => t.Kontrollat)
+            .HasForeignKey(p => p.PacientiId);
+
             builder.Entity<Tretmani>()
             .HasOne(pp => pp.Pagesa)
             .WithOne(u => u.Tretmani)
             .HasForeignKey<Pagesa>(pp => pp.TretmaniId);
+            
+            builder.Entity<Termini>()
+                .HasOne(p => p.Pacienti)
+                .WithMany(t => t.Terminet)
+                .HasForeignKey(p => p.PacientId);
+
+            builder.Entity<Termini>()
+                .HasOne(p => p.Doktori)
+                .WithMany(t => t.Terminet)
+                .HasForeignKey(p => p.DoktoriId);
+            
+            builder.Entity<Termini>()
+                .HasOne(p => p.Kontrolla)
+                .WithOne(t => t.Termini)
+                .HasForeignKey<Kontrolla>(p => p.TerminiId);
+            
+            builder.Entity<Kontrolla>()
+                .HasOne(p => p.Termini)
+                .WithOne(t => t.Kontrolla)
+                .HasForeignKey<Termini>(p => p.KontrollaId);
         }
     }
 
