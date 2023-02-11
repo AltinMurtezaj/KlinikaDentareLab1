@@ -22,6 +22,20 @@ export default class KontrollaStore {
     get kontrollat(){
         return Array.from(this.kontrollaRegistry.values());
     }
+    get kontrollaByEmri(){
+        return Array.from(this.kontrollaRegistry.values()).sort((a,b) =>{
+            let fa = a.emriKontrolles!.toLowerCase(),
+                fb = b.emriKontrolles!.toLowerCase();
+
+                if(fa<fb){
+                    return -1;
+                }
+                if(fa>fb){
+                    return 1;
+                }
+                return 0;
+        });
+    }
     
 
   loadKontrollat = async() => {
