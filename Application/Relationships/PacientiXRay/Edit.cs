@@ -30,7 +30,7 @@ namespace Application.Relationships.PacientiXRay
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var pacientiXRay = await _context.PacientiXRays.FindAsync(request.pacientiXRay.id);
+                var pacientiXRay = await _context.PacientiXRay.FindAsync(request.pacientiXRay.id);
 
                 if (pacientiXRay == null) return null;
 

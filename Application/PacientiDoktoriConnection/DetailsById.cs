@@ -32,7 +32,7 @@ namespace Application.PacientiDoktoriConnection
 
             public async Task<Result<PacientiDoktoriDTO>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientiDoktori = await _context.PacientiDoktoret.Include(x=>x.XRay).SingleOrDefaultAsync(x=>x.Id==request.Id);
+                var pacientiDoktori = await _context.PacientiDoktoret.Include(x=>x.Pacienti).SingleOrDefaultAsync(x=>x.Id==request.Id);
 
                 var pacientiDoktoriToReturn = _mapper.Map<PacientiDoktoriDTO>(pacientiDoktori);
 

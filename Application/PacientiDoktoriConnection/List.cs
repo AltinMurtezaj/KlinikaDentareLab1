@@ -28,7 +28,10 @@ namespace Application.PacientiDoktoriConnection
 
             public async Task<Result<List<PacientiDoktoriDTO>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientet = await _context.PacientiDoktoret.Include(u=>u.XRay).ToListAsync();
+                var pacientet = await _context.PacientiDoktoret.
+                    Include(x => x.Pacienti)
+                    .Include(x => x.Doktori)
+                    .ToListAsync();
                 var pacientetToReturn = _mapper.Map<List<PacientiDoktoriDTO>>(pacientet);
                 return Result<List<PacientiDoktoriDTO>>.Success(pacientetToReturn);
             }

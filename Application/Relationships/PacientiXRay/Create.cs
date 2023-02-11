@@ -28,11 +28,11 @@ namespace Application.Relationships.PacientiXRay
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var pacientiXRay = await _context.PacientiXRays.FirstOrDefaultAsync(x => x.PacientiId == request.PacientiXRay.PacientiId && x.XRayId == request.PacientiXRay.XRayId);
+                var pacientiXRay = await _context.PacientiXRay.FirstOrDefaultAsync(x => x.PacientiId == request.PacientiXRay.PacientiId && x.XRayId == request.PacientiXRay.XRayId);
 
                 if (pacientiXRay == null)
                 {
-                    _context.PacientiXRays.Add(request.PacientiXRay);
+                    _context.PacientiXRay.Add(request.PacientiXRay);
 
                     var result = await _context.SaveChangesAsync() > 0;
 

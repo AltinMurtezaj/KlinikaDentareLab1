@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
 using AutoMapper;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -13,12 +14,12 @@ namespace Application.PacientiDoktoriConnection
 {
     public class ListByDoktori
     {
-        public class Query : IRequest<Result<List<PacientiDoktoriDTO>>> 
+        public class Query : IRequest<Result<List<PacientiDoktori>>> 
         { 
             public string DoktoriId{get;set;}
         }
 
-        public class Handler : IRequestHandler<Query, Result<List<PacientiDoktoriDTO>>>
+        public class Handler : IRequestHandler<Query, Result<List<PacientiDoktori>>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -28,12 +29,12 @@ namespace Application.PacientiDoktoriConnection
                 _context = context;
             }
 
-            public async Task<Result<List<PacientiDoktoriDTO>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<PacientiDoktori>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientet = await _context.PacientiDoktoret.Include(u => u.XRay)
+                var pacientet = await _context.PacientiDoktoret.Include(u => u.Pacienti).ThenInclude(x=>x.XRays)
                 .Where(x=>x.DoktoriId==request.DoktoriId).ToListAsync();
-                var pacientetToReturn = _mapper.Map<List<PacientiDoktoriDTO>>(pacientet);
-                return Result<List<PacientiDoktoriDTO>>.Success(pacientetToReturn);
+                var pacientetToReturn = _mapper.Map<List<PacientiDoktori>>(pacientet);
+                return Result<List<PacientiDoktori>>.Success(pacientetToReturn);
             }
         }
     }

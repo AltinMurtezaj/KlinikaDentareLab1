@@ -121,9 +121,6 @@ namespace Persistence.Migrations
 
                     b.HasIndex("PacientiId");
 
-                    b.HasIndex("TerminiId")
-                        .IsUnique();
-
                     b.HasIndex("TretmaniId");
 
                     b.ToTable("Kontrollat");
@@ -139,15 +136,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Emri")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LaborantiId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LaborantiId1")
+                    b.Property<string>("LaborantiId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LaborantiId1");
+                    b.HasIndex("LaborantiId");
 
                     b.ToTable("Laboratori");
                 });
@@ -206,6 +200,28 @@ namespace Persistence.Migrations
                     b.ToTable("Pagesat");
                 });
 
+            modelBuilder.Entity("Domain.Relationships.PacientiXRay", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("PacientiId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("XRayId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("PacientiId");
+
+                    b.HasIndex("XRayId");
+
+                    b.ToTable("PacientiXRay");
+                });
+
             modelBuilder.Entity("Domain.Termini", b =>
                 {
                     b.Property<int>("Id")
@@ -231,6 +247,9 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DoktoriId");
+
+                    b.HasIndex("KontrollaId")
+                        .IsUnique();
 
                     b.HasIndex("PacientId");
 
@@ -304,10 +323,18 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TretmaniId")
+                    b.Property<int>("PacientiId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PacientiId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("TretmaniId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PacientiId1");
 
                     b.HasIndex("TretmaniId");
 
@@ -482,12 +509,6 @@ namespace Persistence.Migrations
                         .WithMany("Kontrollat")
                         .HasForeignKey("PacientiId");
 
-                    b.HasOne("Domain.Termini", "Termini")
-                        .WithOne("Kontrolla")
-                        .HasForeignKey("Domain.Kontrolla", "TerminiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Tretmani", "Tretmani")
                         .WithMany("Kontrollat")
                         .HasForeignKey("TretmaniId")
@@ -496,16 +517,14 @@ namespace Persistence.Migrations
 
                     b.Navigation("Pacienti");
 
-                    b.Navigation("Termini");
-
                     b.Navigation("Tretmani");
                 });
 
             modelBuilder.Entity("Domain.Laboratori", b =>
                 {
                     b.HasOne("Domain.Laboranti", "Laboranti")
-                        .WithMany("Laboratori")
-                        .HasForeignKey("LaborantiId1");
+                        .WithMany("Laboratoret")
+                        .HasForeignKey("LaborantiId");
 
                     b.Navigation("Laboranti");
                 });
@@ -540,17 +559,42 @@ namespace Persistence.Migrations
                     b.Navigation("Tretmani");
                 });
 
+            modelBuilder.Entity("Domain.Relationships.PacientiXRay", b =>
+                {
+                    b.HasOne("Domain.Pacienti", "Pacienti")
+                        .WithMany()
+                        .HasForeignKey("PacientiId");
+
+                    b.HasOne("Domain.XRay", "XRay")
+                        .WithMany()
+                        .HasForeignKey("XRayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pacienti");
+
+                    b.Navigation("XRay");
+                });
+
             modelBuilder.Entity("Domain.Termini", b =>
                 {
                     b.HasOne("Domain.Doktori", "Doktori")
                         .WithMany("Terminet")
                         .HasForeignKey("DoktoriId");
 
+                    b.HasOne("Domain.Kontrolla", "Kontrolla")
+                        .WithOne("Termini")
+                        .HasForeignKey("Domain.Termini", "KontrollaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Pacienti", "Pacienti")
                         .WithMany("Terminet")
                         .HasForeignKey("PacientId");
 
                     b.Navigation("Doktori");
+
+                    b.Navigation("Kontrolla");
 
                     b.Navigation("Pacienti");
                 });
@@ -573,7 +617,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Udhezimi", b =>
                 {
                     b.HasOne("Domain.Tretmani", "Tretmani")
-                        .WithMany()
+                        .WithMany("Udhezimet")
                         .HasForeignKey("TretmaniId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -583,18 +627,22 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.XRay", b =>
                 {
+                    b.HasOne("Domain.Pacienti", "Pacienti")
+                        .WithMany("XRays")
+                        .HasForeignKey("PacientiId1");
+
                     b.HasOne("Domain.Tretmani", "Tretmani")
                         .WithMany()
-                        .HasForeignKey("TretmaniId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TretmaniId");
+
+                    b.Navigation("Pacienti");
 
                     b.Navigation("Tretmani");
                 });
 
-            modelBuilder.Entity("Domain.Termini", b =>
+            modelBuilder.Entity("Domain.Kontrolla", b =>
                 {
-                    b.Navigation("Kontrolla");
+                    b.Navigation("Termini");
                 });
 
             modelBuilder.Entity("Domain.Tretmani", b =>
@@ -602,6 +650,8 @@ namespace Persistence.Migrations
                     b.Navigation("Kontrollat");
 
                     b.Navigation("Pagesa");
+
+                    b.Navigation("Udhezimet");
                 });
 
             modelBuilder.Entity("Domain.Doktori", b =>
@@ -615,7 +665,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Laboranti", b =>
                 {
-                    b.Navigation("Laboratori");
+                    b.Navigation("Laboratoret");
                 });
 
             modelBuilder.Entity("Domain.Pacienti", b =>
@@ -629,6 +679,8 @@ namespace Persistence.Migrations
                     b.Navigation("Terminet");
 
                     b.Navigation("Tretmanet");
+
+                    b.Navigation("XRays");
                 });
 #pragma warning restore 612, 618
         }

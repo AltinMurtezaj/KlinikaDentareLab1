@@ -9,6 +9,6 @@ namespace Domain
     {
         public string Kualifikimi { get; set; }
         public string Specializimi { get; set; }
-        public ICollection<Laboratori> Laboratori { get; set; } = new List<Laboratori>();
+        public ICollection<Laboratori> Laboratoret { get; set; } = new List<Laboratori>();
     }
 }

@@ -29,7 +29,7 @@ namespace Application.Relationships.PacientiXRay
 
             public async Task<Result<Domain.Relationships.PacientiXRay>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientiXRay = await _context.PacientiXRays.FirstOrDefaultAsync(x => x.PacientiId == request.PacientId && x.XRayId == request.XRayId);
+                var pacientiXRay = await _context.PacientiXRay.FirstOrDefaultAsync(x => x.PacientiId == request.PacientId && x.XRayId == request.XRayId);
 
                 return Result<Domain.Relationships.PacientiXRay>.Success(pacientiXRay);
             }

@@ -31,7 +31,7 @@ namespace Application.Relationships.PacientiXRay
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var pacientiXRay = await _context.PacientiXRays.FirstOrDefaultAsync(x => x.PacientiId == request.PacientId && x.XRayId == request.XRayId);
+                var pacientiXRay = await _context.PacientiXRay.FirstOrDefaultAsync(x => x.PacientiId == request.PacientId && x.XRayId == request.XRayId);
 
 
                 if (pacientiXRay == null) return null;

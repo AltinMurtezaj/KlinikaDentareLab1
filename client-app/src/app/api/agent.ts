@@ -14,6 +14,7 @@ import { Udhezimi } from "../models/ushezimi";
 import { XRay } from "../models/xray";
 import { Pagesa } from "../models/pagesa";
 import { PacientiDoktori } from "../models/PacientiDoktori";
+import { PacientiXRay } from "../models/pacientiXRay";
 
 const sleep=(delay: number) =>{
     return new Promise ((resolve) => {
@@ -153,17 +154,22 @@ const Laboratoret = {
     update: (laboratori: Laboratori) => axios.put<void>(`/Laboratori/${laboratori.id}`,laboratori),
     delete: (id: string) => axios.delete<void>(`/Laboratori/${id}`)
 }
-// const PacientiDoktori = {
-//     list: () => requests.get<PacientiDoktori[]>('PacientiDoktori'),
-//     details: (id: string) => requests.get<Laboratori>(`PacientiDoktori/${id}`),
-//     create: (laboratori: Laboratori) => axios.post<void>('PacientiDoktori', laboratori),
-//     update: (laboratori: Laboratori) => axios.put<void>(`Laboratori/${laboratori.id}`,laboratori),
-//     detailsById:(id:number)=>request.get<ProfesoriLendaDto>(`/ProfesoriLenda/${id}`),
-//     delete: (id: string) => axios.delete<void>(`Laboratori/${id}`) detailsByProfesoriId:(ProfesoriId:string)=>request.get<ProfesoriLendaDto>(`/ProfesoriLenda/${ProfesoriId}/profesori`)
-// }
-
-
-
+const PacientiDoktori = {
+    list: () => requests.get<PacientiDoktori[]>('/PacientiDoktori'),
+    details: (id: string) => requests.get<PacientiDoktori>(`/PacientiDoktori/${id}`),
+    create: (pacientidoktori: PacientiDoktori) => axios.post<void>('/PacientiDoktori', pacientidoktori),
+    update: (pacientidoktori: PacientiDoktori) => axios.put<void>(`/PacientiDoktori/${pacientidoktori.id}`,pacientidoktori),
+    delete: (id: string) => axios.delete<void>(`/PacientiDoktori/${id}`),
+    detailsbyId: (id: string) => requests.get<PacientiDoktori>(`/PacientiDoktori/${id}`),
+    }
+const PacientiXRay = {
+    list: () => requests.get<PacientiXRay[]>('/PacientiXRay'),
+    details: (id: string) => requests.get<PacientiXRay>(`/PacientiXRay/${id}`),
+    create: (pacientixray: PacientiXRay) => axios.post<void>('/PacientiXRay', pacientixray),
+    update: (pacientixray: PacientiXRay) => axios.put<void>(`/PacientiXRay/${pacientixray.id}`,pacientixray),
+    delete: (id: string) => axios.delete<void>(`/PacientiXRay/${id}`),
+    detailsbyId: (id: string) => requests.get<PacientiXRay>(`/PacientiXRay/${id}`),
+}
 
 
 const Account = {
@@ -197,8 +203,9 @@ const agent = {
     XRays,
     Udhezimet,
     Tretmanet,
-    Laboratoret
-    // PacientiDoktori
+    Laboratoret,
+    PacientiDoktori,
+    PacientiXRay
 }
 
 export default agent;

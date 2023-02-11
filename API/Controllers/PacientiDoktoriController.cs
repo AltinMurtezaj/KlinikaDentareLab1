@@ -26,8 +26,8 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Application.PacientiDoktoriConnection.Create.Command{ PacientiDoktori = pacientiDoktori}));
         }
         [HttpGet("{PacientiId}/{DoktoriId}")]
-        public async Task<IActionResult> getPacientiDoktori(string PacientId,string DoktoriId){
-            return HandleResult(await Mediator.Send(new Application.PacientiDoktoriConnection.Details.Query { PacientiId = PacientId,DoktoriId=DoktoriId }));
+        public async Task<IActionResult> getPacientiDoktori(string PacientiId,string DoktoriId){
+            return HandleResult(await Mediator.Send(new Application.PacientiDoktoriConnection.Details.Query { PacientiId = PacientiId,DoktoriId=DoktoriId }));
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> getPacientiDoktori(int Id){
@@ -35,9 +35,9 @@ namespace API.Controllers
         }
        
         [HttpDelete("{PacientiId}/{DoktoriId}")]
-        public async Task<ActionResult<PacientiDoktoriDTO>> deleteConnectionPL(string PacientId,string DoktoriId )
+        public async Task<ActionResult<PacientiDoktoriDTO>> deleteConnectionPL(string PacientiId,string DoktoriId )
         {
-            return HandleResult(await Mediator.Send(new Application.PacientiDoktoriConnection.Delete.Command { PacientiId = PacientId,DoktoriId=DoktoriId}));
+            return HandleResult(await Mediator.Send(new Application.PacientiDoktoriConnection.Delete.Command { PacientiId = PacientiId,DoktoriId=DoktoriId}));
         }
         [HttpPut("{id}")]
         public async Task<ActionResult<PacientiDoktori>> editPacientinint(int id, PacientiDoktoriDTO pacientiDoktori)

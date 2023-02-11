@@ -10,7 +10,7 @@ namespace Application.LaborPerson
     {
         public string Kualifikimi { get; set; }
         public String Specializimi { get; set; }
-        public ICollection<LaboratoriDto> Laboratori { get; set; } = new List<LaboratoriDto>();
+        public ICollection<LaboratoriDto> Laboratoret { get; set; } = new List<LaboratoriDto>();
         
     }
 }

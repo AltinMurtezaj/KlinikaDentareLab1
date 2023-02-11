@@ -24,7 +24,7 @@ public class DataContext : IdentityDbContext<AppUser>
         public DbSet<XRay> XRays { get; set; }
         public DbSet<Udhezimi> Udhezimet { get; set; }
         public DbSet<PacientiDoktori> PacientiDoktoret { get; set; }
-        public DbSet<PacientiXRay> PacientiXRays { get; set; }
+        public DbSet<PacientiXRay> PacientiXRay { get; set; }
 
 
         
@@ -89,6 +89,20 @@ public class DataContext : IdentityDbContext<AppUser>
                 .HasOne(p => p.Termini)
                 .WithOne(t => t.Kontrolla)
                 .HasForeignKey<Termini>(p => p.KontrollaId);
+
+            builder.Entity<Laboratori>()
+                .HasOne(l => l.Laboranti)
+                .WithMany(l => l.Laboratoret)
+                .HasForeignKey(l => l.LaborantiId);
+
+            builder.Entity<Udhezimi>()
+                .HasOne(u => u.Tretmani)
+                .WithMany(l => l.Udhezimet)
+                .HasForeignKey(u => u.TretmaniId);
+
+            
+            
+         
         }
     }
 

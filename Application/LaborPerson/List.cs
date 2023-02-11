@@ -30,7 +30,7 @@ namespace Application.LaborPerson
             }
             public async Task<Result<List<LaborantiDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var laborantet = await _context.Laborantet.Include(x => x.Laboratori)
+                var laborantet = await _context.Laborantet.Include(x => x.Laboratoret)
                                                         .ToListAsync();
                 var laborantetList = _mapper.Map<List<LaborantiDto>>(laborantet);
                 return Result<List<LaborantiDto>>.Success(laborantetList);

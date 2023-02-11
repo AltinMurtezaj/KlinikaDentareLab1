@@ -7,11 +7,10 @@ namespace Domain
 {
     public class PacientiDoktori
     {
-        public int Id;
+        public int Id { get; set; }
         public string PacientiId { get; set; }
         public Pacienti Pacienti { get; set; }
         public string DoktoriId { get; set; }
         public Doktori Doktori { get; set; }
-        public ICollection<XRay> XRay = new List<XRay>();
     }
 }

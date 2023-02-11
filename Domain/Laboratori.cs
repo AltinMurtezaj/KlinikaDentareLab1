@@ -9,7 +9,8 @@ namespace Domain
     {
         public int Id { get; set; }
         public string Emri{ get; set; }
+        public string LaborantiId { get; set; }
         public Laboranti Laboranti { get; set; }
-        public int LaborantiId { get; set; }
+        
     }
 }

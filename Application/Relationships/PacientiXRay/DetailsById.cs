@@ -28,7 +28,7 @@ namespace Application.Relationships.PacientiXRay
 
             public async Task<Result<Domain.Relationships.PacientiXRay>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientiXRay = await _context.PacientiXRays.FindAsync(request.Id);
+                var pacientiXRay = await _context.PacientiXRay.FindAsync(request.Id);
 
                 return Result<Domain.Relationships.PacientiXRay>.Success(pacientiXRay);
             }

@@ -26,7 +26,7 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<ActionResult<XRay>> GetXRay(string id)
+        public async Task<ActionResult<XRay>> GetXRay(int id)
         {
             return await Mediator.Send(new Details.Query{Id = id});
         }

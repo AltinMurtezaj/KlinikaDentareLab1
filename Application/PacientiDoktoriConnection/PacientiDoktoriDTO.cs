@@ -11,7 +11,6 @@ namespace Application.PacientiDoktoriConnection
         public int id {get;set;}
         public string PacientiId { get; set; }
         public string DoktoriId {get;set;}
-        public ICollection<XRayDto> XRays{get;set;}
 
     }
 }

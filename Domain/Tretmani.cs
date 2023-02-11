@@ -18,5 +18,6 @@ namespace Domain
         public string PacientId { get; set; }
         public Pacienti Pacienti { get; set;}
         public ICollection<Kontrolla> Kontrollat { get; set; } = new List<Kontrolla>();
+        public ICollection<Udhezimi> Udhezimet { get; set; } = new List<Udhezimi>();
     }
 }

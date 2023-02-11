@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 
@@ -14,7 +15,7 @@ namespace Application.XRayCourse
     {
         public class Query : IRequest<XRay>
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, XRay>
@@ -25,8 +26,10 @@ namespace Application.XRayCourse
                 _context = context;
             }
             public async Task<XRay> Handle(Query request, CancellationToken cancellationToken)
+
             {
-                return await _context.XRays.FindAsync(request.Id);
+                return await _context.XRays.Include(x=>x.Tretmani).SingleOrDefaultAsync(x=>x.Id == request.Id);
+                
             }
 
         }

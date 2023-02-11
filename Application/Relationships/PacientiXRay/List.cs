@@ -27,7 +27,7 @@ namespace Application.Relationships.PacientiXRay
 
                 public async Task<Result<List<PacientiXRayDto>>> Handle(Query request, CancellationToken cancellationToken)
                 {
-                    var pacientiXRay = await _context.PacientiXRays.ToListAsync();
+                    var pacientiXRay = await _context.PacientiXRay.ToListAsync();
                     var pacientiXRayToReturn = _mapper.Map<List<PacientiXRayDto>>(pacientiXRay);
                     return Result<List<PacientiXRayDto>>.Success(pacientiXRayToReturn);
                 }

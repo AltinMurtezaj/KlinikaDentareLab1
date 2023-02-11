@@ -3,23 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class NewUpdate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Laboratori",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Emri = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Laboratori", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
@@ -143,6 +130,26 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Laboratori",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Emri = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LaborantiId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Laboratori", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Laboratori_Users_LaborantiId",
+                        column: x => x.LaborantiId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PacientiDoktoret",
                 columns: table => new
                 {
@@ -169,36 +176,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Terminet",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Koha = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PacientId = table.Column<int>(type: "int", nullable: false),
-                    PacientiId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    DoktoriId = table.Column<int>(type: "int", nullable: false),
-                    DoktoriId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Terminet", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Terminet_Users_DoktoriId1",
-                        column: x => x.DoktoriId1,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Terminet_Users_PacientiId",
-                        column: x => x.PacientiId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tretmanet",
                 columns: table => new
                 {
@@ -208,6 +185,7 @@ namespace Persistence.Migrations
                     Pershkrimi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cmimi = table.Column<float>(type: "real", nullable: false),
                     DokoriId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PagesaId = table.Column<int>(type: "int", nullable: false),
                     PacientId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -235,9 +213,9 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmriKontrolles = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Kosto = table.Column<float>(type: "real", nullable: false),
-                    PacientiId = table.Column<int>(type: "int", nullable: false),
-                    PacientiId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    TretmaniId = table.Column<int>(type: "int", nullable: false)
+                    PacientiId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    TretmaniId = table.Column<int>(type: "int", nullable: false),
+                    TerminiId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -249,8 +227,8 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Kontrollat_Users_PacientiId1",
-                        column: x => x.PacientiId1,
+                        name: "FK_Kontrollat_Users_PacientiId",
+                        column: x => x.PacientiId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -326,15 +304,81 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Terminet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Koha = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PacientId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DoktoriId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    KontrollaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Terminet", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Terminet_Kontrollat_KontrollaId",
+                        column: x => x.KontrollaId,
+                        principalTable: "Kontrollat",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Terminet_Users_DoktoriId",
+                        column: x => x.DoktoriId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Terminet_Users_PacientId",
+                        column: x => x.PacientId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PacientiXRay",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PacientiId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    XRayId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PacientiXRay", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_PacientiXRay_Users_PacientiId",
+                        column: x => x.PacientiId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PacientiXRay_XRays_XRayId",
+                        column: x => x.XRayId,
+                        principalTable: "XRays",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Kontrollat_PacientiId1",
+                name: "IX_Kontrollat_PacientiId",
                 table: "Kontrollat",
-                column: "PacientiId1");
+                column: "PacientiId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Kontrollat_TretmaniId",
                 table: "Kontrollat",
                 column: "TretmaniId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Laboratori_LaborantiId",
+                table: "Laboratori",
+                column: "LaborantiId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PacientiDoktoret_DoktoriId",
@@ -347,6 +391,16 @@ namespace Persistence.Migrations
                 column: "PacientiId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PacientiXRay_PacientiId",
+                table: "PacientiXRay",
+                column: "PacientiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PacientiXRay_XRayId",
+                table: "PacientiXRay",
+                column: "XRayId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pagesat_PacientiId",
                 table: "Pagesat",
                 column: "PacientiId");
@@ -354,17 +408,24 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Pagesat_TretmaniId",
                 table: "Pagesat",
-                column: "TretmaniId");
+                column: "TretmaniId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Terminet_DoktoriId1",
+                name: "IX_Terminet_DoktoriId",
                 table: "Terminet",
-                column: "DoktoriId1");
+                column: "DoktoriId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Terminet_PacientiId",
+                name: "IX_Terminet_KontrollaId",
                 table: "Terminet",
-                column: "PacientiId");
+                column: "KontrollaId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Terminet_PacientId",
+                table: "Terminet",
+                column: "PacientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tretmanet_DokoriId",
@@ -390,13 +451,13 @@ namespace Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Kontrollat");
-
-            migrationBuilder.DropTable(
                 name: "Laboratori");
 
             migrationBuilder.DropTable(
                 name: "PacientiDoktoret");
+
+            migrationBuilder.DropTable(
+                name: "PacientiXRay");
 
             migrationBuilder.DropTable(
                 name: "Pagesat");
@@ -427,6 +488,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "XRays");
+
+            migrationBuilder.DropTable(
+                name: "Kontrollat");
 
             migrationBuilder.DropTable(
                 name: "Tretmanet");

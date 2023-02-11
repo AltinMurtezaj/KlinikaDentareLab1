@@ -14,13 +14,13 @@ namespace Application.PacientiDoktoriConnection
 {
     public class DetailsByDoktori
     {
-        public class Query : IRequest<Result<PacientiDoktoriDTO>>
+        public class Query : IRequest<Result<PacientiDoktori>>
         {
             public string DoktoriId { get; set; }
 
         }
 
-        public class Handler : IRequestHandler<Query, Result<PacientiDoktoriDTO>>
+        public class Handler : IRequestHandler<Query, Result<PacientiDoktori>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -30,12 +30,12 @@ namespace Application.PacientiDoktoriConnection
                 _mapper=mapper;
             }
 
-            public async Task<Result<PacientiDoktoriDTO>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<PacientiDoktori>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientiDoktori = await _context.PacientiDoktoret.Include(x=>x.XRay).FirstOrDefaultAsync(x=>x.DoktoriId == request.DoktoriId);
+                var pacientiDoktori = await _context.PacientiDoktoret.Include(x=>x.Pacienti).FirstOrDefaultAsync(x=>x.DoktoriId == request.DoktoriId);
 
-                var pacientiDoktoriToReturn = _mapper.Map<PacientiDoktoriDTO>(pacientiDoktori);
-                return Result<PacientiDoktoriDTO>.Success(pacientiDoktoriToReturn);
+                var pacientiDoktoriToReturn = _mapper.Map<PacientiDoktori>(pacientiDoktori);
+                return Result<PacientiDoktori>.Success(pacientiDoktoriToReturn);
             }
 
 
