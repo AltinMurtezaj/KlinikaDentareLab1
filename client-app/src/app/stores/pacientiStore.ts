@@ -42,6 +42,22 @@ export default class PacientiStore{
             this.setLoadingInitial(false); 
         }
     }
+   
+        get pacientiByEmri(){
+            return Array.from(this.pacientiRegistry.values()).sort((a,b) =>{
+                let fa = a.emri!.toLowerCase(),
+                    fb = b.emri!.toLowerCase();
+    
+                    if(fa<fb){
+                        return -1;
+                    }
+                    if(fa>fb){
+                        return 1;
+                    }
+                    return 0;
+            });
+        }
+ 
     loadPacienti = async (id:string) => {
         let pacienti = this.getPacienti(id);
         if(pacienti){

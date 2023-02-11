@@ -6,8 +6,12 @@ import KontrollaStore from "./kontrollaStore";
 import LaborantiStore from "./laborantiStore";
 import ModalStore from "./modalStore";
 import PacientiStore from "./pacientiStore";
+import PagesaStore from "./pagesaStore";
 import TerminiStore from "./terminiStore";
+import TretmaniStore from "./tretmaniStore";
+import UdhezimiStore from "./udhezimiStore";
 import UserStore from "./userStore";
+import xrayStore from "./xrayStore";
 
 
 interface Store{
@@ -19,7 +23,12 @@ interface Store{
     userStore: UserStore;
     modalStore: ModalStore;
     terminiStore: TerminiStore;
-    kontrollaStore: KontrollaStore
+    tretmaniStore: TretmaniStore;
+    kontrollaStore: KontrollaStore;
+    xrayStore: xrayStore;
+    pagesaStore: PagesaStore;
+    udhezimiStore: UdhezimiStore;
+
 }
 
 export const store: Store = {
@@ -31,7 +40,11 @@ export const store: Store = {
     userStore: new UserStore(),
     modalStore: new ModalStore(),
     terminiStore: new TerminiStore(),
+    tretmaniStore: new TretmaniStore(),
     kontrollaStore: new KontrollaStore(),
+    xrayStore: new xrayStore(),
+    pagesaStore: new PagesaStore(),
+    udhezimiStore: new UdhezimiStore()
 }
 
 export const StoreContext = createContext(store);
