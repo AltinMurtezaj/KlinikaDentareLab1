@@ -17,19 +17,16 @@ export default function TerminiListItem({termini}: Props){
                         <Item.Image size = 'tiny' circular src='/assets/appointment.png'/>
                         <Item.Content>
                             <Item.Header as ={Link} to={`/terminet/${termini.id}`}>
-                                {termini.emri}
+                                {termini.koha}
                             </Item.Header>
                         </Item.Content>
                     </Item>
                 </Item.Group>
             </Segment>
             <Segment>
-                <span>
-                    <Icon name ='time'/> {format (termini.data!, 'dd MMM yyyy h:mm aa')}
-                    <Icon name ='marker'/> {termini.orari}
-                    <Icon name ='marker'/> {termini.pershkrimi}
-                    <Icon name ='marker'/> {}
-                </span>
+                    <span>
+                    <Icon name ='time'/> {termini.data}
+                    </span>
             </Segment>
             <Segment clearing>
                 <Button 

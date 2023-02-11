@@ -17,7 +17,7 @@ export default observer(function ActivityDetailedInfo({laboranti}: Props) {
                         <Icon size='large' color='teal' name='info'/>
                     </Grid.Column>
                     <Grid.Column width={15}>
-                        <p>{laboranti.laboratori}</p>
+                        <p>{laboranti.emri}</p>
                     </Grid.Column>
                 </Grid>
             </Segment>
@@ -39,7 +39,8 @@ export default observer(function ActivityDetailedInfo({laboranti}: Props) {
                         <Icon name='marker' size='large' color='teal'/>
                     </Grid.Column>
                     <Grid.Column width={11}>
-                        <span>{laboranti.email}, {laboranti.laboratori}</span>
+                        <span>{laboranti.email}</span>
+                        <span>{laboranti.kualifikimi}</span>
                     </Grid.Column>
                 </Grid>
             </Segment>

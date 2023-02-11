@@ -1,4 +1,4 @@
-import { Tretmani } from "./Tretmani";
+import { Tretmani } from "./tretmani";
 
 export interface Udhezimi {
     Id?: string;

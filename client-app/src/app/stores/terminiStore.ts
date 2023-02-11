@@ -14,21 +14,6 @@ export default class TerminiStore{
         makeAutoObservable(this)
     }
 
-    get terminetByDate(){
-        return Array.from(this.terminiRegistry.values()).sort((a, b) =>
-            a.data!.getTime() - b.data!.getTime());
-    }
-
-    get grouperTerminet (){
-        return Object.entries(
-            this.terminetByDate.reduce((TerminiPacientit, termini) =>{
-                const data = format(termini.data!, 'dd MMM yyyy');
-                TerminiPacientit[data] = TerminiPacientit[data] ? [...TerminiPacientit[data], termini] : [termini];
-                return TerminiPacientit;
-            }, {} as {[key: string]: Termini[]})
-        )
-    }
-
     loadTerminet = async () => { 
         this.loadingInitial = true;
         try{

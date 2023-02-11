@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
-import { Udhezimi } from '../models/ushezimi';
+import { Udhezimi } from '../models/udhezimi';
 
 export default class UdhezimiStore {
   udhezimiRegistry = new Map<string,Udhezimi>();

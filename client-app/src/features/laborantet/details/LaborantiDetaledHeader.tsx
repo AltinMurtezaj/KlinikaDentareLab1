@@ -55,7 +55,7 @@ export default observer (function LaborantiDetailedHeader({laboranti}: Props) {
             <Button name={laboranti.id}
                 as={Link} to={'/laborantet'}
                 loading={loading && target === laboranti.id}
-                onClick={(e)=>handleLaborantiDelete(e, laboranti.id)}
+                onClick={(e)=>handleLaborantiDelete(e, laboranti.id!)}
                  color='red'>Delete Laboranti</Button>
                 <Button as={Link} to={`/manageLaboranti/${laboranti.id}`} color='blue' floated='right'>
                     Edit Laboranti

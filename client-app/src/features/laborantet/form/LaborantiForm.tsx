@@ -33,7 +33,6 @@ export default observer( function LaborantiForm (){
         specializimi: '',
         vendbanimi: '',
         nrKontaktues: '',
-        laboratori: '',
     });
 
     const validationSchema = Yup.object({
@@ -54,7 +53,7 @@ export default observer( function LaborantiForm (){
     }, [id, loadLaboranti]);
 
     function handleFormSubmit(laboranti: Laboranti){
-        if(laboranti.id.length === 0){
+        if(laboranti.id!.length === 0){
             let newLaboranti = {
                 ...laboranti,
                 id: uuid()

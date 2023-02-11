@@ -65,7 +65,7 @@ export default class LaborantiStore{
     }
     private setLaboranti = (laboranti: Laboranti) => {
         laboranti.datelindja = new Date(laboranti.datelindja!);
-        this.laborantiRegistry.set(laboranti.id, laboranti);
+        this.laborantiRegistry.set(laboranti.id!, laboranti);
     }
 
     private getLaboranti= (id: string) => {
@@ -82,7 +82,7 @@ export default class LaborantiStore{
         try {
             await agent.Laborantet.create(laboranti);
             runInAction(() =>{
-                this.laborantiRegistry.set(laboranti.id, laboranti);
+                this.laborantiRegistry.set(laboranti.id!, laboranti);
                 this.selectedLaboranti = laboranti;
                 this.editMode = false;
                 this.loading = false;
@@ -100,7 +100,7 @@ export default class LaborantiStore{
         try{
             await agent.Laborantet.update(laboranti);
             runInAction(() =>{
-                this.laborantiRegistry.set(laboranti.id, laboranti);
+                this.laborantiRegistry.set(laboranti.id!, laboranti);
                 this.selectedLaboranti = laboranti;
                 this.editMode = false;
                 this.loading = false;

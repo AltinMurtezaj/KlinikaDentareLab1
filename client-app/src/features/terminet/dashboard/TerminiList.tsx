@@ -7,20 +7,11 @@ import TerminiListItem from "./TerminiListItem";
 
 export default observer(function TerminetList(){
     const {terminiStore} = useStore();
-    const {grouperTerminet} = terminiStore;
+
 
     return(
         <>
-            {grouperTerminet.map(([group, terminet])=> (
-                <Fragment key={group}>
-                    <Header sub color='teal'>
-                        {group}
-                    </Header>
-                    {terminet.map(termini => (
-                        <TerminiListItem key= {termini.id} termini={termini} />
-                    ))}
-                </Fragment>
-            ))}
+            
         </>
     )
 })

@@ -5,7 +5,7 @@ import { Pacienti } from "./pacienti";
 export interface Termini {
   id?: string;
   koha: string;
-  data: Date;
+  data: string;
   pacientId: string;
   pacienti?: Pacienti;
   doktoriId: string;

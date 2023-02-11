@@ -25,10 +25,11 @@ export default observer( function TerminiForm (){
 
     const [termini, setTermini] = useState<Termini>({
         id: '',
-        emri: '',
-        data: null,
-        orari: '',
-        pershkrimi: ''
+        data: '',
+        koha: '',
+        pacientId: '',
+        doktoriId: '',
+        terminiId: '',
     });
 
     const validationSchema = Yup.object({
@@ -44,7 +45,7 @@ export default observer( function TerminiForm (){
     }, [id, loadTermini]);
 
     function handleFormSubmit(termini: Termini){
-        if(termini.id.length === 0){
+        if(termini.id!.length === 0){
             let newTermini = {
                 ...termini,
                 id: uuid()

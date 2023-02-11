@@ -16,11 +16,8 @@ export default observer(function NavBar(){
                 <Menu.Item as={NavLink} to='/' exact header>
                     Dental Clinic
                 </Menu.Item>
-                
-                {user?.discriminator==="Pacienti" ?(
-                
                 <Menu.Item as={NavLink} to='/terminet' name ='Appointments' />
-                ):
+       
                 <>
                 <Menu.Item as={NavLink} to='/pacientet' name ='Pacients' />
                 <Menu.Item as={NavLink} to='/doktoret' name ='Doctors' />
@@ -29,7 +26,7 @@ export default observer(function NavBar(){
                 
                 <Menu.Item as={NavLink} to='/errors' name='Errors' />
                 </>
-                }
+                
                 
                 <Menu.Item position='right'>
                     <Dropdown pointing='top left' text={user?.userName}>

@@ -30,6 +30,7 @@ import TerminiForm from '../../features/terminet/form/TerminiForm';
 import DoktoriRegisterForm from '../../features/doktoret/form/DoktoriRegisterForm';
 import PacientiRegisterForm from '../../features/pacientet/form/PacientiRegisterForm';
 import InfermierjaRegisterForm from '../../features/infermjeret/form/infermierjaRegisterForm';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,10 @@ function App() {
     <ToastContainer position='bottom-right' hideProgressBar/>
     <ModalContainer />
     <Routes>
+      <Route element={<PrivateRoute/>}>
+      
+      </Route>
+
      <Route path='/' element={<HomePage/>}/>
      <Route 
      path={'/*'}
@@ -58,6 +63,7 @@ function App() {
         <NavBar />
         <Container style={{marginTop: '7em'}}>
           <Routes>
+
             <Route path='/terminet' element={<TerminiDashboard/>}/>
             <Route path='/terminet/:id' element={<TerminiDetails/>}/>
             <Route key={location.key}path='/createTerminet' element={<TerminiForm/>}/>
@@ -84,6 +90,11 @@ function App() {
             <Route key={location.key}path='/manageInfermierja/:id' element={<InfermierjaForm/>}/>
             <Route key={location.key}path='/createInfermjeret' element={<InfermierjaRegisterForm/>}/>
 
+
+  
+
+            
+            <Route element={<NotFound/>}/>
             <Route path='/errors' element={<TestErrors/>}/>
             <Route path='/server-error' element={<ServerError/>}/>
             <Route path='/login' element={<LoginForm/>}/>
@@ -94,6 +105,7 @@ function App() {
         </>
       )}
      />
+     
     </Routes>
     </>
   );

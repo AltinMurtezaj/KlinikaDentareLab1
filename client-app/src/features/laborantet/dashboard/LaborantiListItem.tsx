@@ -31,7 +31,6 @@ export default function LaborantiListItem({laboranti}: Props){
                 </span>
             </Segment>
             <Segment clearing>
-                <span>{laboranti.laboratori}</span>
                 <Button 
                     as={Link}
                     to={`/laborantet/${laboranti.id}`}

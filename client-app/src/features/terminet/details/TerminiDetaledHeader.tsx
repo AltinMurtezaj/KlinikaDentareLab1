@@ -41,10 +41,10 @@ export default observer (function TerminiDetailedHeader({termini}: Props) {
                             <Item.Content>
                                 <Header
                                     size='huge'
-                                    content={termini.emri}
+                                    content={termini.koha}
                                     style={{color: 'white'}}
                                 />
-                                <p>{format (termini.data!, 'dd MMM yyyy')}</p>
+                                <p>{termini.data}</p>
                                 
                             </Item.Content>
                         </Item>
@@ -55,7 +55,7 @@ export default observer (function TerminiDetailedHeader({termini}: Props) {
             <Button name={termini.id}
                 as={Link} to={'/terminet'}
                 loading={loading && target === termini.id}
-                onClick={(e)=>handleTerminiDelete(e, termini.id)}
+                onClick={(e)=>handleTerminiDelete(e, termini.id!)}
                  color='red'>Delete Termini</Button>
                 <Button as={Link} to={`/manageTermini/${termini.id}`} color='orange' floated='right'>
                     Edit Termini

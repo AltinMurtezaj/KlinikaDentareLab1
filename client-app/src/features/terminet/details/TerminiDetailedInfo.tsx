@@ -17,7 +17,7 @@ export default observer(function TerminiDetailedInfo({termini}: Props) {
                         <Icon size='large' color='teal' name='info'/>
                     </Grid.Column>
                     <Grid.Column width={15}>
-                        <p>{termini.pershkrimi}</p>
+                        <p>{termini.koha}</p>
                     </Grid.Column>
                 </Grid>
             </Segment>
@@ -28,7 +28,7 @@ export default observer(function TerminiDetailedInfo({termini}: Props) {
                     </Grid.Column>
                     <Grid.Column width={15}>
             <span>
-              {format (termini.data!, 'dd MMM yyyy h:mm aa')}
+              {termini.data}
             </span>
                     </Grid.Column>
                 </Grid>
@@ -39,7 +39,8 @@ export default observer(function TerminiDetailedInfo({termini}: Props) {
                         <Icon name='marker' size='large' color='teal'/>
                     </Grid.Column>
                     <Grid.Column width={11}>
-                        <span>{termini.orari}, {termini.pershkrimi}</span>
+                        <span> {termini.koha} </span> 
+
                     </Grid.Column>
                 </Grid>
             </Segment>
