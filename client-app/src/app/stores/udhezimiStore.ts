@@ -22,6 +22,21 @@ export default class UdhezimiStore {
     get udhezimet(){
         return Array.from(this.udhezimiRegistry.values());
     }
+
+    get udhezimetByEmri(){
+        return Array.from(this.udhezimiRegistry.values()).sort((a,b) =>{
+            let fa = a.Emri.toLowerCase(),
+                fb = b.Emri.toLowerCase();
+
+                if(fa<fb){
+                    return -1;
+                }
+                if(fa>fb){
+                    return 1;
+                }
+                return 0;
+        });
+    }
     
 
   loadUdhezimi = async() => {
