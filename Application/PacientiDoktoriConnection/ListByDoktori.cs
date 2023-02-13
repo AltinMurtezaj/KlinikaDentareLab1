@@ -31,7 +31,7 @@ namespace Application.PacientiDoktoriConnection
 
             public async Task<Result<List<PacientiDoktori>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientet = await _context.PacientiDoktoret.Include(u => u.Pacienti).ThenInclude(x=>x.XRays)
+                var pacientet = await _context.PacientiDoktoret.Include(u => u.Pacienti)
                 .Where(x=>x.DoktoriId==request.DoktoriId).ToListAsync();
                 var pacientetToReturn = _mapper.Map<List<PacientiDoktori>>(pacientet);
                 return Result<List<PacientiDoktori>>.Success(pacientetToReturn);

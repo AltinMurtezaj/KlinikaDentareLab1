@@ -10,14 +10,12 @@ using Application.Nurse;
 using Application.Pacient;
 using Application.PacientiDoktoriConnection;
 using Application.Payment;
-using Application.Relationships.PacientiXRay;
 using Application.TerminiFolder;
 using Application.TretmaniCourse;
 using Application.UdhezimetCourse;
-using Application.XRayCourse;
 using AutoMapper;
 using Domain;
-using Domain.Relationships;
+
 
 namespace Application.Core
 {
@@ -29,8 +27,7 @@ namespace Application.Core
             CreateMap<Doktori, Doktori>();
             CreateMap<Termini, Termini>();
             CreateMap<Laboranti, Laboranti>();
-            CreateMap<Infermierja, Infermierja>();
-            CreateMap<Pacienti, Pacienti>();     
+            CreateMap<Infermierja, Infermierja>();   
             CreateMap<Kontrolla, Kontrolla>();
             CreateMap<Kontrolla, KontrollaDto>();
             CreateMap<KontrollaDto, Kontrolla>();
@@ -41,14 +38,6 @@ namespace Application.Core
             CreateMap<TretmaniDto, Tretmani>();
             CreateMap<Termini, TerminiDto>();
             CreateMap<TerminiDto, Termini>();
-            CreateMap<XRay, PacientiXRayDto>();
-            CreateMap<Pacienti, PacientiXRayDto>();
-            CreateMap<PacientiXRay, PacientiXRayDto>();
-            CreateMap<Pacienti, XRay>();
-            CreateMap<PacientiDto, XRay>();
-            CreateMap<XRay, XRayDto>();
-            CreateMap<XRayDto, XRay>();
-            CreateMap<XRay, XRay>();
             CreateMap<PacientiDoktori, PacientiDoktoriDTO>();
             CreateMap<PacientiDoktoriDTO, PacientiDoktori>();
             CreateMap<PacientiDoktori, PacientiDoktori>();

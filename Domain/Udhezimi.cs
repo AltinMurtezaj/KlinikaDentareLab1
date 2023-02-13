@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Domain
 {
@@ -12,6 +14,6 @@ namespace Domain
         public string Doza { get; set; }
         public int TretmaniId { get; set; }
         public Tretmani Tretmani { get; set; }
-
+    
     }
 }

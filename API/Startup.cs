@@ -23,6 +23,8 @@ using API.Middleware;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Options;
+using Domain;
 
 namespace API
 {
@@ -49,14 +51,17 @@ namespace API
             .AddFluentValidation(config => 
             {
                 config.RegisterValidatorsFromAssemblyContaining<Create>();
+            })
+            .AddJsonOptions(options =>{
+            options.JsonSerializerOptions.MaxDepth = 512;
             });
             services.AddApplicationServices(_config);
             services.AddIdentityServices(_config);
-            services.AddControllersWithViews();
-             services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-});
+            var json = System.Text.Json.JsonSerializer.Serialize(_config);
+          
+
+
+             
         }
 
         private void AddFluentValidation()

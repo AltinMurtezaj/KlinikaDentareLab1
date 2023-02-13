@@ -13,5 +13,6 @@ namespace Domain
         public DateTime DataPageses { get; set; }
         public int TretmaniId { get; set; }
         public Tretmani Tretmani { get; set; }
+        
     }
 }

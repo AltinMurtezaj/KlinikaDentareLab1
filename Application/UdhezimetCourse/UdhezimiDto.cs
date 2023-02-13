@@ -11,7 +11,5 @@ namespace Application.UdhezimetCourse
         public int Id { get; set; }
         public string Emri { get; set; }
         public string Doza { get; set; }
-        public int TretmaniId { get; set; }
-        public TretmaniDto Tretmani { get; set; }
     }
 }

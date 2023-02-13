@@ -29,9 +29,9 @@ namespace Application.KontrollaFolder
             }
             public async Task<Result<List<KontrollaDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var kontrollat = await _context.Kontrollat.Include(x => x.Pacienti)
-                                                        .Include(x => x.Tretmani)
-                                                        .Include(x => x.Termini)
+                var kontrollat = await _context.Kontrollat                         
+    
+                                                        .Include(x => x.Tretmanet)
                                                         .ToListAsync();
                 var kontrollatList = _mapper.Map<List<KontrollaDto>>(kontrollat);
                 return Result<List<KontrollaDto>>.Success(kontrollatList);

@@ -49,7 +49,7 @@ export default class userStore{
     register = async (creds: UserFormValues) => {
         try{
             const user = await agent.Account.register(creds);
-            store.commonStore.setToken(user.token);
+            store.commonStore.setToken(user.token!);
             runInAction(() => this.user = user);
             store.modalStore.closeModal();
         }catch(error){

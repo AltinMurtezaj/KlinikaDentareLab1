@@ -30,7 +30,7 @@ namespace Application.Payment
             }
             public async Task<Result<List<PagesaDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pagesat = await _context.Pagesat.Include(x => x.Tretmani)
+                var pagesat = await _context.Pagesat
                                                         .ToListAsync();
                 var pagesatList = _mapper.Map<List<PagesaDto>>(pagesat);
                 return Result<List<PagesaDto>>.Success(pagesatList);

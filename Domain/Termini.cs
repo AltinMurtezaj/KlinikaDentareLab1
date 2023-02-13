@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain
@@ -10,11 +11,6 @@ namespace Domain
         public int Id {get;set;}
         public string Koha {get;set;}
         public DateTime Data {get;set;}
-        public string PacientId { get; set; }
-        public Pacienti Pacienti { get; set; }
-        public string DoktoriId { get; set; }
-        public Doktori Doktori { get; set; }
-        public int KontrollaId { get; set; }
-        public Kontrolla Kontrolla { get; set; }
+        public ICollection <Kontrolla> Kontrollat { get; set; } = new List<Kontrolla>();
     }
 }

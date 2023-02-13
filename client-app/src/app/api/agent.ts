@@ -90,7 +90,7 @@ const Doktoret = {
 }
 
 const Pacientet = {
-    list: () => requests.get<Pacienti[]>('/Pacient'),
+    list: () => requests.get<Pacienti[]>("/Pacient"),
     details: (id: string) => requests.get<Pacienti>(`/Pacient/${id}`),
     create: (pacienti: Pacienti) => axios.post<void>('/Pacient', pacienti),
     update: (pacienti: Pacienti) => axios.put<void>(`/Pacient/${pacienti.id}`,pacienti),
@@ -172,9 +172,9 @@ const PacientiXRay = {
     detailsbyId: (id: string) => requests.get<PacientiXRayDTO>(`/PacientiXRay/${id}`),
 }
 const Account = {
-    current: () => requests.get<User>('/account'),
-    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
-    register: (user: UserFormValues) => requests.post<User>('/account/register', user),
+    current: () => requests.get<Pacienti>('/account'),
+    login: (user: UserFormValues) => requests.post<Pacienti>('/account/login', user),
+    register: (user: UserFormValues) => requests.post<PacientiFormValues>('/account/register', user),
 }
 
 const AccountInfermierja = {

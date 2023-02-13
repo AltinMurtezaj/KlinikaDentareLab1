@@ -1,10 +1,10 @@
-import { Formik } from "formik/dist/Formik";
 import { observer, Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import * as Yup from 'yup';
+import { Formik } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { Tretmani } from "../../../app/models/tretmani";

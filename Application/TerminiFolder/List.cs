@@ -30,10 +30,7 @@ namespace Application.TerminiFolder
             }
             public async Task<Result<List<TerminiDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var terminet = await _context.Terminet.Include(x => x.Pacienti)
-                                                        .Include(x => x.Doktori)
-                                                        .Include(x => x.Kontrolla)
-                                                        .ToListAsync();
+                var terminet = await _context.Terminet.Include(x => x.Kontrollat).ToListAsync();
                 var terminetList = _mapper.Map<List<TerminiDto>>(terminet);
                 return Result<List<TerminiDto>>.Success(terminetList);
             }

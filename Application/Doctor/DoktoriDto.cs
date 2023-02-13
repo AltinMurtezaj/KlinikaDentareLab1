@@ -24,6 +24,5 @@ namespace Application.Doctor
         public string Kualifikimi { get; set; }
         public string Specializimi { get; set; }
         public ICollection<TretmaniDto> Tretmanet { get; set; }
-        public ICollection<TerminiDto> Terminet { get; set; }
     }
 }

@@ -2,7 +2,6 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Domain.Relationships;
 
 namespace Persistence
 {
@@ -21,11 +20,8 @@ public class DataContext : IdentityDbContext<AppUser>
         public DbSet<Kontrolla> Kontrollat { get; set; }
         public DbSet<Pagesa> Pagesat { get; set; }
         public DbSet<Tretmani> Tretmanet { get; set; }
-        public DbSet<XRay> XRays { get; set; }
         public DbSet<Udhezimi> Udhezimet { get; set; }
         public DbSet<PacientiDoktori> PacientiDoktoret { get; set; }
-        public DbSet<PacientiXRay> PacientiXRay { get; set; }
-
 
         
         protected override void OnModelCreating(ModelBuilder builder)
@@ -46,63 +42,40 @@ public class DataContext : IdentityDbContext<AppUser>
                 .HasForeignKey(pp => pp.DoktoriId);
             
             builder.Entity<Tretmani>()
-            .HasOne(t => t.Pacienti)
-            .WithMany(p => p.Tretmanet)
-            .HasForeignKey(t => t.PacientId);
-
+                .HasOne(pd => pd.Pacienti)
+                .WithMany(p => p.Tretmanet)
+                .HasForeignKey(pp => pp.PacientId);
             builder.Entity<Tretmani>()
-                .HasOne(t => t.Doktori)
+                .HasOne(pd => pd.Doktori)
                 .WithMany(d => d.Tretmanet)
-                .HasForeignKey(t => t.DokoriId);
+                .HasForeignKey(pp => pp.DokoriId);
+                
+            builder.Entity<Tretmani>()  
+                .HasOne(pd => pd.Pagesa)
+                .WithOne(d => d.Tretmani)
+                .HasForeignKey<Pagesa>(pp => pp.TretmaniId);
 
             builder.Entity<Kontrolla>()
-            .HasOne(p => p.Tretmani)
-            .WithMany(t => t.Kontrollat)
-            .HasForeignKey(p => p.TretmaniId);
-
-            builder.Entity<Kontrolla>()
-            .HasOne(p => p.Pacienti)
-            .WithMany(t => t.Kontrollat)
-            .HasForeignKey(p => p.PacientiId);
-
+                .HasOne(pd => pd.Termini)
+                .WithMany(d => d.Kontrollat)
+                .HasForeignKey(pp => pp.TerminiId);
             builder.Entity<Tretmani>()
-            .HasOne(pp => pp.Pagesa)
-            .WithOne(u => u.Tretmani)
-            .HasForeignKey<Pagesa>(pp => pp.TretmaniId);
-            
-            builder.Entity<Termini>()
-                .HasOne(p => p.Pacienti)
-                .WithMany(t => t.Terminet)
-                .HasForeignKey(p => p.PacientId);
+                .HasOne(pd => pd.Kontrolla)
+                .WithMany(d => d.Tretmanet)
+                .HasForeignKey(pp => pp.KontrollaId);
 
-            builder.Entity<Termini>()
-                .HasOne(p => p.Doktori)
-                .WithMany(t => t.Terminet)
-                .HasForeignKey(p => p.DoktoriId);
-            
-            builder.Entity<Termini>()
-                .HasOne(p => p.Kontrolla)
-                .WithOne(t => t.Termini)
-                .HasForeignKey<Kontrolla>(p => p.TerminiId);
-            
-            builder.Entity<Kontrolla>()
-                .HasOne(p => p.Termini)
-                .WithOne(t => t.Kontrolla)
-                .HasForeignKey<Termini>(p => p.KontrollaId);
-
+            builder.Entity<Pagesa>()
+                .HasOne(pd => pd.Tretmani)
+                .WithOne(d => d.Pagesa)
+                .HasForeignKey<Pagesa>(pp => pp.TretmaniId);
             builder.Entity<Laboratori>()
-                .HasOne(l => l.Laboranti)
-                .WithMany(l => l.Laboratoret)
-                .HasForeignKey(l => l.LaborantiId);
-
+                .HasOne(pd => pd.Laboranti)
+                .WithMany(d => d.Laboratoret)
+                .HasForeignKey(pp => pp.LaborantiId);
             builder.Entity<Udhezimi>()
-                .HasOne(u => u.Tretmani)
-                .WithMany(l => l.Udhezimet)
-                .HasForeignKey(u => u.TretmaniId);
-
-            
-            
-         
+            .HasOne(u => u.Tretmani)
+            .WithMany(t => t.Udhezimet)
+            .HasForeignKey(u => u.TretmaniId);
         }
     }
 

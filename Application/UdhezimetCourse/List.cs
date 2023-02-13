@@ -30,8 +30,7 @@ namespace Application.UdhezimetCourse
             }
             public async Task<Result<List<UdhezimiDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var udhezimi = await _context.Udhezimet.Include(x => x.Tretmani)
-                                                        .ToListAsync();
+                var udhezimi = await _context.Udhezimet.ToListAsync();
                 var udhezimetList = _mapper.Map<List<UdhezimiDto>>(udhezimi);
                 return Result<List<UdhezimiDto>>.Success(udhezimetList);
             }

@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230210230102_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230213161630_InitialCreateee")]
+    partial class InitialCreateee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,20 +110,12 @@ namespace Persistence.Migrations
                     b.Property<float>("Kosto")
                         .HasColumnType("real");
 
-                    b.Property<string>("PacientiId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("TerminiId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TretmaniId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PacientiId");
-
-                    b.HasIndex("TretmaniId");
+                    b.HasIndex("TerminiId");
 
                     b.ToTable("Kontrollat");
                 });
@@ -183,9 +175,6 @@ namespace Persistence.Migrations
                     b.Property<string>("MetodaPageses")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PacientiId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<float>("Shuma")
                         .HasColumnType("real");
 
@@ -194,34 +183,10 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PacientiId");
-
                     b.HasIndex("TretmaniId")
                         .IsUnique();
 
                     b.ToTable("Pagesat");
-                });
-
-            modelBuilder.Entity("Domain.Relationships.PacientiXRay", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("PacientiId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("XRayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("PacientiId");
-
-                    b.HasIndex("XRayId");
-
-                    b.ToTable("PacientiXRay");
                 });
 
             modelBuilder.Entity("Domain.Termini", b =>
@@ -240,20 +205,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Koha")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("KontrollaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PacientId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DoktoriId");
-
-                    b.HasIndex("KontrollaId")
-                        .IsUnique();
-
-                    b.HasIndex("PacientId");
 
                     b.ToTable("Terminet");
                 });
@@ -274,11 +228,11 @@ namespace Persistence.Migrations
                     b.Property<string>("Emri")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("KontrollaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PacientId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PagesaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Pershkrimi")
                         .HasColumnType("nvarchar(max)");
@@ -286,6 +240,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DokoriId");
+
+                    b.HasIndex("KontrollaId");
 
                     b.HasIndex("PacientId");
 
@@ -313,26 +269,6 @@ namespace Persistence.Migrations
                     b.HasIndex("TretmaniId");
 
                     b.ToTable("Udhezimet");
-                });
-
-            modelBuilder.Entity("Domain.XRay", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TretmaniId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TretmaniId");
-
-                    b.ToTable("XRays");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -499,19 +435,13 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Kontrolla", b =>
                 {
-                    b.HasOne("Domain.Pacienti", "Pacienti")
+                    b.HasOne("Domain.Termini", "Termini")
                         .WithMany("Kontrollat")
-                        .HasForeignKey("PacientiId");
-
-                    b.HasOne("Domain.Tretmani", "Tretmani")
-                        .WithMany("Kontrollat")
-                        .HasForeignKey("TretmaniId")
+                        .HasForeignKey("TerminiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Pacienti");
-
-                    b.Navigation("Tretmani");
+                    b.Navigation("Termini");
                 });
 
             modelBuilder.Entity("Domain.Laboratori", b =>
@@ -540,10 +470,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Pagesa", b =>
                 {
-                    b.HasOne("Domain.Pacienti", null)
-                        .WithMany("Pagesat")
-                        .HasForeignKey("PacientiId");
-
                     b.HasOne("Domain.Tretmani", "Tretmani")
                         .WithOne("Pagesa")
                         .HasForeignKey("Domain.Pagesa", "TretmaniId")
@@ -553,44 +479,11 @@ namespace Persistence.Migrations
                     b.Navigation("Tretmani");
                 });
 
-            modelBuilder.Entity("Domain.Relationships.PacientiXRay", b =>
-                {
-                    b.HasOne("Domain.Pacienti", "Pacienti")
-                        .WithMany("XRays")
-                        .HasForeignKey("PacientiId");
-
-                    b.HasOne("Domain.XRay", "XRay")
-                        .WithMany("Pacientet")
-                        .HasForeignKey("XRayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pacienti");
-
-                    b.Navigation("XRay");
-                });
-
             modelBuilder.Entity("Domain.Termini", b =>
                 {
-                    b.HasOne("Domain.Doktori", "Doktori")
+                    b.HasOne("Domain.Doktori", null)
                         .WithMany("Terminet")
                         .HasForeignKey("DoktoriId");
-
-                    b.HasOne("Domain.Kontrolla", "Kontrolla")
-                        .WithOne("Termini")
-                        .HasForeignKey("Domain.Termini", "KontrollaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Pacienti", "Pacienti")
-                        .WithMany("Terminet")
-                        .HasForeignKey("PacientId");
-
-                    b.Navigation("Doktori");
-
-                    b.Navigation("Kontrolla");
-
-                    b.Navigation("Pacienti");
                 });
 
             modelBuilder.Entity("Domain.Tretmani", b =>
@@ -599,11 +492,19 @@ namespace Persistence.Migrations
                         .WithMany("Tretmanet")
                         .HasForeignKey("DokoriId");
 
+                    b.HasOne("Domain.Kontrolla", "Kontrolla")
+                        .WithMany("Tretmanet")
+                        .HasForeignKey("KontrollaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Pacienti", "Pacienti")
                         .WithMany("Tretmanet")
                         .HasForeignKey("PacientId");
 
                     b.Navigation("Doktori");
+
+                    b.Navigation("Kontrolla");
 
                     b.Navigation("Pacienti");
                 });
@@ -619,34 +520,21 @@ namespace Persistence.Migrations
                     b.Navigation("Tretmani");
                 });
 
-            modelBuilder.Entity("Domain.XRay", b =>
-                {
-                    b.HasOne("Domain.Tretmani", "Tretmani")
-                        .WithMany()
-                        .HasForeignKey("TretmaniId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tretmani");
-                });
-
             modelBuilder.Entity("Domain.Kontrolla", b =>
                 {
-                    b.Navigation("Termini");
+                    b.Navigation("Tretmanet");
+                });
+
+            modelBuilder.Entity("Domain.Termini", b =>
+                {
+                    b.Navigation("Kontrollat");
                 });
 
             modelBuilder.Entity("Domain.Tretmani", b =>
                 {
-                    b.Navigation("Kontrollat");
-
                     b.Navigation("Pagesa");
 
                     b.Navigation("Udhezimet");
-                });
-
-            modelBuilder.Entity("Domain.XRay", b =>
-                {
-                    b.Navigation("Pacientet");
                 });
 
             modelBuilder.Entity("Domain.Doktori", b =>
@@ -665,17 +553,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Pacienti", b =>
                 {
-                    b.Navigation("Kontrollat");
-
                     b.Navigation("PacientiDoktoret");
 
-                    b.Navigation("Pagesat");
-
-                    b.Navigation("Terminet");
-
                     b.Navigation("Tretmanet");
-
-                    b.Navigation("XRays");
                 });
 #pragma warning restore 612, 618
         }

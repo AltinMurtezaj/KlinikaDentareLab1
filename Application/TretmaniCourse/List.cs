@@ -30,10 +30,8 @@ namespace Application.TretmaniCourse
             }
             public async Task<Result<List<TretmaniDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var tretmani = await _context.Tretmanet.Include(x => x.Doktori)
-                                                        .Include(x => x.Pagesa)
-                                                        .Include(x => x.Pacienti)
-                                                        .Include(x => x.Kontrollat)
+                var tretmani = await _context.Tretmanet.Include(x => x.Pagesa)
+                                                        .Include(x => x.Udhezimet)
                                                         .ToListAsync();
                 var tretmanetList = _mapper.Map<List<TretmaniDto>>(tretmani);
                 return Result<List<TretmaniDto>>.Success(tretmanetList);
