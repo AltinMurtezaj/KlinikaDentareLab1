@@ -19,7 +19,6 @@ import DoktoriDashboard from '../../features/doktoret/dashboard/DoktoriDashboard
 import DoktoriDetails from '../../features/doktoret/details/DoktoriDetails';
 import DoktoriForm from '../../features/doktoret/form/DoktoriForm';
 import PacientiDashboard from '../../features/pacientet/dashboard/PacientiDashboard';
-import PacientiDetails from '../../features/pacientet/details/PacientiDetails';
 import PacientiForm from '../../features/pacientet/form/PacientiForm';
 import LaborantiDashboard from '../../features/laborantet/dashboard/LaborantiDashboard';
 import LaborantiDetails from '../../features/laborantet/details/LaborantiDetails';
@@ -28,9 +27,9 @@ import TerminiDashboard from '../../features/terminet/dashboard/TerminiDashboard
 import TerminiDetails from '../../features/terminet/details/TerminiDetails';
 import TerminiForm from '../../features/terminet/form/TerminiForm';
 import DoktoriRegisterForm from '../../features/doktoret/form/DoktoriRegisterForm';
-import PacientiRegisterForm from '../../features/pacientet/form/PacientiRegisterForm';
 import InfermierjaRegisterForm from '../../features/infermjeret/form/infermierjaRegisterForm';
 import PrivateRoute from './PrivateRoute';
+import PacientiDetails from '../../features/pacientet/dashboard/PacientiDetails';
 
 function App() {
   const location = useLocation();
@@ -69,17 +68,16 @@ function App() {
             <Route key={location.key}path='/createTerminet' element={<TerminiForm/>}/>
             <Route key={location.key}path='/manageTermini/:id' element={<TerminiForm/>}/>
             
-            <Route  path='/doktoret' element={<DoktoriDashboard/>}/>\
+            <Route  path='/doktoret' element={<DoktoriDashboard/>}/>
             <Route path='/doktoret/:id' element={<DoktoriDetails/>}/>
             <Route key={location.key}path='/manageDoktori/:id' element={<DoktoriForm/>}/>
             <Route key={location.key}path='/createDoktoret' element={<DoktoriRegisterForm/>}/>
 
-            <Route  path='/pacientet' element={<PacientiDashboard/>}/>\
-            <Route path='/pacientet/:id' element={<PacientiDetails/>}/>
+            <Route  path='/pacientet' element={<PacientiDashboard/>}/>
             <Route key={location.key}path='/managePacienti/:id' element={<PacientiForm/>}/>
-            <Route key={location.key}path='/createPacientet' element={<PacientiRegisterForm/> }/>
+            <Route key={location.key}path='/PacientiDetails/:id' element={<PacientiDetails/> }/>
             
-            <Route  path='/laborantet' element={<LaborantiDashboard/>}/>\
+            <Route  path='/laborantet' element={<LaborantiDashboard/>}/>
             <Route path='/laborantet/:id' element={<LaborantiDetails/>}/>
             <Route key={location.key}path='/createLaborantet' element={<LaborantiForm/>}/>
             <Route key={location.key}path='/manageLaboranti/:id' element={<LaborantiForm/>}/>

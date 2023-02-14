@@ -28,7 +28,9 @@ export default class PacientiStore{
             }, {} as {[key: string]: Pacienti[]})
         )
     }
-
+    get getPacientet(){
+        return Array.from(this.pacientiRegistry.values());
+    }
     loadPacientet = async () => { 
         this.loadingInitial = true;
         try{
