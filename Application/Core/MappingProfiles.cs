@@ -13,6 +13,7 @@ using Application.Payment;
 using Application.TerminiFolder;
 using Application.TretmaniCourse;
 using Application.UdhezimetCourse;
+using Application.XRayFolder;
 using AutoMapper;
 using Domain;
 
@@ -56,6 +57,11 @@ namespace Application.Core
             CreateMap<Laboratori, LaboratoriDto>();
             CreateMap<LaboratoriDto, Laboratori>();
             CreateMap<Laboratori, Laboratori>();
+            CreateMap<XRay, XRay>();
+            CreateMap<XRay, XRayDto>();
+            CreateMap<XRayDto, XRay>();
+            
+
 
             // // CreateMap<PacientiXRay, PacientiDto>()
             // // .ForMember(d => d.Id, o => o.MapFrom(s => s.Pacienti.Id))

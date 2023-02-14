@@ -32,6 +32,7 @@ namespace Application.TretmaniCourse
             {
                 var tretmani = await _context.Tretmanet.Include(x => x.Pagesa)
                                                         .Include(x => x.Udhezimet)
+                                                        .Include(x => x.XRays)
                                                         .ToListAsync();
                 var tretmanetList = _mapper.Map<List<TretmaniDto>>(tretmani);
                 return Result<List<TretmaniDto>>.Success(tretmanetList);

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230213194115_InitialCreate555")]
+    partial class InitialCreate555
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,33 +271,6 @@ namespace Persistence.Migrations
                     b.ToTable("Udhezimet");
                 });
 
-            modelBuilder.Entity("Domain.XRay", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PacientiId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("TretmaniId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PacientiId")
-                        .IsUnique()
-                        .HasFilter("[PacientiId] IS NOT NULL");
-
-                    b.HasIndex("TretmaniId");
-
-                    b.ToTable("XRays");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -545,23 +520,6 @@ namespace Persistence.Migrations
                     b.Navigation("Tretmani");
                 });
 
-            modelBuilder.Entity("Domain.XRay", b =>
-                {
-                    b.HasOne("Domain.Pacienti", "Pacienti")
-                        .WithOne("XRay")
-                        .HasForeignKey("Domain.XRay", "PacientiId");
-
-                    b.HasOne("Domain.Tretmani", "Tretmani")
-                        .WithMany("XRays")
-                        .HasForeignKey("TretmaniId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pacienti");
-
-                    b.Navigation("Tretmani");
-                });
-
             modelBuilder.Entity("Domain.Kontrolla", b =>
                 {
                     b.Navigation("Tretmanet");
@@ -577,8 +535,6 @@ namespace Persistence.Migrations
                     b.Navigation("Pagesa");
 
                     b.Navigation("Udhezimet");
-
-                    b.Navigation("XRays");
                 });
 
             modelBuilder.Entity("Domain.Doktori", b =>
@@ -600,8 +556,6 @@ namespace Persistence.Migrations
                     b.Navigation("PacientiDoktoret");
 
                     b.Navigation("Tretmanet");
-
-                    b.Navigation("XRay");
                 });
 #pragma warning restore 612, 618
         }

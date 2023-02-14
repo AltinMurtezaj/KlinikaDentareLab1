@@ -22,6 +22,7 @@ public class DataContext : IdentityDbContext<AppUser>
         public DbSet<Tretmani> Tretmanet { get; set; }
         public DbSet<Udhezimi> Udhezimet { get; set; }
         public DbSet<PacientiDoktori> PacientiDoktoret { get; set; }
+        public DbSet<XRay> XRays { get; set; }
 
         
         protected override void OnModelCreating(ModelBuilder builder)
@@ -76,6 +77,18 @@ public class DataContext : IdentityDbContext<AppUser>
             .HasOne(u => u.Tretmani)
             .WithMany(t => t.Udhezimet)
             .HasForeignKey(u => u.TretmaniId);
+            builder.Entity<Tretmani>()  
+                .HasOne(pd => pd.Pagesa)
+                .WithOne(d => d.Tretmani)
+                .HasForeignKey<Pagesa>(pp => pp.TretmaniId);
+            builder.Entity<XRay>()
+                .HasOne(x => x.Tretmani)
+                .WithMany(d => d.XRays)
+                .HasForeignKey(dd => dd.TretmaniId);
+            builder.Entity<XRay>()
+                .HasOne(xx => xx.Pacienti)
+                .WithMany(dd => dd.XRays)
+                .HasForeignKey(dd => dd.PacientiId);
         }
     }
 

@@ -19,7 +19,7 @@ export default class XRayStore {
     get lastItem(){
         return this.xrayById.at(-1);
     }
-    get xrays(){
+    get getXRays(){
         return Array.from(this.xrayRegistry.values());
     }
     

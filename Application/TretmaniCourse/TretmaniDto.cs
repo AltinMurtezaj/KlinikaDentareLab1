@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.KontrollaFolder;
 using Application.UdhezimetCourse;
+using Application.XRayFolder;
 using Domain;
 
 namespace Application.TretmaniCourse
@@ -15,6 +16,6 @@ namespace Application.TretmaniCourse
         public string Pershkrimi { get; set; }
         public float Cmimi { get; set; }
         public ICollection<UdhezimiDto> Udhezimet { get; set; } = new List<UdhezimiDto>();
-
+        public ICollection<XRayDto> XRays { get; set; } = new List<XRayDto>(); 
     }
 }

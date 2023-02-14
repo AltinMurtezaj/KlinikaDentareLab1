@@ -7,6 +7,7 @@ using Application.Payment;
 using Application.TretmaniCourse;
 using Application.TerminiFolder;
 using Application.KontrollaFolder;
+using Application.XRayFolder;
 
 namespace Application.Pacient
 {
@@ -23,5 +24,6 @@ namespace Application.Pacient
         public string Vendbanimi { get; set; }
         public string Discriminator {get; set;}
         public ICollection<TretmaniDto> Tretmanet { get; set; }
+        public ICollection<XRayDto> XRays { get; set; }
     }
 }

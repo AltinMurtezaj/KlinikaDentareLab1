@@ -20,5 +20,6 @@ namespace Domain
         public int KontrollaId { get; set; }
         public Kontrolla Kontrolla { get; set; }
         public ICollection<Udhezimi> Udhezimet { get; set; } = new List<Udhezimi>();
-    }
+        public ICollection<XRay> XRays { get; set; } = new List<XRay>();
+     }
 }
