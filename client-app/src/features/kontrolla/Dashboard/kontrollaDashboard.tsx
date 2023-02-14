@@ -23,7 +23,7 @@ if( kontrollaStore.loadingInitial)
         <Grid>
             <Grid.Column width='10'>
                  <OrariList/>
-                    <Button as={NavLink} to='/createOrari' positive>+Shto Kontrollen</Button>
+                    <Button as={NavLink} to='/createKontrolla' positive>+Shto Kontrollen</Button>
             </Grid.Column>
                     
         </Grid>

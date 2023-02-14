@@ -19,58 +19,48 @@ import { Kontrolla } from "../../../app/models/kontrolla";
 
 export default observer( function KontrollaForm (){
     const navigate = useNavigate();
-    const {kontrollaStore} = useStore();
+    const {kontrollaStore, pacientiStore, tretmaniStore, terminiStore} = useStore();
     const {createKontrolla, updateKontrolla, loadKontrolla, 
     loading, loadingInitial} = kontrollaStore;
+    
     const {id} = useParams<{id: string}>();
+    const {loadPacientet, pacientiByEmri} = pacientiStore;
+    const {loadTretmanet, tretmaniById} = tretmaniStore;
+    const {loadTerminet} = terminiStore;
+    
 
-    const [kontrolla, setKontrolla] = useState<Kontrolla>({
-        id: '',
+
+    const [kontrolla, setKontrolla] = useState({
         emriKontrolles: '',
         kosto: '',
-        pacientiId: '',
-        tretmaniId: '',
-        terminiId: '',
-        token:'',
     });
-
     const validationSchema = Yup.object({
-        emri: Yup.string().required('This field must need to be filled'),
-        datelindja: Yup.string().required('This field must need to be filled').nullable(),
-        kualifikimi: Yup.string().required('This field must need to be filled'),
-        specializimi: Yup.string().required('This field must need to be filled'),
-        vendbanimi: Yup.string().required('This field must need to be filled'),
-        nrKontaktues: Yup.string().required('This field must need to be filled'),
+        emriKontrolles: Yup.string().required('Emri i kontrolles eshte i detyrueshem'),
+        kosto: Yup.string().required('Kosto eshte e detyrueshme'),
+        pacientiId: Yup.string().required('Pacienti eshte i detyrueshem'),
+        tretmaniId: Yup.string().required('Tretmani eshte i detyrueshem')
     })
 
     useEffect(() => {
-        if (id) loadDoktori(id).then(doktori => setDoktori(doktori!))
-    }, [id, loadDoktori]);
-
-    function handleFormSubmit(doktori: Doktori){
-        if(doktori.id.length === 0){
-            let newDoktori = {
-                ...doktori,
-                id: uuid()
-            };
-            createDoktori(newDoktori).then(() => navigate(`/doktoret/${newDoktori.id}`))
-            }else{
-                updateDoktori(doktori).then(() => navigate(`/doktoret/${doktori.id}`))
-            }
-        
-    }
-    
-
-    if(loadingInitial) return <LoadingComponent content='Loading doktori...' />
-
+        if (id) loadKontrolla(id).then(kontrolla => setKontrolla(kontrolla!))
+    }, [id, loadKontrolla]);
+    useEffect(() => {
+        loadPacientet();
+        loadTretmanet();
+        loadTerminet();
+    }, [loadPacientet, loadTretmanet, loadTerminet]);
+        function handleSubmitKontrolla(kontrolla: Kontrolla){
+            updateKontrolla(kontrolla).then(() => navigate('/kontrollat'))
+        }
+        if (loadingInitial) return <LoadingComponent content='Loading kontrolla...' />
     return(
         <Segment clearing>
             <Header content='Doktori Details' sub color='teal' />
             <Formik
                 validationSchema ={validationSchema}
                 enableReinitialize 
-                initialValues={doktori} 
-                onSubmit={values => handleFormSubmit(values)}>
+                initialValues={kontrolla} 
+                onSubmit={values => handleSubmitKontrolla(values)}>
                 {({handleSubmit, isValid, isSubmitting, dirty}) => (
                 <Form className="ui form" onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput name ='emri' placeholder='Emri' /> 
