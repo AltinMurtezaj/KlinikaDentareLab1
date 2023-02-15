@@ -12,7 +12,7 @@ namespace Application.TerminiFolder
     {
         public class Command: IRequest
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
 
         }
 

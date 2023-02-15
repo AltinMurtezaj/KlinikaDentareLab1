@@ -27,6 +27,9 @@ export default class TerminiStore{
             this.setLoadingInitial(false); 
         }
     }
+    get terminet() {
+        return Array.from(this.terminiRegistry.values());
+    }
     loadTermini = async (id:string) => {
         let termini = this.getTermini(id);
         if(termini){

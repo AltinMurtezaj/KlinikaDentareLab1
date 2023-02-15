@@ -1,14 +1,14 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Grid } from "semantic-ui-react";
+import { Button, Grid, Header} from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
-import OrariList from "./KontrollaList";
+import KontrollaList from "./KontrollaList";
 
 
-export default observer(function OrariDashboard(){
+
+export default observer(function KOntrollaDashboard(){
     const {kontrollaStore} = useStore();
     const {loadKontrollat,kontrollaRegistry} = kontrollaStore;
 useEffect(()=>{
@@ -22,10 +22,9 @@ if( kontrollaStore.loadingInitial)
     return (
         <Grid>
             <Grid.Column width='10'>
-                 <OrariList/>
+                 <KontrollaList/>
                     <Button as={NavLink} to='/createKontrolla' positive>+Shto Kontrollen</Button>
-            </Grid.Column>
-                    
+              </Grid.Column>
         </Grid>
     )
 })

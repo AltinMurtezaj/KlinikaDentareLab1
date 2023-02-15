@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class InitialCreate555 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -296,6 +296,33 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "XRays",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TretmaniId = table.Column<int>(type: "int", nullable: false),
+                    PacientiId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_XRays", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_XRays_Tretmanet_TretmaniId",
+                        column: x => x.TretmaniId,
+                        principalTable: "Tretmanet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_XRays_Users_PacientiId",
+                        column: x => x.PacientiId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Kontrollat_TerminiId",
                 table: "Kontrollat",
@@ -346,6 +373,16 @@ namespace Persistence.Migrations
                 name: "IX_Udhezimet_TretmaniId",
                 table: "Udhezimet",
                 column: "TretmaniId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_XRays_PacientiId",
+                table: "XRays",
+                column: "PacientiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_XRays_TretmaniId",
+                table: "XRays",
+                column: "TretmaniId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -379,6 +416,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "XRays");
 
             migrationBuilder.DropTable(
                 name: "Tretmanet");

@@ -26,7 +26,7 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<ActionResult<Termini>> GetTermini(string id)
+        public async Task<ActionResult<Termini>> GetTermini(int id)
         {
             return await Mediator.Send(new Details.Query{Id = id});
         }
@@ -47,7 +47,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTermini(string id)
+        public async Task<IActionResult> DeleteTermini(int id)
         {
             return Ok(await Mediator.Send(new Delete.Command{Id = id}));
         }

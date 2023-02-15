@@ -9,6 +9,8 @@ import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { Pacienti } from '../../../app/models/pacienti';
 import MyDateInput from '../../infermjeret/form/MyDateInput';
+import MySelectInput from './MySelectInput';
+import { gjiniaOption } from '../../../app/common/options/gjiniaOptions';
 
 
 
@@ -68,7 +70,7 @@ export default observer( function PacientiForm(){
                         <MyTextInput placeholder='Emri'  name='emri'/> 
                         <MyTextInput placeholder='Mbiemri'  name='mbiemri'/>
                         <MyTextInput placeholder='NrKontaktues'  name='nrKontaktues'/>
-                        <MyTextInput placeholder='Gjinia'  name='gjinia'/>
+                        <MySelectInput name='gjinia'options={gjiniaOption} placeholder="Gender"/>
                         <MyTextInput placeholder='Vendbanimi'  name='vendbanimi'/>
                         <MyDateInput 
                               placeholderText='Ditelindja'

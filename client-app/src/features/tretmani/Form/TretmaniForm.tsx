@@ -37,13 +37,11 @@ export default observer(function TretmaniForm() {
         cmimi: '',
         doktoriId: '',
         pacientId: '',
-        pagesaId: ''
     });
     const validationSchema = Yup.object({
         pacientiId: Yup.string().required('Pacienti eshte i detyrueshem'),
         doktoriId: Yup.string().required('Doktori eshte i detyrueshem'),
         kontrollaId: Yup.string().required('Kontrolla eshte e detyrueshme'),
-        pagesaId: Yup.string().required('Pagesa eshte e detyrueshme'),
         emri: Yup.string().required('Emri eshte i detyrueshem'),
         koha: Yup.string().required('Koha eshte e detyrueshme'),
         cmimi: Yup.string().required('Cmimi eshte i detyrueshem'),
@@ -97,7 +95,7 @@ export default observer(function TretmaniForm() {
                         content='Submit'
                         disabled={isSubmitting || !dirty || !isValid}
                         />
-                        <Button as={Link} to='/tretmani' floated='right' type='button' content='Cancel' />
+                        <Button as={Link} to='/tretmanet' floated='right' type='button' content='Cancel' />
                     </Form>
                 )}
             </Formik>

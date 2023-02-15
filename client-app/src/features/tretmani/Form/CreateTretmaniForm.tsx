@@ -20,9 +20,9 @@ const validationSchema = Yup.object({
     emri: Yup.string().required('Emri eshte i detyrueshem'),
     pershkrimi: Yup.string().required('Pershkrimi eshte i detyrueshem'),
     cmimi: Yup.string().required('Cmimi eshte i detyrueshem'),
-    koha: Yup.string().required('Koha eshte e detyrueshme'),
     doktoriId: Yup.string().required('Doktori eshte i detyrueshem'),
-    pacientiId: Yup.string().required('Pacienti eshte i detyrueshem')
+    pacientiId: Yup.string().required('Pacienti eshte i detyrueshem'),
+    kontrollaId: Yup.string().required('Kontrolla eshte e detyrueshme'),
 })
 const {tretmaniStore, pacientiStore, doktoriStore, kontrollaStore, pagesaStore} = useStore();
 const {loading, loadingInitial, createTretmani} = tretmaniStore;
@@ -33,15 +33,13 @@ const{loadPagesat, pagesatById} = pagesaStore;
 
 
     const navigate = useNavigate();
-    const[tretmani] = useState({
+    const[tretmani] = useState<Tretmani>({
         emri: '',
         pershkrimi: '',
         cmimi: '',
-        koha: '',
         doktoriId: '',
         pacientId: '',
-        kontrollaId: '',
-        pagesaId: ''
+        kontrollaId: ''
     });
     useEffect(() => {
         loadPacientet();
@@ -53,7 +51,7 @@ const{loadPagesat, pagesatById} = pagesaStore;
         let newTretmani = {
             ...tretmani,
         }
-        createTretmani(tretmani).then(() => navigate('/tretmanet'));
+        createTretmani(newTretmani).then(() => navigate('/tretmanet'));
     }
     if(loadingInitial) return <LoadingComponent content={""}/>
     return(

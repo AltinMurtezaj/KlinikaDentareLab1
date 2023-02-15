@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230214125215_InitialCreate559")]
-    partial class InitialCreate559
+    [Migration("20230214223102_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -289,9 +289,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PacientiId")
-                        .IsUnique()
-                        .HasFilter("[PacientiId] IS NOT NULL");
+                    b.HasIndex("PacientiId");
 
                     b.HasIndex("TretmaniId");
 
@@ -550,8 +548,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.XRay", b =>
                 {
                     b.HasOne("Domain.Pacienti", "Pacienti")
-                        .WithOne("XRay")
-                        .HasForeignKey("Domain.XRay", "PacientiId");
+                        .WithMany("XRays")
+                        .HasForeignKey("PacientiId");
 
                     b.HasOne("Domain.Tretmani", "Tretmani")
                         .WithMany("XRays")
@@ -603,7 +601,7 @@ namespace Persistence.Migrations
 
                     b.Navigation("Tretmanet");
 
-                    b.Navigation("XRay");
+                    b.Navigation("XRays");
                 });
 #pragma warning restore 612, 618
         }

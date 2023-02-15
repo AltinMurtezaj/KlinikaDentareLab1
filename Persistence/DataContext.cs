@@ -45,21 +45,29 @@ public class DataContext : IdentityDbContext<AppUser>
             builder.Entity<Tretmani>()
                 .HasOne(pd => pd.Pacienti)
                 .WithMany(p => p.Tretmanet)
-                .HasForeignKey(pp => pp.PacientId);
+                .HasForeignKey(pp => pp.PacientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Tretmani>()
                 .HasOne(pd => pd.Doktori)
                 .WithMany(d => d.Tretmanet)
-                .HasForeignKey(pp => pp.DokoriId);
+                .HasForeignKey(pp => pp.DokoriId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+           
                 
             builder.Entity<Tretmani>()  
                 .HasOne(pd => pd.Pagesa)
                 .WithOne(d => d.Tretmani)
-                .HasForeignKey<Pagesa>(pp => pp.TretmaniId);
+                .HasForeignKey<Pagesa>(pp => pp.TretmaniId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Kontrolla>()
                 .HasOne(pd => pd.Termini)
                 .WithMany(d => d.Kontrollat)
-                .HasForeignKey(pp => pp.TerminiId);
+                .HasForeignKey(pp => pp.TerminiId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
             builder.Entity<Tretmani>()
                 .HasOne(pd => pd.Kontrolla)
                 .WithMany(d => d.Tretmanet)
@@ -89,6 +97,7 @@ public class DataContext : IdentityDbContext<AppUser>
                 .HasOne(xx => xx.Pacienti)
                 .WithMany(dd => dd.XRays)
                 .HasForeignKey(dd => dd.PacientiId);
+               
         }
     }
 

@@ -31,6 +31,13 @@ namespace Application.Pacient
             {
                 var pacientet = await _context.Pacientet.Include(x => x.Tretmanet)
                                                         .ToListAsync();
+                                                         foreach (var pacient in pacientet)
+    {
+        if (pacient.Tretmanet.Any())
+        {
+            _context.Tretmanet.RemoveRange(pacient.Tretmanet);
+        }
+    }
                 var pacientetList = _mapper.Map<List<PacientiDto>>(pacientet);
                 return Result<List<PacientiDto>>.Success(pacientetList);
             }

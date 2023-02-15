@@ -9,12 +9,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Microsoft.AspNetCore.Identity;
+using Domain;
 
 namespace API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
@@ -25,7 +27,9 @@ namespace API
             try
             {
                 var context = services.GetRequiredService<DataContext>();
-                context.Database.Migrate();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                await context.Database.MigrateAsync();
+                await Seed.SeedData(context, userManager);
 
             }
             catch (Exception ex)
@@ -34,7 +38,7 @@ namespace API
                 logger.LogError(ex, "An error occured during migration");
             }
 
-            host.Run();
+           await host.RunAsync();
         }
 
 

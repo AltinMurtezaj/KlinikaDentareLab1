@@ -7,51 +7,50 @@ import { useStore } from "../../../app/stores/store";
 import * as Yup from 'yup';
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MySelectInput from "../../../app/common/form/MySelectInput";
-import { Kontrolla } from "../../../app/models/kontrolla";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
+import { Termini } from "../../../app/models/termini";
+import MyDateInput from "../../pacientet/form/MyDateInput";
  
-export default observer(function CreateKontrollaForm(){
+export default observer(function CreateTerminiForm(){
     
     const validationSchema = Yup.object({
-       
-        emriKontrolles:Yup.string().required('Emri nuk mund te jete i zbrazet'),
-        kosto:Yup.string().required('Kosto nuk mund te jete e zbrazet'),
-
+        data:Yup.date().required('Data është e detyrueshme'),
+        koha:Yup.string().required('Koha është e detyrueshme'),
     });
-   const {kontrollaStore,terminiStore}=useStore();
-    const{loading,loadingInitial,createKontrolla}=kontrollaStore;
+   const {terminiStore}=useStore();
+    const{loading,loadingInitial,createTermini}=terminiStore;
     const {terminet}=terminiStore
     const navigate = useNavigate();
-    const [kontrolla] = useState<Kontrolla>({
-        emriKontrolles:'',
-        kosto:'',
-        terminiId:''
+    const [termini] = useState<Termini>({
+        data:null,
+        koha:'',
     });
-     function handleFormSubmit(kontrolla: Kontrolla){
-     let newKontrolla = {
-        ...kontrolla,
+     function handleFormSubmit(termini: Termini){
+     let newTermini = {
+        ...termini,
      }
-        createKontrolla(newKontrolla).then(()=> navigate(`/kontrollat`)); 
+        createTermini(newTermini).then(()=> navigate(`/terminet`)); 
     }
     if(loadingInitial) return <LoadingComponent content={""}/>
     return(
          <Segment>
-            <Header content='Shto kontrollen' color='teal'/>
+            <Header content='Shto terminin' color='teal'/>
             <Formik
                 validationSchema={validationSchema}
             enableReinitialize
-             initialValues={kontrolla} 
+             initialValues={termini} 
              onSubmit={values=>handleFormSubmit(values)}>
                 {({handleSubmit})=>(
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='of'>
                 
-                <MyTextInput placeholder='Emri i kontrolles' name='emriKontrolles'/>
-                <MyTextInput placeholder='Kosto' name='kosto'/>
-                <MySelectInput options={terminet.map((termini)=>{
-                        return{text:termini.id, value:termini.id}
-                        })}  placeholder='Termini' name="terminiId"/>
+                <MyDateInput 
+                                 placeholderText='Data'
+                                    name='data'
+                                    dateFormat='d MMMM yyyy'
+                                />
+                <MyTextInput placeholder='Koha' name='koha'/>
                 <Button loading={loading} floated="right" positive type="submit" content='Submit'/>
-                <Button as={NavLink} to='/kontrollat' floated="right"  type="button" content='Cancel'/>
+                <Button as={NavLink} to='/terminet' floated="right"  type="button" content='Cancel'/>
                 </Form> 
                 )}
 

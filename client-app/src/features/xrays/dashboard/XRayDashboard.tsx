@@ -24,7 +24,7 @@ if( xrayStore.loadingInitial)
         <Grid>
             <Grid.Column width='10'>
                  <XRayList/>
-                    <Button as={NavLink} to='/createOrari' positive>+Shto xray</Button>
+                    <Button as={NavLink} to='/createXray' positive>+Shto xray</Button>
             </Grid.Column>
                     
         </Grid>

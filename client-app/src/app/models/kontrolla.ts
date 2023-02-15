@@ -10,6 +10,6 @@ export interface Kontrolla {
     pacienti?: Pacienti;
     tretmaniId?: string;
     tretmani?: Tretmani;
-    terminiId?: string;
+    terminiId: string;
     termini?: Termini;
   }

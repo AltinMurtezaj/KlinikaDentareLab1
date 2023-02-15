@@ -23,13 +23,19 @@ import PacientiForm from '../../features/pacientet/form/PacientiForm';
 import LaborantiDashboard from '../../features/laborantet/dashboard/LaborantiDashboard';
 import LaborantiDetails from '../../features/laborantet/details/LaborantiDetails';
 import LaborantiForm from '../../features/laborantet/form/LaborantiForm';
-import TerminiDashboard from '../../features/terminet/dashboard/TerminiDashboard';
-import TerminiDetails from '../../features/terminet/details/TerminiDetails';
-import TerminiForm from '../../features/terminet/form/TerminiForm';
+import TerminiDashboard from '../../features/terminet/Dashboard/TerminiDashboard';
 import DoktoriRegisterForm from '../../features/doktoret/form/DoktoriRegisterForm';
 import InfermierjaRegisterForm from '../../features/infermjeret/form/infermierjaRegisterForm';
 import PrivateRoute from './PrivateRoute';
 import PacientiDetails from '../../features/pacientet/dashboard/PacientiDetails';
+import CreateTretmaniForm from '../../features/tretmani/Form/CreateTretmaniForm';
+import TretmaniDashboard from '../../features/tretmani/Dashboard/tretmaniDashboard';
+import TretmaniForm from '../../features/tretmani/Form/TretmaniForm';
+import KontrollaRegisterForm from '../../features/kontrolla/Form/KontrollaRegisterForm';
+import KontrollaDashboard from '../../features/kontrolla/Dashboard/kontrollaDashboard';
+import KontrollaForm from '../../features/kontrolla/Form/KontrollaForm';
+import TerminiRegisterForm from '../../features/terminet/Form/TerminiRegisterForm';
+import TerminiForm from '../../features/terminet/Form/TerminiForm';
 
 function App() {
   const location = useLocation();
@@ -62,11 +68,6 @@ function App() {
         <NavBar />
         <Container style={{marginTop: '7em'}}>
           <Routes>
-
-            <Route path='/terminet' element={<TerminiDashboard/>}/>
-            <Route path='/terminet/:id' element={<TerminiDetails/>}/>
-            <Route key={location.key}path='/createTerminet' element={<TerminiForm/>}/>
-            <Route key={location.key}path='/manageTermini/:id' element={<TerminiForm/>}/>
             
             <Route  path='/doktoret' element={<DoktoriDashboard/>}/>
             <Route path='/doktoret/:id' element={<DoktoriDetails/>}/>
@@ -88,6 +89,21 @@ function App() {
             <Route key={location.key}path='/manageInfermierja/:id' element={<InfermierjaForm/>}/>
             <Route key={location.key}path='/createInfermjeret' element={<InfermierjaRegisterForm/>}/>
 
+
+            <Route path='/createTretmani' element={<CreateTretmaniForm/>}/>
+            <Route path='/Tretmanet' element={<TretmaniDashboard/>}/>
+            <Route key={location.key} path='/editTretmani/:id' element={<TretmaniForm/>}/>
+            
+            <Route path='/createKontrolla' element={<KontrollaRegisterForm/>}/>
+            <Route path='/Kontrollat' element={<KontrollaDashboard/>}/>
+            <Route key={location.key} path='/editKontrolla/:id' element={<KontrollaForm/>}/>
+
+            <Route path='/terminet' element={<TerminiDashboard/>}/>
+            <Route path='/createTermini' element={<TerminiRegisterForm/>}/>
+            <Route key={location.key}path='/editTermini/:id' element={<TerminiForm/>}/>
+  
+
+            
 
   
 

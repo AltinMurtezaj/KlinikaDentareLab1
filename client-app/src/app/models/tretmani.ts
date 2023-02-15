@@ -10,9 +10,10 @@ export interface Tretmani {
     cmimi: string;
     doktoriId: string;
     doktori?: Doktori;
-    pagesaId: string;
+    pagesaId?: string;
     pagesa?: Pagesa;
     pacientId: string;
     pacienti?: Pacienti;
+    kontrollaId?: string;
     kontrollat?: Kontrolla[];
   }
