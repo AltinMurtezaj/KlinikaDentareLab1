@@ -37,20 +37,33 @@ export default class UdhezimiStore {
                 return 0;
         });
     }
+
+    get getUdhezimet(){
+        return Array.from(this.udhezimiRegistry.values());
+    }
     
 
-  loadUdhezimi = async() => {
-    try {
-        const udhezimet = await agent.Udhezimet.list();
-        udhezimet.forEach(udhezimi => {
-            this.setUdhezimi(udhezimi);
-        })
-        this.setLoadingInitial(false);
-    } catch (error) {
-        console.log(error);
-        this.setLoadingInitial(false);
+    loadUdhezimi = async (id:string) => {
+        let udhezimi = this.getUdhezimi(id);
+        if(udhezimi){
+            this.selectedUdhezimi = udhezimi;
+            return udhezimi;
+        }else{
+            this.loadingInitial =true;
+            try {
+                udhezimi = await agent.Udhezimet.details(id);
+                this.setUdhezimi(udhezimi);
+                runInAction(() => {
+                    this.selectedUdhezimi = udhezimi;
+                })
+                this.setLoadingInitial(false);
+                return udhezimi;
+            } catch (error) {
+                console.log(error);
+                this.setLoadingInitial(false);
+            }
+        }
     }
-  }
 
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;
@@ -108,28 +121,19 @@ export default class UdhezimiStore {
     }
   }
 
- loadUdhezimet = async(id: string) => {
-    let udhezimi = this.getUdhezimi(id);
-    if (udhezimi) {
-        this.selectedUdhezimi = udhezimi;
-        return udhezimi;
-    } else {
-        this.loadingInitial = true;
-        try {
-            udhezimi = await agent.Udhezimet.details(id);
-            this.setUdhezimi(udhezimi);
-            runInAction(() => {
-                this.selectedUdhezimi = udhezimi;
-            })
-            this.setLoadingInitial(false);
-            return udhezimi;
-        } catch (error) {
-            console.log(error);
-            this.loadingInitial = false;
-            
-        }
+  loadUdhezimet = async () => { 
+    this.loadingInitial = true;
+    try{
+        const udhezimet = await agent.Udhezimet.list();
+            udhezimet.forEach(udhezimi => {
+                this.setUdhezimi(udhezimi);
+        })
+        this.setLoadingInitial(false); 
+    }catch(error){
+        console.log(error);
+        this.setLoadingInitial(false); 
     }
- }
+}
 
   private getUdhezimi = (id: string) => {
     return this.udhezimiRegistry.get(id);
