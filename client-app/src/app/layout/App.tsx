@@ -15,9 +15,6 @@ import LoginForm from '../../features/users/LoginForm';
 import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponents';
 import ModalContainer from '../common/modals/ModalContainer';
-import DoktoriDashboard from '../../features/doktoret/dashboard/DoktoriDashboard';
-import DoktoriDetails from '../../features/doktoret/details/DoktoriDetails';
-import DoktoriForm from '../../features/doktoret/form/DoktoriForm';
 import PacientiDashboard from '../../features/pacientet/dashboard/PacientiDashboard';
 import PacientiForm from '../../features/pacientet/form/PacientiForm';
 import LaborantiDashboard from '../../features/laborantet/dashboard/LaborantiDashboard';
@@ -26,10 +23,17 @@ import LaborantiForm from '../../features/laborantet/form/LaborantiForm';
 import TerminiDashboard from '../../features/terminet/dashboard/TerminiDashboard';
 import TerminiDetails from '../../features/terminet/details/TerminiDetails';
 import TerminiForm from '../../features/terminet/form/TerminiForm';
-import DoktoriRegisterForm from '../../features/doktoret/form/DoktoriRegisterForm';
 import InfermierjaRegisterForm from '../../features/infermjeret/form/infermierjaRegisterForm';
 import PrivateRoute from './PrivateRoute';
 import PacientiDetails from '../../features/pacientet/dashboard/PacientiDetails';
+import DoktoriDetails from '../../features/doktoret/dashboard/DoktoriDetails';
+import DoktoriForm from '../../features/doktoret/form/DoktoriForm';
+import DoktoriDashboard from '../../features/doktoret/dashboard/DoktoriDashboard';
+import DoktoriList from '../../features/doktoret/dashboard/DoktoriList';
+import UdhezimiDashboard from '../../features/udhezimet/dashboard/UdhezimiDashboard';
+import UdhezimiDetails from '../../features/udhezimet/dashboard/UdhezimiDetails';
+import UdhezimiForm from '../../features/udhezimet/form/UdhezimiForm';
+import UdhezimiList from '../../features/udhezimet/dashboard/UdhezimiList';
 
 function App() {
   const location = useLocation();
@@ -69,13 +73,16 @@ function App() {
             <Route key={location.key}path='/manageTermini/:id' element={<TerminiForm/>}/>
             
             <Route  path='/doktoret' element={<DoktoriDashboard/>}/>
-            <Route path='/doktoret/:id' element={<DoktoriDetails/>}/>
             <Route key={location.key}path='/manageDoktori/:id' element={<DoktoriForm/>}/>
-            <Route key={location.key}path='/createDoktoret' element={<DoktoriRegisterForm/>}/>
+            <Route key={location.key}path='/DoktoriDetails/:id' element={<DoktoriDetails/>}/>
 
             <Route  path='/pacientet' element={<PacientiDashboard/>}/>
             <Route key={location.key}path='/managePacienti/:id' element={<PacientiForm/>}/>
             <Route key={location.key}path='/PacientiDetails/:id' element={<PacientiDetails/> }/>
+
+            <Route  path='/udhezimet' element={<UdhezimiDashboard/>}/>
+            <Route key={location.key}path='/manageUdhezimi/:id' element={<UdhezimiForm/>}/>
+            <Route key={location.key}path='/UdhezimiDetails/:id' element={<UdhezimiDetails/> }/>
             
             <Route  path='/laborantet' element={<LaborantiDashboard/>}/>
             <Route path='/laborantet/:id' element={<LaborantiDetails/>}/>

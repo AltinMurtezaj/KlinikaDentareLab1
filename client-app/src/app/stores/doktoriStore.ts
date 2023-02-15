@@ -43,6 +43,9 @@ export default class DoktoriStore{
         });
     }
 
+    get getDoktoret(){
+        return Array.from(this.doktoriRegistry.values());
+    }
     loadDoktoret = async () => { 
         this.loadingInitial = true;
         try{

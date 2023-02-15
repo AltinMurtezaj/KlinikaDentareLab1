@@ -14,7 +14,7 @@ namespace Application.UdhezimetCourse
     {
         public class Query : IRequest<Udhezimi>
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, Udhezimi>

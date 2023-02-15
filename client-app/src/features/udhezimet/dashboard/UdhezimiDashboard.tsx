@@ -5,28 +5,28 @@ import { Button, Grid, List } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponents';
 import { useStore } from '../../../app/stores/store';
 import RegisterForm from '../../users/RegisterForm';
-import DoktoriList from './DoktoriList';
+import UdhezimiList from './UdhezimiList';
 
-export default observer( function DoktoriDashboard(){
-    const {doktoriStore, modalStore} = useStore();
-    const {loadDoktoret} = doktoriStore;
+export default observer( function UdhezimiDashboard(){
+    const {udhezimiStore, modalStore} = useStore();
+    const {loadUdhezimet} = udhezimiStore;
   
 
     useEffect(() => {
-        loadDoktoret();
-    }, [loadDoktoret])
+        loadUdhezimet();
+    }, [loadUdhezimet])
 
   
-  if(doktoriStore.loadingInitial) <LoadingComponent content='Loading doktoret...'/>
+  if(udhezimiStore.loadingInitial) <LoadingComponent content='Loading udhezimet...'/>
     return (
         <>
         <Grid>
             <Grid.Column width='16'>
-                <DoktoriList />
+                <UdhezimiList />
             </Grid.Column>
             <Grid.Column width ='16'>
             < Button onClick={()=>modalStore.openModal(<RegisterForm/>)} positive>
-                    Shto doktorin
+                    Shto udhezimin
                 </Button>
             </Grid.Column>
         </Grid>
