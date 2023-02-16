@@ -21,7 +21,7 @@ const validationSchema = Yup.object({
     pershkrimi: Yup.string().required('Pershkrimi eshte i detyrueshem'),
     cmimi: Yup.string().required('Cmimi eshte i detyrueshem'),
     doktoriId: Yup.string().required('Doktori eshte i detyrueshem'),
-    pacientiId: Yup.string().required('Pacienti eshte i detyrueshem'),
+    pacientId: Yup.string().required('Pacienti eshte i detyrueshem'),
     kontrollaId: Yup.string().required('Kontrolla eshte e detyrueshme'),
 })
 const {tretmaniStore, pacientiStore, doktoriStore, kontrollaStore, pagesaStore} = useStore();
@@ -71,7 +71,7 @@ const{loadPagesat, pagesatById} = pagesaStore;
                     <MySelectInput name='doktoriId' options={doktoriByEmri.map((doktori)=>{
                         return{text:doktori.emri, value:doktori.id}
                        })}   placeholder='Doktori' />
-                    <MySelectInput name='pacientiId'  options={pacientiByEmri.map((pacienti)=>{
+                    <MySelectInput name='pacientId'  options={pacientiByEmri.map((pacienti)=>{
                         return{text:pacienti.emri, value:pacienti.id}
                     })}  placeholder='Pacienti'/>
                     <MySelectInput name='kontrollaId'  options={kontrollatById.map((kontrolla)=>{

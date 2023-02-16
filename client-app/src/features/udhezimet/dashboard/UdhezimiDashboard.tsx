@@ -5,6 +5,7 @@ import { Button, Grid, List } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponents';
 import { useStore } from '../../../app/stores/store';
 import RegisterForm from '../../users/RegisterForm';
+import UdhezimiForm from '../form/UdhezimiForm';
 import UdhezimiList from './UdhezimiList';
 
 export default observer( function UdhezimiDashboard(){
@@ -25,7 +26,7 @@ export default observer( function UdhezimiDashboard(){
                 <UdhezimiList />
             </Grid.Column>
             <Grid.Column width ='16'>
-            < Button onClick={()=>modalStore.openModal(<RegisterForm/>)} positive>
+            < Button onClick={()=>modalStore.openModal(<UdhezimiForm/>)} positive>
                     Shto udhezimin
                 </Button>
             </Grid.Column>

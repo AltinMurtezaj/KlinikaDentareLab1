@@ -7,8 +7,6 @@ import { useStore } from '../../../app/stores/store';
 import { Formik,Form} from 'formik';
 import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
-import { Pacienti } from '../../../app/models/pacienti';
-import MyDateInput from '../../infermjeret/form/MyDateInput';
 import { Udhezimi } from '../../../app/models/udhezimi';
 
 

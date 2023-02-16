@@ -34,6 +34,13 @@ namespace Application.Doctor
                                                         .Include(x => x.Terminet)
                                                         .Include(x => x.Tretmanet)
                                                         .ToListAsync();
+                                                         foreach (var doktori in doktoret)
+    {
+        if (doktori.Tretmanet.Any())
+        {
+            _context.Tretmanet.RemoveRange(doktori.Tretmanet);
+        }
+    }
                 var doktoretList = _mapper.Map<List<DoktoriDto>>(doktoret);
                 return Result<List<DoktoriDto>>.Success(doktoretList);
             }

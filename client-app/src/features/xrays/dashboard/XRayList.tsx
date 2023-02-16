@@ -45,9 +45,9 @@ export default observer(function XRayList(){
           <Table.Row key={xray.Id}>
         <Table.Cell>{format(new Date(xray.Data!),'dd MMM yyy')}</Table.Cell>
         <Table.Cell colSpan="3">
-        <Button as={Link} to={`/PacientiDetails/${xray.Id}`} primary floated='left' placeholder='Details' color="teal">Details</Button>
+        <Button as={Link} to={`/XRayDetails/${xray.Id}`} primary floated='left' placeholder='Details' color="teal">Details</Button>
             
-            <Button as={Link} to={`/manageXRay/${xray.Id}`} floated='left' color='blue'>
+            <Button as={Link} to={`/editXRay/${xray.Id}`} floated='left' color='blue'>
                                 <Icon name='edit'/>
                             </Button>
                             <Button 

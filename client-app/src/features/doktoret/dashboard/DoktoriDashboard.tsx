@@ -5,6 +5,7 @@ import { Button, Grid, List } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponents';
 import { useStore } from '../../../app/stores/store';
 import RegisterForm from '../../users/RegisterForm';
+import RegisterDoktoriForm from '../form/RegisterDoktoriForm';
 import DoktoriList from './DoktoriList';
 
 export default observer( function DoktoriDashboard(){
@@ -25,7 +26,7 @@ export default observer( function DoktoriDashboard(){
                 <DoktoriList />
             </Grid.Column>
             <Grid.Column width ='16'>
-            < Button onClick={()=>modalStore.openModal(<RegisterForm/>)} positive>
+            < Button onClick={()=>modalStore.openModal(<RegisterDoktoriForm/>)} positive>
                     Shto doktorin
                 </Button>
             </Grid.Column>
