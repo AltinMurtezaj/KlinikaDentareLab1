@@ -156,6 +156,7 @@ const Laboratoret = {
 }
 const PacientiDoktori = {
     list: () => requests.get<PacientiDoktoriDTO[]>('/PacientiDoktori'),
+    listByDoktori:(doktoriId:string)=>requests.get<PacientiDoktoriDTO[]>(`/PacientiDoktori/${doktoriId}/byDoktori`),
     details: (id: string) => requests.get<PacientiDoktoriDTO>(`/PacientiDoktori/${id}`),
     create: (pacientidoktori: PacientiDoktoriDTO) => axios.post<void>('/PacientiDoktori', pacientidoktori),
     update: (pacientidoktori: PacientiDoktoriDTO) => axios.put<void>(`/PacientiDoktori/${pacientidoktori.id}`,pacientidoktori),
