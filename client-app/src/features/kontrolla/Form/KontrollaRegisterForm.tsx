@@ -16,16 +16,17 @@ export default observer(function CreateKontrollaForm(){
        
         emriKontrolles:Yup.string().required('Emri nuk mund te jete i zbrazet'),
         kosto:Yup.string().required('Kosto nuk mund te jete e zbrazet'),
+        terminiId:Yup.string().required('Termini nuk mund te jete i zbrazet'),
 
     });
    const {kontrollaStore,terminiStore}=useStore();
     const{loading,loadingInitial,createKontrolla}=kontrollaStore;
-    const {terminet}=terminiStore
+    const {terminetById}=terminiStore
     const navigate = useNavigate();
     const [kontrolla] = useState<Kontrolla>({
         emriKontrolles:'',
         kosto:'',
-        terminiId:''
+        terminiId:'',
     });
      function handleFormSubmit(kontrolla: Kontrolla){
      let newKontrolla = {
@@ -47,18 +48,14 @@ export default observer(function CreateKontrollaForm(){
                 
                 <MyTextInput placeholder='Emri i kontrolles' name='emriKontrolles'/>
                 <MyTextInput placeholder='Kosto' name='kosto'/>
-                <MySelectInput options={terminet.map((termini)=>{
+                <MySelectInput options={terminetById.map((termini)=>{
                         return{text:termini.id, value:termini.id}
                         })}  placeholder='Termini' name="terminiId"/>
                 <Button loading={loading} floated="right" positive type="submit" content='Submit'/>
                 <Button as={NavLink} to='/kontrollat' floated="right"  type="button" content='Cancel'/>
                 </Form> 
                 )}
-
-            </Formik>
-           
-                
-                
+            </Formik>   
         </Segment>
     )
 })

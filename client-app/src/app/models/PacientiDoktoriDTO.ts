@@ -1,5 +1,5 @@
 export interface PacientiDoktoriDTO {
-    id?: string;
+    id?: number;
     PacientiId: string;
     DoktoriId: string;
 }

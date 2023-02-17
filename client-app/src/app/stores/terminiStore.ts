@@ -27,7 +27,10 @@ export default class TerminiStore{
             this.setLoadingInitial(false); 
         }
     }
-    get terminet() {
+    get terminetById(){
+        return Array.from(this.terminiRegistry.values()).sort((a,b) => Number(a.id) - Number(b.id));
+    }
+    get terminet(){
         return Array.from(this.terminiRegistry.values());
     }
     loadTermini = async (id:string) => {

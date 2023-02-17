@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Tab, Table } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
@@ -10,11 +10,15 @@ import { useStore } from "../../../app/stores/store";
 export default observer(function TretmaniList() {
      const {tretmaniStore} = useStore();
      const [target,setTarget] = useState('');
-     const {tretmanet, deletetretmani, loading} = tretmaniStore;
+     const {tretmanet, deletetretmani, loading, loadTretmanet} = tretmaniStore;
     function handleTretmaniDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         setTarget(e.currentTarget.name);
         deletetretmani(id);
     }
+    useEffect(() => {
+        loadTretmanet();
+    }, [loadTretmanet])
+
     return(
         <Container style={{marginTop: '7em'}}>
             <Table >
@@ -31,7 +35,7 @@ export default observer(function TretmaniList() {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {tretmanet.map(tretmani => (
+                    {tretmanet.map((tretmani) => (
                         <Table.Row key={tretmani.id}>
 
                             <Table.Cell>{tretmani.emri}</Table.Cell>
@@ -43,7 +47,7 @@ export default observer(function TretmaniList() {
 
                             <Table.Cell colSpan="3">
 
-                <Button as={Link} to={`/tretmani/${tretmani.id}`} primary placeholder='Edit' color='blue' content='Edit'>Edit</Button>
+                <Button as={Link} to={`/editTretmani/${tretmani.id}`} primary placeholder='Edit' color='blue' content='Edit'>Edit</Button>
                 <Button loading={loading && target === tretmani.id!.toString()} 
                 onClick={(e) => handleTretmaniDelete(e, tretmani.id!)} placeholder='Delete' color='red' content='Delete'>Delete</Button>
                             </Table.Cell> 

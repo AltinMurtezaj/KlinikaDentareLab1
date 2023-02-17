@@ -220,7 +220,7 @@ namespace Persistence.Migrations
                     b.Property<float>("Cmimi")
                         .HasColumnType("real");
 
-                    b.Property<string>("DokoriId")
+                    b.Property<string>("DoktoriId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Emri")
@@ -237,7 +237,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DokoriId");
+                    b.HasIndex("DoktoriId");
 
                     b.HasIndex("KontrollaId");
 
@@ -513,7 +513,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Doktori", "Doktori")
                         .WithMany("Tretmanet")
-                        .HasForeignKey("DokoriId");
+                        .HasForeignKey("DoktoriId");
 
                     b.HasOne("Domain.Kontrolla", "Kontrolla")
                         .WithMany("Tretmanet")

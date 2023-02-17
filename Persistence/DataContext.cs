@@ -45,28 +45,22 @@ public class DataContext : IdentityDbContext<AppUser>
             builder.Entity<Tretmani>()
                 .HasOne(pd => pd.Pacienti)
                 .WithMany(p => p.Tretmanet)
-                .HasForeignKey(pp => pp.PacientId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(pp => pp.PacientId);
 
             builder.Entity<Tretmani>()
                 .HasOne(pd => pd.Doktori)
                 .WithMany(d => d.Tretmanet)
-                .HasForeignKey(pp => pp.DokoriId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-           
-                
+                .HasForeignKey(pp => pp.DoktoriId);
+               
             builder.Entity<Tretmani>()  
                 .HasOne(pd => pd.Pagesa)
                 .WithOne(d => d.Tretmani)
-                .HasForeignKey<Pagesa>(pp => pp.TretmaniId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey<Pagesa>(pp => pp.TretmaniId);
 
             builder.Entity<Kontrolla>()
                 .HasOne(pd => pd.Termini)
                 .WithMany(d => d.Kontrollat)
-                .HasForeignKey(pp => pp.TerminiId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(pp => pp.TerminiId);
                 
             builder.Entity<Tretmani>()
                 .HasOne(pd => pd.Kontrolla)

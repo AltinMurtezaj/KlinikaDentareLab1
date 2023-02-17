@@ -39,11 +39,10 @@ export default observer(function TretmaniForm() {
         pacientId: '',
     });
     const validationSchema = Yup.object({
-        pacientiId: Yup.string().required('Pacienti eshte i detyrueshem'),
+        pacientId: Yup.string().required('Pacienti eshte i detyrueshem'),
         doktoriId: Yup.string().required('Doktori eshte i detyrueshem'),
         kontrollaId: Yup.string().required('Kontrolla eshte e detyrueshme'),
         emri: Yup.string().required('Emri eshte i detyrueshem'),
-        koha: Yup.string().required('Koha eshte e detyrueshme'),
         cmimi: Yup.string().required('Cmimi eshte i detyrueshem'),
         pershkrimi: Yup.string().required('Pershkrimi eshte i detyrueshem')
     })
@@ -58,7 +57,7 @@ export default observer(function TretmaniForm() {
         loadPagesat();
     }, [loadPacientet, loadDoktoret, loadKontrollat, loadPagesat])
     function handleSubmitTretmani(tretmani: Tretmani) {
-        updateTretmani(tretmani).then(() => navigate('/tretmani'))
+        updateTretmani(tretmani).then(() => navigate('/tretmanet'))
     }
     if(loadingInitial) return <LoadingComponent content={""}/>
     return (
@@ -72,7 +71,7 @@ export default observer(function TretmaniForm() {
             >
                 {({handleSubmit, isValid, isSubmitting, dirty}) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        <MySelectInput name='pacientiId' placeholder='Pacienti' options={pacientiByEmri.map((pacienti)=>{
+                        <MySelectInput name='pacientId' placeholder='Pacienti' options={pacientiByEmri.map((pacienti)=>{
                             return {value: pacienti.id, text: pacienti.emri}
                         })} />
                         <MySelectInput name='doktoriId' placeholder='Doktori' options={doktoriByEmri.map((doktori)=>{
@@ -85,7 +84,6 @@ export default observer(function TretmaniForm() {
                             return {value: pagesa.id, text: pagesa.id}
                         })} />
                         <MyTextInput name='emri' placeholder='Emri' />
-                        <MyTextInput name='koha' placeholder='Koha' />
                         <MyTextInput name='cmimi' placeholder='Cmimi' />
                         <MyTextInput name='pershkrimi' placeholder='Pershkrimi' />
                         <Button

@@ -100,7 +100,6 @@ function App() {
             <Route key={location.key}path='/manageInfermierja/:id' element={<InfermierjaForm/>}/>
             <Route key={location.key}path='/createInfermjeret' element={<InfermierjaRegisterForm/>}/>
 
-
             <Route path='/createTretmani' element={<CreateTretmaniForm/>}/>
             <Route path='/Tretmanet' element={<TretmaniDashboard/>}/>
             <Route key={location.key} path='/editTretmani/:id' element={<TretmaniForm/>}/>

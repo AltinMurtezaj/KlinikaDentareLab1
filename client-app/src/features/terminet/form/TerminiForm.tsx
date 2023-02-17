@@ -51,6 +51,7 @@ export default observer( function TerminiForm(){
             >
                     {({handleSubmit, isValid, isSubmitting, dirty}) =>(
                         <Form className='ui form'onSubmit={handleSubmit} autoComplete='off'>
+                        <MyTextInput placeholder='Termini ID' name='id' value={termini.id} disabled/>
                         <MyDateInput 
                               placeholderText='Data'
                               name='data'
