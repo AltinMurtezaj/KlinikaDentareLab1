@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCrasdasdeate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -226,7 +226,7 @@ namespace Persistence.Migrations
                     Emri = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Pershkrimi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cmimi = table.Column<float>(type: "real", nullable: false),
-                    DokoriId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DoktoriId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PacientId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     KontrollaId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -240,8 +240,8 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tretmanet_Users_DokoriId",
-                        column: x => x.DokoriId,
+                        name: "FK_Tretmanet_Users_DoktoriId",
+                        column: x => x.DoktoriId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -355,9 +355,9 @@ namespace Persistence.Migrations
                 column: "DoktoriId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tretmanet_DokoriId",
+                name: "IX_Tretmanet_DoktoriId",
                 table: "Tretmanet",
-                column: "DokoriId");
+                column: "DoktoriId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tretmanet_KontrollaId",

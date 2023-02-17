@@ -156,11 +156,12 @@ const Laboratoret = {
 }
 const PacientiDoktori = {
     list: () => requests.get<PacientiDoktoriDTO[]>('/PacientiDoktori'),
-    details: (id: string) => requests.get<PacientiDoktoriDTO>(`/PacientiDoktori/${id}`),
-    create: (pacientidoktori: PacientiDoktoriDTO) => axios.post<void>('/PacientiDoktori', pacientidoktori),
-    update: (pacientidoktori: PacientiDoktoriDTO) => axios.put<void>(`/PacientiDoktori/${pacientidoktori.id}`,pacientidoktori),
-    delete: (id: string) => axios.delete<void>(`/PacientiDoktori/${id}`),
-    detailsById: (id: string) => requests.get<PacientiDoktoriDTO>(`/PacientiDoktori/${id}`),
+    listByDoktori: (doktoriId:string) => requests.get<PacientiDoktoriDTO[]>(`/PacientiDoktori/${doktoriId}/byDoktori`),
+    details: (pacientiId: string, DoktoriId:string) => requests.get<PacientiDoktoriDTO>(`/PacientiDoktori/${pacientiId}/${DoktoriId}`),
+    create: (doktoriDto: PacientiDoktoriDTO) => axios.post<void>('/PacientiDoktori', doktoriDto),
+    update: (doktoriDto: PacientiDoktoriDTO) => axios.put<void>(`/PacientiDoktori/${doktoriDto.id}`,doktoriDto),
+    delete: (pacientiId: string, DoktoriId: string) => axios.delete<void>(`/PacientiDoktori/${pacientiId}/${DoktoriId}`),
+    detailsById: (id: number) => requests.get<PacientiDoktoriDTO>(`/PacientiDoktori/${id}`),
     detailsByDoktoriId: (DoktoriId: string) => requests.get<PacientiDoktoriDTO>(`/PacientiDoktori/${DoktoriId}/DoktoriId`),
     }
 const PacientiXRay = {

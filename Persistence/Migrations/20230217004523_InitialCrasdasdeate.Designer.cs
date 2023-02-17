@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230214223102_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230217004523_InitialCrasdasdeate")]
+    partial class InitialCrasdasdeate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -222,7 +222,7 @@ namespace Persistence.Migrations
                     b.Property<float>("Cmimi")
                         .HasColumnType("real");
 
-                    b.Property<string>("DokoriId")
+                    b.Property<string>("DoktoriId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Emri")
@@ -239,7 +239,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DokoriId");
+                    b.HasIndex("DoktoriId");
 
                     b.HasIndex("KontrollaId");
 
@@ -515,7 +515,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Doktori", "Doktori")
                         .WithMany("Tretmanet")
-                        .HasForeignKey("DokoriId");
+                        .HasForeignKey("DoktoriId");
 
                     b.HasOne("Domain.Kontrolla", "Kontrolla")
                         .WithMany("Tretmanet")

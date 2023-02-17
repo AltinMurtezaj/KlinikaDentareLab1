@@ -67,7 +67,6 @@ const{loadPagesat, pagesatById} = pagesaStore;
                     <MyTextInput name='emri' placeholder='Emri'/>
                     <MyTextInput name='pershkrimi' placeholder='Pershkrimi'/>
                     <MyTextInput name='cmimi' placeholder='Cmimi'/>
-                    <MyTextInput name='koha' placeholder='Koha'/>
                     <MySelectInput name='doktoriId' options={doktoriByEmri.map((doktori)=>{
                         return{text:doktori.emri, value:doktori.id}
                        })}   placeholder='Doktori' />

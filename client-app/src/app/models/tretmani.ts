@@ -16,4 +16,4 @@ export interface Tretmani {
     pacienti?: Pacienti;
     kontrollaId?: string;
     kontrollat?: Kontrolla[];
-  }
+}

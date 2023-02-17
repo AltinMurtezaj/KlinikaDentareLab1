@@ -12,7 +12,7 @@ namespace Domain
         public string Emri { get; set; }
         public string Pershkrimi { get; set; }
         public float Cmimi { get; set; }
-        public string DokoriId { get; set; }
+        public string DoktoriId { get; set; }
         public Doktori Doktori { get; set; }
         public Pagesa Pagesa { get; set; }
         public string PacientId { get; set; }

@@ -29,7 +29,8 @@ namespace Application.Pacient
             }
             public async Task<Result<List<PacientiDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientet = await _context.Pacientet.Include(x => x.Tretmanet)
+                var pacientet = await _context.Pacientet.Include(x => x.PacientiDoktoret)
+                                                            .Include(x => x.Tretmanet)
                                                         .ToListAsync();
                                                          foreach (var pacient in pacientet)
     {
