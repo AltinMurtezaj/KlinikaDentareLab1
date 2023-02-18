@@ -44,6 +44,9 @@ import XRayForm from '../../features/xrays/form/XRayForm';
 import XRayDashboard from '../../features/xrays/dashboard/XRayDashboard';
 import XRryCreateForm from '../../features/xrays/form/CreateXrayForm';
 import CreateXrayForm from '../../features/xrays/form/CreateXrayForm';
+import PacientiDoktoriEdit from '../../features/pacientet/form/PacientiDoktoriEdit';
+import PacientiDoktoriForm from '../../features/pacientet/form/PacientiDoktoriForm';
+import PacientiDoktoriDetails from '../../features/DoktoriUser/PacientiDoktoriDetails';
 
 function App() {
   const location = useLocation();
@@ -117,6 +120,10 @@ function App() {
             <Route key={location.key}path='/editXRay/:id' element={<XRayForm/>}/>
 
 
+            <Route key={location.key} path='/editDoktoriPacienti/:PacientiId/:DoktoriId' element={<PacientiDoktoriEdit/>}/>
+            <Route key={location.key} path='/pacientiDoktoriForm' element={<PacientiDoktoriForm/>}/>
+
+            <Route key={location.key} path='/pacientiDoktoriDetails' element={<PacientiDoktoriDetails/>}/>
   
 
             

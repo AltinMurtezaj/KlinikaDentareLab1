@@ -34,12 +34,12 @@ public class DataContext : IdentityDbContext<AppUser>
 
             builder.Entity<PacientiDoktori>()
                 .HasOne(pd => pd.Pacienti)
-                .WithMany(p => p.PacientiDoktoret)
+                .WithMany(p => p.Doktoret)
                 .HasForeignKey(pp => pp.PacientiId);
 
             builder.Entity<PacientiDoktori>()
                 .HasOne(pd => pd.Doktori)
-                .WithMany(d => d.PacientiDoktoret)
+                .WithMany(d => d.Pacientet)
                 .HasForeignKey(pp => pp.DoktoriId);
             
             builder.Entity<Tretmani>()

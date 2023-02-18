@@ -29,16 +29,9 @@ namespace Application.Pacient
             }
             public async Task<Result<List<PacientiDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacientet = await _context.Pacientet.Include(x => x.PacientiDoktoret)
+                var pacientet = await _context.Pacientet.Include(x => x.Doktoret).ThenInclude(x => x.Doktori)
                                                             .Include(x => x.Tretmanet)
                                                         .ToListAsync();
-                                                         foreach (var pacient in pacientet)
-    {
-        if (pacient.Tretmanet.Any())
-        {
-            _context.Tretmanet.RemoveRange(pacient.Tretmanet);
-        }
-    }
                 var pacientetList = _mapper.Map<List<PacientiDto>>(pacientet);
                 return Result<List<PacientiDto>>.Success(pacientetList);
             }
