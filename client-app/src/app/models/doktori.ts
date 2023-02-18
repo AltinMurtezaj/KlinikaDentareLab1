@@ -10,14 +10,12 @@ export interface Doktori extends User {
     specializimi: string;
     pacientiDoktori?: PacientiDoktoriDTO[];
     tretmanet?: Tretmani[];
-
     pacientet?: Pacienti[];
     
   }
   export interface DoktoriFormValues extends UserFormValues{
     kualifikimi?: string;
     specializimi?: string;
-
-    pacientet?: Pacienti [];
+    pacientet?: Pacienti[];
   }
   

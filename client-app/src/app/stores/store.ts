@@ -48,6 +48,7 @@ export const store: Store = {
     pagesaStore: new PagesaStore(),
     udhezimiStore: new UdhezimiStore(),
     pacientiDoktoriStore: new PacientiDoktoriStore()
+    
 }
 
 export const StoreContext = createContext(store);

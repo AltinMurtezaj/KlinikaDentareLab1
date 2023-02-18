@@ -27,7 +27,7 @@ namespace API.Controllers
 
         public async Task<ActionResult<Pacienti>> GetPacienti(string id)
         {
-            return await Mediator.Send(new Details.Query{Id = id});
+            return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
         }
 
         [HttpPost]

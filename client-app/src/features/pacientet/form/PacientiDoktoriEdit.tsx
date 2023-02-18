@@ -1,71 +1,71 @@
-// import { Formik } from "formik";
+import { Formik } from "formik";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { Button, Form, Header, Segment } from "semantic-ui-react";
+import MySelectInput from "../../../app/common/form/MySelectInput";
+import { useStore } from "../../../app/stores/store";
+import * as Yup from 'yup';
+import { observer } from "mobx-react-lite";
+import { PacientiDoktoriDTO } from "../../../app/models/PacientiDoktoriDTO";
+import LoadingComponent from "../../../app/layout/LoadingComponents";
 
-// import { useEffect, useState } from "react";
-// import { NavLink, useNavigate, useParams } from "react-router-dom";
-// import { Button, Form, Header, Segment } from "semantic-ui-react";
-// import MySelectInput from "../../../app/common/form/MySelectInput";
+export default observer(function PacientiDoktoriEdit(){
+     const {pacientiStore,doktoriStore,pacientiDoktoriStore}=useStore();
+    const{loading,loadingInitial,pacientiByEmri}=pacientiStore;
+    const{updatePacientiDoktori,loadDoktoriPacienti}=pacientiDoktoriStore;
+    const{doktoriByEmri}=doktoriStore;
+    const navigate = useNavigate();
+     const{PacientId,DoktoriId} = useParams<{PacientId:string,DoktoriId:string}>();
+      const [doktoripacienti,setPacienti] = useState<PacientiDoktoriDTO>({
+         DoktoriId:'',
+        PacientiId:''
+     });
+    useEffect(()=>{
+            loadDoktoriPacienti(PacientId!,DoktoriId!).then(doktoripacienti =>setPacienti(doktoripacienti!));
+     },[PacientId,DoktoriId, loadDoktoriPacienti]);
 
-// import { useStore } from "../../../app/stores/store";
-// import * as Yup from 'yup';
-
-// import { observer } from "mobx-react-lite";
-// export default observer(function ProfesoriLendaEdit(){
-//      const {pacientiStore,doktoriStore,profesoriLendaStore}=useStore();
-//     const{loading,loadingInitial,lendaByEmri}=lendaStore;
-//     const{updateProfesoriLenda,loadProfesoriLenda}=profesoriLendaStore;
-//     const{profesoriByEmri}=profesoriStore;
-//     const navigate = useNavigate();
-//      const{LendaId,ProfesoriId} = useParams<{LendaId:string,ProfesoriId:string}>();
-//       const [profesoriLenda,setLenda] = useState<ProfesoriLendaDto>({
-//          profesoriId:'',
-//         lendaId:''
-//      });
-//     useEffect(()=>{
-//             loadProfesoriLenda(LendaId!,ProfesoriId!).then(profesoriLenda =>setLenda(profesoriLenda!));
-//      },[LendaId,ProfesoriId, loadProfesoriLenda]);
-
-//      function handleFormSubmit(profesroiLenda: ProfesoriLendaDto){
-//             updateProfesoriLenda(profesroiLenda).then(() =>navigate(`/lendet`));
-//     }
-//     const validationSchema = Yup.object({
-//         profesoriId:Yup.string().required('Emri i profesorit nuk mund te jete i zbrazet'),
-//         lendaId:Yup.number().required('Emri i lendes nuk mund te jete i zbrazet')
-//     });
-//     if(loadingInitial) return <LoadingComponent/>
-//     return (
+     function handleFormSubmit(doktoriPacienti: PacientiDoktoriDTO){
+            updatePacientiDoktori(doktoriPacienti).then(() =>navigate(`/pacientet`));
+    }
+    const validationSchema = Yup.object({
+        PacientiId:Yup.string().required('Pacienti eshte i detyrueshem'),
+        DoktoriId:Yup.string().required('Doktori eshte i detyrueshem')
+    });
+    if(loadingInitial) return <LoadingComponent content={""}/>
+    return (
         
-//         <Segment>
+        <Segment>
            
-//             <Header content='Shto Profesori Lenda' color='teal'/>
+            <Header content='Shto Doktori Pacienti' color='teal'/>
           
-//             <Formik
-//             validationSchema={validationSchema}
-//             enableReinitialize
-//              initialValues={profesoriLenda} 
-//              onSubmit={values=>handleFormSubmit(values)}>
-//                 {({handleSubmit, isValid, isSubmitting, dirty})=>(
-//                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='of'>
-//                <MySelectInput options={lendaByEmri.map((lenda)=>{
-//                             return {text:lenda.emri,value:lenda.id}
-//                         })}  placeholder={profesoriLenda.lendaId} name="lendaId"/>
-//                         <MySelectInput options={profesoriByEmri.map((profesori)=>{
-//                             return {text:profesori.emri+' '+profesori.mbiemri,value:profesori.id}
-//                         })}  placeholder={profesoriLenda.profesoriId} name="profesoriId"/>
-//                 <Button 
-//                  disabled={isSubmitting || !dirty || !isValid}
-//                         loading={loading} 
-//                         floated='right'
-//                         positive type='submit' 
-//                         content='Submit'/>
+            <Formik
+            validationSchema={validationSchema}
+            enableReinitialize
+             initialValues={doktoripacienti} 
+             onSubmit={values=>handleFormSubmit(values)}>
+                {({handleSubmit, isValid, isSubmitting, dirty})=>(
+                    <Form className='ui form' onSubmit={handleSubmit} autoComplete='of'>
+               <MySelectInput options={pacientiByEmri.map((pacienti)=>{
+                            return {text:pacienti.emri,value:pacienti.id}
+                        })}  placeholder={doktoripacienti.PacientiId} name="PacientiId"/>
+                        <MySelectInput options={doktoriByEmri.map((doktori)=>{
+                            return {text:doktori.emri+' '+doktori.mbiemri,value:doktori.id}
+                        })}  placeholder={doktoripacienti.DoktoriId} name="DoktoriId"/>
+                <Button 
+                 disabled={isSubmitting || !dirty || !isValid}
+                        loading={loading} 
+                        floated='right'
+                        positive type='submit' 
+                        content='Submit'/>
                
-//                  <Button as={NavLink} to='/lendet' floated="right"  type="button" content='Cancle'/>
-//                 </Form> 
-//                 )}
+                 <Button as={NavLink} to='/pacientet' floated="right"  type="button" content='Cancel'/>
+                </Form> 
+                )}
 
-//             </Formik>
+            </Formik>
            
                 
                 
-//         </Segment>
+        </Segment>
         
-// )});
+)});

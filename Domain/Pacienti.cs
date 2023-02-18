@@ -8,7 +8,7 @@ namespace Domain
 {
     public class Pacienti : AppUser
     {
-        public ICollection<PacientiDoktori> PacientiDoktoret { get; set; } = new List<PacientiDoktori>();
+        public ICollection<PacientiDoktori> Doktoret { get; set; } = new List<PacientiDoktori>();
         public ICollection<Tretmani> Tretmanet { get; set; } = new List<Tretmani>();
         public ICollection<XRay> XRays { get; set; } = new List<XRay>();
     }

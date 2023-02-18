@@ -58,8 +58,8 @@ export default observer(function PacientiDoktoriDetails(){
         <Table.Body>
         {Doktori?.pacientet!.map((pacienti) =>(
           
-          <Table.Row key={pacienti.id}>
-      <Table.Cell>{pacienti.emri}</Table.Cell>
+        <Table.Row key={pacienti.id}>
+        <Table.Cell>{pacienti.emri}</Table.Cell>
         <Table.Cell>{pacienti.mbiemri}</Table.Cell>
         <Table.Cell>{pacienti.gjinia}</Table.Cell>
         <Table.Cell>{pacienti.email}</Table.Cell>
@@ -77,51 +77,4 @@ export default observer(function PacientiDoktoriDetails(){
 
         
     )
-}) 
-
-/*
-return( 
-    <>
-    <Header >Lista e Doktorit</Header>
-     
-
-     {doktoriPacientet?.map((doktoriPacienti)=>(
-        <>
-               {console.log(doktoriPacienti)
-               }
-        <Table key={doktoriPacienti.id}>
-            <Table.Header>
-      <Table.Row >
-      <Table.HeaderCell>Dita</Table.HeaderCell>
-    <Table.HeaderCell>Klasa</Table.HeaderCell>
-    <Table.HeaderCell>Lenda</Table.HeaderCell>
-    <Table.HeaderCell>Ora</Table.HeaderCell>
-    <Table.HeaderCell>Fillon</Table.HeaderCell>
-    <Table.HeaderCell>Mbaron</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-    <Table.Body>
-        {doktoriPacienti.pacientet!.map((pacienti)=>(
-            
-            <Table.Row key={pacienti.id}>
-      <Table.Cell><TretmaniName tretmaniId={pacienti.emri}/></Table.Cell>
-      <Table.Cell><KontrollaName kontrollaId={pacienti.mbiemri}/></Table.Cell>
-        <Table.Cell>{pacienti.emri}</Table.Cell>
-        <Table.Cell>{pacienti.mbiemri}</Table.Cell>
-        <Table.Cell>{pacienti.gjinia}</Table.Cell>
-        <Table.Cell>{pacienti.email}</Table.Cell>
-        <Table.Cell>{pacienti.nrKontaktues}</Table.Cell>
-  
-    
-    </Table.Row>
-        ))}
-    </Table.Body>
-            </Table>     
-  
-     
-</>
-
-     ))}</>
-)
-})*/
-
+})

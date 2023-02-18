@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Button, Grid, List } from 'semantic-ui-react';
+import { Button, Grid, Header, List } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponents';
 import { useStore } from '../../../app/stores/store';
 import RegisterForm from '../../users/RegisterForm';
@@ -23,11 +23,13 @@ export default observer( function PacientiDashboard(){
         <Grid>
             <Grid.Column width='16'>
                 <PacientiList />
-            </Grid.Column>
-            <Grid.Column width ='16'>
-            < Button onClick={()=>modalStore.openModal(<RegisterForm/>)} positive>
+                < Button onClick={()=>modalStore.openModal(<RegisterForm/>)} positive>
                     Shto pacientin
                 </Button>
+            </Grid.Column>
+            <Grid.Column width ='16'>
+                        <Header style={{color:'teal'}}>Doktoret e pacienteve specifike</Header>
+                        <Button as={NavLink} to='/pacientiDoktoriForm' primary positive>+Vendosi pacientin doktorit</Button>
             </Grid.Column>
         </Grid>
         </>
