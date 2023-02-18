@@ -2,7 +2,8 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { useStore } from "../../app/stores/store";
 
-import { Table } from "semantic-ui-react";
+import { Header, Table } from "semantic-ui-react";
+
 
 export default observer(function PacientiDoktoriDetails(){
     const {userStore,doktoriStore} = useStore();
@@ -13,14 +14,44 @@ export default observer(function PacientiDoktoriDetails(){
     useEffect(()=>{
         loadDoktori(user?.id!);
         if(state) setState(false);
-    },[loadDoktori,user?.id,state,setState]);
+    },[loadDoktori,user?.id,state,setState]); 
+
+/*
+    export default observer(function PacientiDoktoriDetails(){
+        const {userStore,pacientiDoktoriStore,pacientiStore} = useStore();
+        const {user}=userStore;
+    
+        const {loadPacienti}=pacientiStore
+        const {loadDoktoriPacientiByDoktori,selectedPacientiDoktori:PacientiDoktori}=pacientiDoktoriStore;
+    
+        const {doktoriPacientet}=pacientiDoktoriStore;
+    
+        
+        useEffect(()=>{
+    
+            loadDoktoriPacientiByDoktori(user?.id!);
+            console.log(PacientiDoktori);
+        },[loadDoktoriPacientiByDoktori,PacientiDoktori,user?.id]);
+    
+    
+    
+        useEffect(()=>{
+            if(PacientiDoktori?.id) loadPacienti(PacientiDoktori?.PacientiId);
+        },[loadPacienti,PacientiDoktori?.id,PacientiDoktori?.PacientiId]); */
+    
     return( 
         <>
+         <Header>Pacientet</Header>
+         
          <Table >
         <Table.Header>
           <Table.Row >
           <Table.HeaderCell>Emri i Pacientit</Table.HeaderCell>
         <Table.HeaderCell>Mbiemri i Pacientit</Table.HeaderCell>
+        <Table.HeaderCell>Gjinia e Pacientit</Table.HeaderCell>
+        <Table.HeaderCell>Email i Pacientit</Table.HeaderCell>
+        <Table.HeaderCell>nrKontaktues i Pacientit</Table.HeaderCell>
+        <Table.HeaderCell>vendbanimi i Pacientit</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
     
@@ -30,6 +61,11 @@ export default observer(function PacientiDoktoriDetails(){
           <Table.Row key={pacienti.id}>
       <Table.Cell>{pacienti.emri}</Table.Cell>
         <Table.Cell>{pacienti.mbiemri}</Table.Cell>
+        <Table.Cell>{pacienti.gjinia}</Table.Cell>
+        <Table.Cell>{pacienti.email}</Table.Cell>
+        <Table.Cell>{pacienti.nrKontaktues}</Table.Cell>
+        <Table.Cell>{pacienti.vendbanimi}</Table.Cell>
+        
       
         
         
@@ -41,5 +77,51 @@ export default observer(function PacientiDoktoriDetails(){
 
         
     )
-})
+}) 
+
+/*
+return( 
+    <>
+    <Header >Lista e Doktorit</Header>
+     
+
+     {doktoriPacientet?.map((doktoriPacienti)=>(
+        <>
+               {console.log(doktoriPacienti)
+               }
+        <Table key={doktoriPacienti.id}>
+            <Table.Header>
+      <Table.Row >
+      <Table.HeaderCell>Dita</Table.HeaderCell>
+    <Table.HeaderCell>Klasa</Table.HeaderCell>
+    <Table.HeaderCell>Lenda</Table.HeaderCell>
+    <Table.HeaderCell>Ora</Table.HeaderCell>
+    <Table.HeaderCell>Fillon</Table.HeaderCell>
+    <Table.HeaderCell>Mbaron</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+        {doktoriPacienti.pacientet!.map((pacienti)=>(
+            
+            <Table.Row key={pacienti.id}>
+      <Table.Cell><TretmaniName tretmaniId={pacienti.emri}/></Table.Cell>
+      <Table.Cell><KontrollaName kontrollaId={pacienti.mbiemri}/></Table.Cell>
+        <Table.Cell>{pacienti.emri}</Table.Cell>
+        <Table.Cell>{pacienti.mbiemri}</Table.Cell>
+        <Table.Cell>{pacienti.gjinia}</Table.Cell>
+        <Table.Cell>{pacienti.email}</Table.Cell>
+        <Table.Cell>{pacienti.nrKontaktues}</Table.Cell>
+  
+    
+    </Table.Row>
+        ))}
+    </Table.Body>
+            </Table>     
+  
+     
+</>
+
+     ))}</>
+)
+})*/
 

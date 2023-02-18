@@ -37,13 +37,13 @@ import TretmaniForm from '../../features/tretmani/Form/TretmaniForm';
 import KontrollaRegisterForm from '../../features/kontrolla/Form/KontrollaRegisterForm';
 import KontrollaDashboard from '../../features/kontrolla/Dashboard/kontrollaDashboard';
 import KontrollaForm from '../../features/kontrolla/Form/KontrollaForm';
-import TerminiRegisterForm from '../../features/terminet/Form/TerminiRegisterForm';
-import TerminiDashboard from '../../features/terminet/Dashboard/TerminiDashboard';
-import TerminiForm from '../../features/terminet/Form/TerminiForm';
 import XRayForm from '../../features/xrays/form/XRayForm';
 import XRayDashboard from '../../features/xrays/dashboard/XRayDashboard';
 import XRryCreateForm from '../../features/xrays/form/CreateXrayForm';
 import CreateXrayForm from '../../features/xrays/form/CreateXrayForm';
+import TerminiDashboard from '../../features/terminet/dashboard/TerminiDashboard';
+import TerminiRegisterForm from '../../features/terminet/form/TerminiRegisterForm';
+import TerminiForm from '../../features/terminet/form/TerminiForm';
 
 function App() {
   const location = useLocation();
