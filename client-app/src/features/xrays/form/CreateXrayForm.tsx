@@ -10,7 +10,7 @@ import MySelectInput from "../../../app/common/form/MySelectInput";
 import { Kontrolla } from "../../../app/models/kontrolla";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { XRay } from "../../../app/models/xray";
-import MyDateInput from "../../terminet/Form/MyDateInput";
+import MyDateInput from "./MyDateInput";
  
 export default observer(function CreateXrayForm(){
     
