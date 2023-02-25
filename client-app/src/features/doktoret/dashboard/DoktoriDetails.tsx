@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Container, Grid, Header, Input, Table } from "semantic-ui-react";
+import { Card, Container, Grid, Header, Input, Tab, Table } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
 
@@ -141,15 +141,21 @@ export default observer(function DoktoriDetails() {
           <Table.Row >
         <Table.HeaderCell>Emri</Table.HeaderCell>
         <Table.HeaderCell>Mbiemri</Table.HeaderCell>
-
-        
-
-        
+        <Table.HeaderCell>Email</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
     
         <Table.Body>
-        </Table.Body>
+        
+        {Doktori?.pacientet?.map((pacienti) => (
+          <Table.Row key={pacienti.id} >
+            <Table.Cell>{pacienti.emri}</Table.Cell>
+            <Table.Cell>{pacienti.mbiemri}</Table.Cell>
+            <Table.Cell>{pacienti.email}</Table.Cell>
+
+            </Table.Row>
+
+))} </Table.Body>
          </Table>
       </Grid.Column>
         </Grid>

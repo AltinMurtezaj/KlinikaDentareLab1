@@ -59,8 +59,7 @@ return (
         <div className="container" > 
         <Input readOnly className='Input'>{user?.discriminator}</Input>
         </div>
-          
-        
+
   </Container>
     </Card.Content>
   </Card>
