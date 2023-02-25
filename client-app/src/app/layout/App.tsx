@@ -45,6 +45,9 @@ import PacientiDoktoriEdit from '../../features/pacientet/form/PacientiDoktoriEd
 import PacientiDoktoriForm from '../../features/pacientet/form/PacientiDoktoriForm';
 import PacientiDoktoriDetails from '../../features/DoktoriUser/PacientiDoktoriDetails';
 import JoinRoute from './JoinRoute';
+import TerminiDashboard from '../../features/terminet/dashboard/TerminiDashboard';
+import TerminiRegisterForm from '../../features/terminet/form/TerminiRegisterForm';
+import TerminiForm from '../../features/terminet/form/TerminiForm';
 
 function App() {
   const location = useLocation();
