@@ -45,9 +45,6 @@ import PacientiDoktoriEdit from '../../features/pacientet/form/PacientiDoktoriEd
 import PacientiDoktoriForm from '../../features/pacientet/form/PacientiDoktoriForm';
 import PacientiDoktoriDetails from '../../features/DoktoriUser/PacientiDoktoriDetails';
 import JoinRoute from './JoinRoute';
-import TerminiDashboard from '../../features/terminet/dashboard/TerminiDashboard';
-import TerminiRegisterForm from '../../features/terminet/form/TerminiRegisterForm';
-import TerminiForm from '../../features/terminet/form/TerminiForm';
 
 function App() {
   const location = useLocation();
@@ -80,46 +77,45 @@ function App() {
         <NavBar />
         <Container style={{marginTop: '7em'}}>
           <Routes>
-            
-            <Route  path='/doktoret' element={<DoktoriDashboard/>}/>
-            <Route key={location.key}path='/manageDoktori/:id' element={<DoktoriForm/>}/>
-            <Route key={location.key}path='/DoktoriDetails/:id' element={<DoktoriDetails/>}/>
-
+            <Route element={<DoktoriRoute/>}>
             <Route  path='/pacientet' element={<PacientiDashboard/>}/>
             <Route key={location.key}path='/managePacienti/:id' element={<PacientiForm/>}/>
             <Route key={location.key}path='/PacientiDetails/:id' element={<PacientiDetails/> }/>
-
+            <Route key={location.key}path='/DoktoriDetails/:id' element={<DoktoriDetails/>}/>
             <Route  path='/udhezimet' element={<UdhezimiDashboard/>}/>
             <Route key={location.key}path='/manageUdhezimi/:id' element={<UdhezimiForm/>}/>
             <Route key={location.key}path='/UdhezimiDetails/:id' element={<UdhezimiDetails/> }/>
-            
-            <Route element={<JoinRoute/>}>
+            <Route path='/createTretmani' element={<CreateTretmaniForm/>}/>
+            <Route path='/Tretmanet' element={<TretmaniDashboard/>}/>
+            <Route key={location.key} path='/editTretmani/:id' element={<TretmaniForm/>}/>
+            <Route path='/createKontrolla' element={<KontrollaRegisterForm/>}/>
+            <Route path='/Kontrollat' element={<KontrollaDashboard/>}/>
+            <Route key={location.key} path='/editKontrolla/:id' element={<KontrollaForm/>}/>
+            <Route path='/terminet' element={<TerminiDashboard/>}/>
+            <Route path='/createTermini' element={<TerminiRegisterForm/>}/>
+            <Route key={location.key}path='/editTermini/:id' element={<TerminiForm/>}/>
+            <Route path='/createXray' element={<CreateXrayForm/>}/>
+            <Route path='/XRays' element={<XRayDashboard/>}/>
+            <Route key={location.key}path='/editXRay/:id' element={<XRayForm/>}/>
+            </Route>
+
+
+            <Route element={<AdminRoute/>}>
+            <Route  path='/doktoret' element={<DoktoriDashboard/>}/>
+            <Route key={location.key}path='/manageDoktori/:id' element={<DoktoriForm/>}/>
             <Route  path='/laborantet' element={<LaborantiDashboard/>}/>
             <Route path='/laborantet/:id' element={<LaborantiDetails/>}/>
             <Route key={location.key}path='/createLaborantet' element={<LaborantiForm/>}/>
             <Route key={location.key}path='/manageLaboranti/:id' element={<LaborantiForm/>}/>
-            </Route>
-
             <Route  path='/infermjeret' element={<InfermierjaDashboard/>}/>
             <Route path='/infermjeret/:id' element={<InfermierjaDetails/>}/>
             <Route key={location.key}path='/manageInfermierja/:id' element={<InfermierjaForm/>}/>
             <Route key={location.key}path='/createInfermjeret' element={<InfermierjaRegisterForm/>}/>
+            </Route>
 
-            <Route path='/createTretmani' element={<CreateTretmaniForm/>}/>
-            <Route path='/Tretmanet' element={<TretmaniDashboard/>}/>
-            <Route key={location.key} path='/editTretmani/:id' element={<TretmaniForm/>}/>
-            
-            <Route path='/createKontrolla' element={<KontrollaRegisterForm/>}/>
-            <Route path='/Kontrollat' element={<KontrollaDashboard/>}/>
-            <Route key={location.key} path='/editKontrolla/:id' element={<KontrollaForm/>}/>
+           
 
-            <Route path='/terminet' element={<TerminiDashboard/>}/>
-            <Route path='/createTermini' element={<TerminiRegisterForm/>}/>
-            <Route key={location.key}path='/editTermini/:id' element={<TerminiForm/>}/>
-
-            <Route path='/createXray' element={<CreateXrayForm/>}/>
-            <Route path='/XRays' element={<XRayDashboard/>}/>
-            <Route key={location.key}path='/editXRay/:id' element={<XRayForm/>}/>
+           
 
 
             <Route key={location.key} path='/editDoktoriPacienti/:PacientiId/:DoktoriId' element={<PacientiDoktoriEdit/>}/>
