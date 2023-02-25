@@ -15,14 +15,14 @@ export default observer(function PacientiDoktoriEdit(){
     const{updatePacientiDoktori,loadDoktoriPacienti}=pacientiDoktoriStore;
     const{doktoriByEmri}=doktoriStore;
     const navigate = useNavigate();
-     const{PacientId,DoktoriId} = useParams<{PacientId:string,DoktoriId:string}>();
+     const{PacientiId,DoktoriId} = useParams<{PacientiId:string,DoktoriId:string}>();
       const [doktoripacienti,setPacienti] = useState<PacientiDoktoriDTO>({
          DoktoriId:'',
         PacientiId:''
      });
     useEffect(()=>{
-            loadDoktoriPacienti(PacientId!,DoktoriId!).then(doktoripacienti =>setPacienti(doktoripacienti!));
-     },[PacientId,DoktoriId, loadDoktoriPacienti]);
+            loadDoktoriPacienti(PacientiId!,DoktoriId!).then(doktoripacienti =>setPacienti(doktoripacienti!));
+     },[PacientiId,DoktoriId, loadDoktoriPacienti]);
 
      function handleFormSubmit(doktoriPacienti: PacientiDoktoriDTO){
             updatePacientiDoktori(doktoriPacienti).then(() =>navigate(`/pacientet`));
@@ -49,7 +49,7 @@ export default observer(function PacientiDoktoriEdit(){
                             return {text:pacienti.emri,value:pacienti.id}
                         })}  placeholder={doktoripacienti.PacientiId} name="PacientiId"/>
                         <MySelectInput options={doktoriByEmri.map((doktori)=>{
-                            return {text:doktori.emri+' '+doktori.mbiemri,value:doktori.id}
+                            return {text:doktori.emri,value:doktori.id}
                         })}  placeholder={doktoripacienti.DoktoriId} name="DoktoriId"/>
                 <Button 
                  disabled={isSubmitting || !dirty || !isValid}

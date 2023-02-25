@@ -2,7 +2,7 @@ import { observer, Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Header, Segment } from "semantic-ui-react";
+import { Button, Form, Header, Input, Segment } from "semantic-ui-react";
 import * as Yup from 'yup';
 import { Formik } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -20,16 +20,16 @@ const validationSchema = Yup.object({
     emri: Yup.string().required('Emri eshte i detyrueshem'),
     pershkrimi: Yup.string().required('Pershkrimi eshte i detyrueshem'),
     cmimi: Yup.string().required('Cmimi eshte i detyrueshem'),
-    doktoriId: Yup.string().required('Doktori eshte i detyrueshem'),
     pacientId: Yup.string().required('Pacienti eshte i detyrueshem'),
     kontrollaId: Yup.string().required('Kontrolla eshte e detyrueshme'),
 })
-const {tretmaniStore, pacientiStore, doktoriStore, kontrollaStore, pagesaStore} = useStore();
+const {tretmaniStore, pacientiStore, doktoriStore, kontrollaStore, pagesaStore, userStore} = useStore();
 const {loading, loadingInitial, createTretmani} = tretmaniStore;
 const{loadPacientet, pacientiByEmri} = pacientiStore;
-const{loadDoktoret, doktoriByEmri} = doktoriStore;
+const{loadDoktori, selectedDoktori} = doktoriStore;
 const{loadKontrollat, kontrollatById} = kontrollaStore;
 const{loadPagesat, pagesatById} = pagesaStore;
+const{user} = userStore;
 
 
     const navigate = useNavigate();
@@ -37,16 +37,16 @@ const{loadPagesat, pagesatById} = pagesaStore;
         emri: '',
         pershkrimi: '',
         cmimi: '',
-        doktoriId: '',
+        doktoriId: user?.id,
         pacientId: '',
         kontrollaId: ''
     });
     useEffect(() => {
         loadPacientet();
-        loadDoktoret();
         loadKontrollat();
         loadPagesat();
-    }, [loadPacientet, loadDoktoret, loadKontrollat, loadPagesat]);
+        loadDoktori(user?.id);
+    }, [loadPacientet, loadKontrollat, loadPagesat, loadDoktori]);
     function handleFormSubmit(tretmani: Tretmani){
         let newTretmani = {
             ...tretmani,
@@ -67,9 +67,7 @@ const{loadPagesat, pagesatById} = pagesaStore;
                     <MyTextInput name='emri' placeholder='Emri'/>
                     <MyTextInput name='pershkrimi' placeholder='Pershkrimi'/>
                     <MyTextInput name='cmimi' placeholder='Cmimi'/>
-                    <MySelectInput name='doktoriId' options={doktoriByEmri.map((doktori)=>{
-                        return{text:doktori.emri, value:doktori.id}
-                       })}   placeholder='Doktori' />
+                   
                     <MySelectInput name='pacientId'  options={pacientiByEmri.map((pacienti)=>{
                         return{text:pacienti.emri, value:pacienti.id}
                     })}  placeholder='Pacienti'/>

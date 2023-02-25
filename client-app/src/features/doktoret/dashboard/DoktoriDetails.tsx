@@ -135,12 +135,13 @@ export default observer(function DoktoriDetails() {
   </Card>
   </Grid.Column>
   <Grid.Column width="7" style={{marginTop:"200px" }}>
+  <h4>Lista e pacienteve</h4>
   <Table >
         <Table.Header>
           <Table.Row >
-        <Table.HeaderCell>Pershkrimi</Table.HeaderCell>
-          <Table.HeaderCell>Data</Table.HeaderCell>
-       
+        <Table.HeaderCell>Emri</Table.HeaderCell>
+        <Table.HeaderCell>Mbiemri</Table.HeaderCell>
+
         
 
         

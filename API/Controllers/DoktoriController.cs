@@ -27,7 +27,7 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<ActionResult<Doktori>> GetDoktori(string id)
+        public async Task<ActionResult<DoktoriDto>> GetDoktori(string id)
         {
             return await Mediator.Send(new Details.Query{Id = id});
         }

@@ -7,7 +7,8 @@ import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function PacientiDetails() {
-  const { pacientiStore, pacientiDoktoriStore } = useStore();
+  const { pacientiStore, pacientiDoktoriStore, userStore } = useStore();
+  const {user} = userStore;
   const {loadingInitial, loadPacienti, selectedPacienti:pacienti} = pacientiStore;
   const { deletePacientiDoktori, loadDoktoriPacienti, selectedPacientiDoktori:doktoriPacienti } = pacientiDoktoriStore;
   const { id } = useParams<{ id: string }>();
@@ -48,10 +49,19 @@ function handleDeletePacientiDoktori(e:SyntheticEvent<HTMLButtonElement>,Pacient
                               <Table.Cell>{doktori.mbiemri}</Table.Cell>
                               <Table.Cell>{doktori.email}</Table.Cell>
                               <Table.Cell> 
-                                  <Button as={Link} to={`/editDoktoriPacienti/${pacienti.id}/${doktori.id}`} primary  placeholder='Edit' color="blue">Edit</Button>
+                                {
+                                 (user!.discriminator === "Doktori")? 
+                                  
+                                    <div>
+                                      <Button as={Link} to={`/editDoktoriPacienti/${pacienti.id}/${doktori.id}`} primary  placeholder='Edit' color="blue">Edit</Button>
                                   <Button loading={ target === pacienti.id!} 
   onClick={(e)=> handleDeletePacientiDoktori(e,pacienti.id!,doktori.id!,doktoriPacienti?.id!)}  className="button" aria-label="Delete" color="red">Delete
-      </Button></Table.Cell>
+      </Button>
+                                    </div>
+                                  : null
+                        
+                      }
+                        </Table.Cell>
                           </Table.Row>
                       ))}</Table.Body>
                      

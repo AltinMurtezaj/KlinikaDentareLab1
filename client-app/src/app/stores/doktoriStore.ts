@@ -59,15 +59,15 @@ export default class DoktoriStore{
             this.setLoadingInitial(false); 
         }
     }
-    loadDoktori = async (id:string) => {
-        let doktori = this.getDoktori(id);
+    loadDoktori = async (id?:string) => {
+        let doktori = this.getDoktori(id!);
         if(doktori){
             this.selectedDoktori = doktori;
             return doktori;
         }else{
             this.loadingInitial =true;
             try {
-                doktori = await agent.Doktoret.details(id);
+                doktori = await agent.Doktoret.details(id!);
                 this.setDoktori(doktori);
                 runInAction(() => {
                     this.selectedDoktori = doktori;

@@ -47,6 +47,7 @@ import CreateXrayForm from '../../features/xrays/form/CreateXrayForm';
 import PacientiDoktoriEdit from '../../features/pacientet/form/PacientiDoktoriEdit';
 import PacientiDoktoriForm from '../../features/pacientet/form/PacientiDoktoriForm';
 import PacientiDoktoriDetails from '../../features/DoktoriUser/PacientiDoktoriDetails';
+import JoinRoute from './JoinRoute';
 
 function App() {
   const location = useLocation();
@@ -92,11 +93,12 @@ function App() {
             <Route key={location.key}path='/manageUdhezimi/:id' element={<UdhezimiForm/>}/>
             <Route key={location.key}path='/UdhezimiDetails/:id' element={<UdhezimiDetails/> }/>
             
+            <Route element={<JoinRoute/>}>
             <Route  path='/laborantet' element={<LaborantiDashboard/>}/>
             <Route path='/laborantet/:id' element={<LaborantiDetails/>}/>
             <Route key={location.key}path='/createLaborantet' element={<LaborantiForm/>}/>
             <Route key={location.key}path='/manageLaboranti/:id' element={<LaborantiForm/>}/>
-
+            </Route>
 
             <Route  path='/infermjeret' element={<InfermierjaDashboard/>}/>
             <Route path='/infermjeret/:id' element={<InfermierjaDetails/>}/>
@@ -122,7 +124,6 @@ function App() {
 
             <Route key={location.key} path='/editDoktoriPacienti/:PacientiId/:DoktoriId' element={<PacientiDoktoriEdit/>}/>
             <Route key={location.key} path='/pacientiDoktoriForm' element={<PacientiDoktoriForm/>}/>
-
             <Route key={location.key} path='/pacientiDoktoriDetails' element={<PacientiDoktoriDetails/>}/>
   
 

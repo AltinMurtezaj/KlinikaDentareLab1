@@ -8,7 +8,7 @@ export interface Tretmani {
     emri: string;
     pershkrimi: string;
     cmimi: string;
-    doktoriId: string;
+    doktoriId?: string;
     doktori?: Doktori;
     pagesaId?: string;
     pagesa?: Pagesa;

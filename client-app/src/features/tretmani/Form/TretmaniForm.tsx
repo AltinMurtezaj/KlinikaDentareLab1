@@ -35,7 +35,6 @@ export default observer(function TretmaniForm() {
         emri: '',
         pershkrimi: '',
         cmimi: '',
-        doktoriId: '',
         pacientId: '',
     });
     const validationSchema = Yup.object({
@@ -74,9 +73,9 @@ export default observer(function TretmaniForm() {
                         <MySelectInput name='pacientId' placeholder='Pacienti' options={pacientiByEmri.map((pacienti)=>{
                             return {value: pacienti.id, text: pacienti.emri}
                         })} />
-                        <MySelectInput name='doktoriId' placeholder='Doktori' options={doktoriByEmri.map((doktori)=>{
+                        {/* <MySelectInput name='doktoriId' placeholder='Doktori' options={doktoriByEmri.map((doktori)=>{
                             return {value: doktori.id, text: doktori.emri}
-                        })} />
+                        })} /> */}
                         <MySelectInput name='kontrollaId' placeholder='Kontrolla' options={kontrollatById.map((kontrolla)=>{
                             return {value: kontrolla.id, text: kontrolla.id}
                         })} />

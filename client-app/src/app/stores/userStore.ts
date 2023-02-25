@@ -34,6 +34,7 @@ export default class userStore{
         store.commonStore.setToken(null);
         window.localStorage.removeItem('jwt');
         this.user = null;
+        window.location.href = '/';
        
     }
 

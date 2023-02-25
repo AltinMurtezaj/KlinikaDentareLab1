@@ -30,7 +30,7 @@ namespace Application.Doctor
             }
             public async Task<Result<List<DoktoriDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var doktoret = await _context.Doktoret.Include(x => x.Pacientet)
+                var doktoret = await _context.Doktoret.Include(x => x.Pacientet).ThenInclude(x => x.Pacienti)
                                                         .Include(x => x.Terminet)
                                                         .Include(x => x.Tretmanet)
                                                         .ToListAsync();
