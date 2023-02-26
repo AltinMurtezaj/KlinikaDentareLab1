@@ -16,21 +16,25 @@ export default observer(function NavBar(){
                 <Menu.Item as={NavLink} to='/' exact header>
                     Dental Clinic
                 </Menu.Item>
+
+                
+
                 {user?.discriminator==="Doktori" ? (
                     <>
                 <Menu.Item as={NavLink} to='/terminet' name ='Terminet' />
                 <Menu.Item as={NavLink} to='/pacientet' name ='Pacientet' />
                 <Menu.Item as={NavLink} to='/kontrollat' name ='Kontrollat' />
                 <Menu.Item as={NavLink} to='/tretmanet' name ='Tretmanet' />
+                <Menu.Item as={NavLink} to='/xrays' name ='XRays' />
                 </>) : null}
 
                 {user?.discriminator==="Pacienti" ? (
                     <>
-                <Menu.Item as={NavLink} to='/terminet' name ='Terminet' />
-                <Menu.Item as={NavLink} to='/kontrollat' name ='Kontrollat' />
-                <Menu.Item as={NavLink} to='/tretmanet' name ='Tretmanet' />
+                <Menu.Item as={NavLink} to='/terminet' name='Terminet'/>
+                <Menu.Item as={NavLink} to='/kontrollat' name='Kontrollat'/>
+                <Menu.Item as={NavLink} to='/tretmanet' name='Tretmanet'/>
+                <Menu.Item as={NavLink} to='/xrays' name ='XRays' />
                 </>) : null}
-                
 
 
 

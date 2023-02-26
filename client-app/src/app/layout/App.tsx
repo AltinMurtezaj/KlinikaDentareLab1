@@ -50,9 +50,6 @@ import TerminiRegisterForm from '../../features/terminet/Form/TerminiRegisterFor
 import TerminiForm from '../../features/terminet/Form/TerminiForm';
 import DoktoriRoute from './DoktoriRoute';
 import AdminRoute from './AdminRoute';
-import TretmaniListPacienti from '../../features/tretmani/Dashboard/TretmaniListPacienti';
-import JoinRoutePacientiDoktori from './JoinRoutePacientiDoktori';
-import PacientiRoute from './PacientiRoute';
 
 function App() {
   const location = useLocation();
