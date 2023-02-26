@@ -30,9 +30,9 @@ export default observer(function NavBar(){
 
                 {user?.discriminator==="Pacienti" ? (
                     <>
-                <Menu.Item as={NavLink} to='/terminet' name='Terminet'/>
+                <Menu.Item as={NavLink} to='/termini' name='Termini'/>
                 <Menu.Item as={NavLink} to='/kontrollat' name='Kontrollat'/>
-                <Menu.Item as={NavLink} to='/tretmanet' name='Tretmanet'/>
+                <Menu.Item as={NavLink} to='/tretmani' name='Tretmani'/>
                 <Menu.Item as={NavLink} to='/xrays' name ='XRays' />
                 </>) : null}
 

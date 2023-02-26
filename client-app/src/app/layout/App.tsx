@@ -50,6 +50,10 @@ import TerminiRegisterForm from '../../features/terminet/Form/TerminiRegisterFor
 import TerminiForm from '../../features/terminet/Form/TerminiForm';
 import DoktoriRoute from './DoktoriRoute';
 import AdminRoute from './AdminRoute';
+import PacientiRoute from './PacientiRoute';
+import TretmaniListPacienti from '../../features/tretmani/Dashboard/TretmaniListPacienti';
+import JoinRoutePacientiDoktori from './JoinRoutePacientiDoktori';
+import TerminiListPacienti from '../../features/terminet/Dashboard/TerminiListPacienti';
 
 function App() {
   const location = useLocation();
@@ -83,6 +87,8 @@ function App() {
         <Container style={{marginTop: '7em'}}>
           <Routes>
             <Route element={<DoktoriRoute/>}>
+            <Route path='/Tretmanet' element={<TretmaniDashboard/>}/>
+
             <Route  path='/udhezimet' element={<UdhezimiDashboard/>}/>
             <Route key={location.key}path='/manageUdhezimi/:id' element={<UdhezimiForm/>}/>
             <Route key={location.key}path='/UdhezimiDetails/:id' element={<UdhezimiDetails/> }/>
@@ -107,16 +113,16 @@ function App() {
             </Route>
 
             <Route element={<PacientiRoute/>}>
-
             <Route key={location.key}path='/PacientiDetails/:id' element={<PacientiDetails/> }/>
             <Route  path='/TretmaniPacienti/:id' element={<TretmaniListPacienti/>}/>
             </Route>
 
+
             <Route element={<JoinRoutePacientiDoktori/>}>
-            <Route path='/Tretmanet' element={<TretmaniListPacienti/>}/>
+            <Route path='/Tretmani' element={<TretmaniListPacienti/>}/>
+            <Route path='/Termini' element={<TerminiListPacienti/>}/>
             </Route>
     
-
 
             <Route element={<AdminRoute/>}>
             <Route  path='/doktoret' element={<DoktoriDashboard/>}/>
@@ -132,19 +138,12 @@ function App() {
             <Route key={location.key}path='/createInfermjeret' element={<InfermierjaRegisterForm/>}/>
             </Route>
 
-    
-
 
             <Route key={location.key} path='/editDoktoriPacienti/:PacientiId/:DoktoriId' element={<PacientiDoktoriEdit/>}/>
             <Route key={location.key} path='/pacientiDoktoriForm' element={<PacientiDoktoriForm/>}/>
             <Route key={location.key} path='/pacientiDoktoriDetails' element={<PacientiDoktoriDetails/>}/>
-  
-
             
 
-  
-
-            
             <Route element={<NotFound/>}/>
             <Route path='/errors' element={<TestErrors/>}/>
             <Route path='/server-error' element={<ServerError/>}/>

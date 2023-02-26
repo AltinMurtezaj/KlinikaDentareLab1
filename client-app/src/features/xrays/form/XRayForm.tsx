@@ -19,7 +19,7 @@ export default observer( function XRayForm(){
      const navigate = useNavigate();
      const [xray,setXRay] = useState<XRay>({
         Id: '',
-        Data: null
+        Data: '',
      });
      const validationSchema = Yup.object({
         

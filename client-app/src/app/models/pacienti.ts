@@ -1,6 +1,7 @@
 import { Doktori } from "./doktori";
 import { DoktoriDto } from "./doktoriDto";
 import { PacientiDoktoriDTO } from "./PacientiDoktoriDTO";
+import { Termini } from "./termini";
 import { Tretmani } from "./tretmani";
 import { User, UserFormValues } from "./user";
 import { XRay } from "./xray";
@@ -11,6 +12,7 @@ export interface Pacienti extends User {
   tretmanet?: Tretmani[];
   xrays?: XRay[];
   doktoret?: DoktoriDto[];
+  terminet?: Termini[];
 
   }
   export interface PacientiFormValues extends UserFormValues{
@@ -18,4 +20,5 @@ export interface Pacienti extends User {
   tretmanet?: Tretmani[];
   xrays?: XRay[];
   doktoret?: DoktoriDto[];
+  terminet?: Termini[];
   }

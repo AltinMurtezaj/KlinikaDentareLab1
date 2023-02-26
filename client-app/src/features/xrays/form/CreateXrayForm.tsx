@@ -23,7 +23,7 @@ export default observer(function CreateXrayForm(){
     const{loading,loadingInitial,createXRay}=xrayStore;
     const navigate = useNavigate();
     const [xray] = useState<XRay>({
-       Data:null,
+       Data: '',
     });
      function handleFormSubmit(xray: XRay){
      let newXray = {

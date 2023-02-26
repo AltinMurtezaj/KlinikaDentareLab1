@@ -2,7 +2,7 @@ import { Tretmani } from "./tretmani";
 
 export interface XRay {
     Id?: string;
-    Data: Date | null;
+    Data: string;
     TretmaniId?: string | undefined;
     Tretmani?: Tretmani;
 }

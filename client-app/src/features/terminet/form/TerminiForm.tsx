@@ -26,7 +26,7 @@ export default observer( function TerminiForm(){
      const navigate = useNavigate();
      const [termini,setTermini] = useState<Termini>({
         id:'',
-        data:null,
+        data:'',
         koha:'',
         pacientiId:'',
      });
