@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class InitialCreate111 : Migration
+    public partial class Termini : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,6 +183,7 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Koha = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PacientiId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DoktoriId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -191,6 +192,12 @@ namespace Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Terminet_Users_DoktoriId",
                         column: x => x.DoktoriId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Terminet_Users_PacientiId",
+                        column: x => x.PacientiId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -353,6 +360,11 @@ namespace Persistence.Migrations
                 name: "IX_Terminet_DoktoriId",
                 table: "Terminet",
                 column: "DoktoriId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Terminet_PacientiId",
+                table: "Terminet",
+                column: "PacientiId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tretmanet_DoktoriId",

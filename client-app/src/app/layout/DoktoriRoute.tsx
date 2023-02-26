@@ -13,7 +13,7 @@ const DoktoriRoute = ()=>{
     const {userStore}=useStore();
 
 
-    return userStore.user?.discriminator==="Doktori" ? <Outlet/>: <DoktoriDetails/>;
+    return userStore.user?.discriminator==="Doktori" ? <Outlet/>: <Llogaria/>;
 };
 
 export default DoktoriRoute;

@@ -11,6 +11,8 @@ namespace Domain
         public int Id {get;set;}
         public string Koha {get;set;}
         public DateTime Data {get;set;}
+        public string PacientiId {get;set;}
+        public Pacienti Pacienti {get;set;}
         public ICollection <Kontrolla> Kontrollat { get; set; } = new List<Kontrolla>();
     }
 }

@@ -13,6 +13,8 @@ namespace Application.TerminiFolder
         public int Id {get;set;}
         public string Koha {get;set;}
         public DateTime Data {get;set;}
+        public string PacientiId {get;set;}
+        public PacientiDto Pacienti {get;set;}
         public ICollection<KontrollaDto> Kontrollat { get; set; } = new List<KontrollaDto>();
     }
 }

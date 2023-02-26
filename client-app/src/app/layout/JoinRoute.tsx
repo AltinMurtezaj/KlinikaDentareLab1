@@ -10,7 +10,7 @@ const JoinRoute = ()=>{
     const {userStore}=useStore();
 
 
-    return userStore.user?.discriminator==="Admini" || userStore.user?.discriminator==="Doktori" ? <Outlet/>: <Llogaria/>;
+    return userStore.user?.discriminator==="AppUser" || userStore.user?.discriminator==="Doktori" ? <Outlet/>: <Llogaria/>;
 };
 
 export default JoinRoute;

@@ -6,5 +6,6 @@ export interface Termini {
   id?: string;
   koha: string;
   data: Date | null;
+  pacientiId?: string;
   kontrolla?: Kontrolla[];
 }

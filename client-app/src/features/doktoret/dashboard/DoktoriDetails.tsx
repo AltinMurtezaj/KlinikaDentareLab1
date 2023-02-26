@@ -1,13 +1,16 @@
 import { format } from "date-fns";
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Card, Container, Grid, Header, Input, Tab, Table } from "semantic-ui-react";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Button, Card, Container, Grid, Header, Icon, Input, Tab, Table } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function DoktoriDetails() {
-  const { doktoriStore } = useStore();
+  const { doktoriStore, pacientiDoktoriStore, pacientiStore, userStore } = useStore();
+  const {user} = userStore;
+  const {deletePacientiDoktori} = pacientiDoktoriStore;
+  const [target, setTarget] = useState('');
   const {
     loadingInitial,
     loadDoktori,
@@ -16,7 +19,12 @@ export default observer(function DoktoriDetails() {
 
   const { id } = useParams<{ id: string }>();
   const [state, setState] = useState(false);
-
+  function handleDeletePacientiDoktori(e:SyntheticEvent<HTMLButtonElement>,PacientiId:string, DoktoriId:string){
+    setTarget(e.currentTarget.name);
+    deletePacientiDoktori(PacientiId, DoktoriId);
+    setState(true);
+    //reloading 
+  }
   useEffect(() => {
     if (id) {
       loadDoktori(id);
@@ -142,6 +150,8 @@ export default observer(function DoktoriDetails() {
         <Table.HeaderCell>Emri</Table.HeaderCell>
         <Table.HeaderCell>Mbiemri</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
+        <Table.HeaderCell>Operations</Table.HeaderCell>
+
           </Table.Row>
         </Table.Header>
     
@@ -152,6 +162,14 @@ export default observer(function DoktoriDetails() {
             <Table.Cell>{pacienti.emri}</Table.Cell>
             <Table.Cell>{pacienti.mbiemri}</Table.Cell>
             <Table.Cell>{pacienti.email}</Table.Cell>
+            <Button as={Link} to={`/PacientiDetails/${pacienti.id}`} primary floated='left' placeholder='Details' color="teal">Details</Button>
+            {user?.discriminator === "Doktori" ?(
+              <>
+              
+                            <Button loading={ target === pacienti.id!}  
+  onClick={(e)=> handleDeletePacientiDoktori(e,pacienti.id!,Doktori.id!)}  className="button" aria-label="Delete" color="red">Delete
+      </Button>
+      </>) : null}
 
             </Table.Row>
 

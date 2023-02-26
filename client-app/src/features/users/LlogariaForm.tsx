@@ -1,6 +1,7 @@
 
 import { format } from 'date-fns';
-import { Card, Container,  Header, Input } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Button, Card, Container,  Header, Input } from 'semantic-ui-react';
 import { useStore } from '../../app/stores/store';
 
 export default function Llogaria(){
@@ -59,10 +60,17 @@ return (
         <div className="container" > 
         <Input readOnly className='Input'>{user?.discriminator}</Input>
         </div>
-
+          
+  
   </Container>
     </Card.Content>
+    {user?.discriminator==='Doktori' || user?.discriminator==='Pacienti' ? (
+  <Button as={Link} to={user?.discriminator==='Doktori' ? `/DoktoriDetails/${user?.id}` : `/PacientiDetails/${user?.id}`} primary floated='left' placeholder='Details' color="teal">Details</Button>
+) : null}
+
+    
   </Card>
+  
 
 )
 

@@ -1,6 +1,6 @@
 import { Formik,} from "formik";
 import { observer } from "mobx-react-lite";
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
@@ -16,14 +16,22 @@ export default observer(function CreateTerminiForm(){
     const validationSchema = Yup.object({
         data:Yup.date().required('Data është e detyrueshme'),
         koha:Yup.string().required('Koha është e detyrueshme'),
+        pacientiId:Yup.string().required('Pacienti është i detyrueshëm'),
     });
-   const {terminiStore}=useStore();
+    
+   const {terminiStore, pacientiStore}=useStore();
+    const {loadPacientet, pacientiByEmri}=pacientiStore;
     const{loading,loadingInitial,createTermini}=terminiStore;
     const navigate = useNavigate();
     const [termini] = useState<Termini>({
         data:null,
         koha:'',
+        pacientiId:'',
     });
+     useEffect(()=>{
+       loadPacientet();
+     },[loadPacientet]);
+
      function handleFormSubmit(termini: Termini){
      let newTermini = {
         ...termini,
@@ -48,6 +56,9 @@ export default observer(function CreateTerminiForm(){
                                     dateFormat='d MMMM yyyy'
                                 />
                 <MyTextInput placeholder='Koha' name='koha'/>
+                <MySelectInput options={pacientiByEmri.map((pacienti)=>{
+                            return {text:pacienti.emri,value:pacienti.id}
+                        })}  placeholder='Pacienti' name="pacientiId"/>
                 <Button loading={loading} floated="right" positive type="submit" content='Submit'/>
                 <Button as={NavLink} to='/terminet' floated="right"  type="button" content='Cancel'/>
                 </Form> 

@@ -26,7 +26,7 @@ namespace Application.Pacient
         public string Discriminator {get; set;}
         public ICollection<TretmaniDto> Tretmanet { get; set; }
         public ICollection<XRayDto> XRays { get; set; }
-
         public ICollection<DoktoriDto> Doktoret { get; set; }
+        public ICollection<TerminiDto> Terminet { get; set; }
     }
 }

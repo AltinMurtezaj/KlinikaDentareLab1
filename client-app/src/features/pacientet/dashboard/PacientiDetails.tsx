@@ -22,7 +22,7 @@ export default observer(function PacientiDetails() {
   }, [id, loadPacienti, state, setState]);
 function handleDeletePacientiDoktori(e:SyntheticEvent<HTMLButtonElement>,PacientiId:string, DoktoriId:string, id: number){
   setTarget(e.currentTarget.name);
-  deletePacientiDoktori(PacientiId, DoktoriId, id);
+  deletePacientiDoktori(PacientiId, DoktoriId);
   loadDoktoriPacienti(PacientiId, DoktoriId);
   setState(true);
 }
@@ -37,31 +37,17 @@ function handleDeletePacientiDoktori(e:SyntheticEvent<HTMLButtonElement>,Pacient
                     <Table.Header>
                       <Table.Row>
                           <Table.HeaderCell>Emri </Table.HeaderCell>
-                          <Table.HeaderCell>Mbiemri</Table.HeaderCell>
-                          <Table.HeaderCell>Kontakti</Table.HeaderCell>
+                          <Table.HeaderCell>Pershkrimi</Table.HeaderCell>
+                          <Table.HeaderCell>Cmimi</Table.HeaderCell>
                           <Table.HeaderCell colSpan="1">Operations</Table.HeaderCell>
                       </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                      {pacienti?.doktoret?.map((doktori) => (
-                          <Table.Row key={doktori.id} >
-                              <Table.Cell>{doktori.emri}</Table.Cell>
-                              <Table.Cell>{doktori.mbiemri}</Table.Cell>
-                              <Table.Cell>{doktori.email}</Table.Cell>
-                              <Table.Cell> 
-                                {
-                                 (user!.discriminator === "Doktori")? 
-                                  
-                                    <div>
-                                      <Button as={Link} to={`/editDoktoriPacienti/${pacienti.id}/${doktori.id}`} primary  placeholder='Edit' color="blue">Edit</Button>
-                                  <Button loading={ target === pacienti.id!} 
-  onClick={(e)=> handleDeletePacientiDoktori(e,pacienti.id!,doktori.id!,doktoriPacienti?.id!)}  className="button" aria-label="Delete" color="red">Delete
-      </Button>
-                                    </div>
-                                  : null
-                        
-                      }
-                        </Table.Cell>
+                      {pacienti?.tretmanet?.map((tretmani) => (
+                          <Table.Row key={tretmani.id} >
+                              <Table.Cell>{tretmani.emri}</Table.Cell>
+                              <Table.Cell>{tretmani.pershkrimi}</Table.Cell>
+                              <Table.Cell>{tretmani.cmimi}</Table.Cell>
                           </Table.Row>
                       ))}</Table.Body>
                      

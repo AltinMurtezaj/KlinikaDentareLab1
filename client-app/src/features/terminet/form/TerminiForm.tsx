@@ -18,23 +18,27 @@ import internal from 'stream';
 
 
 export default observer( function TerminiForm(){
-    const {terminiStore} = useStore();
+    const {terminiStore, pacientiStore} = useStore();
     
     const {updateTermini,loading,loadTermini,loadingInitial} = terminiStore;
+    const {loadPacientet, pacientiByEmri} = pacientiStore;
      const{id} = useParams<{id:string}>();   
      const navigate = useNavigate();
      const [termini,setTermini] = useState<Termini>({
         id:'',
         data:null,
         koha:'',
+        pacientiId:'',
      });
      const validationSchema = Yup.object({
         data:Yup.date().required('Data është e detyrueshme'),
         koha:Yup.string().required('Koha është e detyrueshme'),
+        pacientiId:Yup.string().required('Pacienti është i detyrueshëm'),
      })
      useEffect(()=>{
+       loadPacientet();
         if(id) loadTermini(id).then(termini =>setTermini(termini!))
-     },[id, loadTermini]);
+     },[id, loadTermini, loadPacientet]);
            
     function handleFormSubmit(Termini: Termini){
             updateTermini(Termini).then(() =>navigate(`/terminet`));
@@ -58,6 +62,9 @@ export default observer( function TerminiForm(){
                               dateFormat='d MMMM yyyy'
                          />
                         <MyTextInput placeholder='Koha' name='koha'/>
+                        <MySelectInput options={pacientiByEmri.map((pacienti)=>{
+                            return {text:pacienti.emri,value:pacienti.id}
+                        })}  placeholder='Pacienti' name="pacientiId"/>
                         <Button 
                         disabled={isSubmitting || !dirty || !isValid}
                         loading={loading} 

@@ -11,7 +11,7 @@ const AdminRoute = ()=>{
     const {userStore}=useStore();
 
 
-    return userStore.user?.discriminator==="Admini" ? <Outlet/>: <Llogaria/>;
+    return userStore.user?.discriminator==="AppUser" ? <Outlet/>: <Llogaria/>;
 };
 
 export default AdminRoute;

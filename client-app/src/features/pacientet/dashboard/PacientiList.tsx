@@ -8,7 +8,8 @@ import { useStore } from "../../../app/stores/store";
 
 
 export default observer(function PacientiList(){
-    const {pacientiStore} = useStore();
+    const {pacientiStore, userStore} = useStore();
+    const {user} = userStore;
     const {deletePacienti, loading, loadPacientet, getPacientet } = pacientiStore;
     const [target, setTarget] = useState('');
 
@@ -59,9 +60,9 @@ export default observer(function PacientiList(){
         <Table.Cell>{pacienti.vendbanimi}</Table.Cell>
         <Table.Cell>{pacienti.email}</Table.Cell>
         <Table.Cell colSpan="3">
-        <Button as={Link} to={`/PacientiDetails/${pacienti.id}`} primary floated='left' placeholder='Details' color="teal">Details</Button>
-            
-            <Button as={Link} to={`/managePacienti/${pacienti.id}`} floated='left' color='blue'>
+        {user?.discriminator==="Doktori" ? (
+                    <>
+                     <Button as={Link} to={`/managePacienti/${pacienti.id}`} floated='left' color='blue'>
                                 <Icon name='edit'/>
                             </Button>
                             <Button 
@@ -73,6 +74,11 @@ export default observer(function PacientiList(){
                         >
                                 <Icon name='delete'/>
                             </Button>
+                            </>) : <Button as={Link} to={`/PacientiDetails/${pacienti.id}`} primary floated='left' placeholder='Details' color="teal">Details</Button>}
+        
+            
+           
+                            
                             
                         </Table.Cell>
                         

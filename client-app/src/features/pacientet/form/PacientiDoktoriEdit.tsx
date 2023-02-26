@@ -10,14 +10,15 @@ import { PacientiDoktoriDTO } from "../../../app/models/PacientiDoktoriDTO";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 
 export default observer(function PacientiDoktoriEdit(){
-     const {pacientiStore,doktoriStore,pacientiDoktoriStore}=useStore();
+     const {pacientiStore,doktoriStore,pacientiDoktoriStore, userStore}=useStore();
     const{loading,loadingInitial,pacientiByEmri}=pacientiStore;
+    const{user} = userStore;
     const{updatePacientiDoktori,loadDoktoriPacienti}=pacientiDoktoriStore;
     const{doktoriByEmri}=doktoriStore;
     const navigate = useNavigate();
      const{PacientiId,DoktoriId} = useParams<{PacientiId:string,DoktoriId:string}>();
       const [doktoripacienti,setPacienti] = useState<PacientiDoktoriDTO>({
-         DoktoriId:'',
+         DoktoriId:user?.id,
         PacientiId:''
      });
     useEffect(()=>{
@@ -47,10 +48,7 @@ export default observer(function PacientiDoktoriEdit(){
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='of'>
                <MySelectInput options={pacientiByEmri.map((pacienti)=>{
                             return {text:pacienti.emri,value:pacienti.id}
-                        })}  placeholder={doktoripacienti.PacientiId} name="PacientiId"/>
-                        <MySelectInput options={doktoriByEmri.map((doktori)=>{
-                            return {text:doktori.emri,value:doktori.id}
-                        })}  placeholder={doktoripacienti.DoktoriId} name="DoktoriId"/>
+                        })}  placeholder={doktoripacienti.PacientiId} name="PacientiId"/>                       
                 <Button 
                  disabled={isSubmitting || !dirty || !isValid}
                         loading={loading} 

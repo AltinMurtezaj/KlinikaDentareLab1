@@ -106,14 +106,14 @@ export default class PacientiDoktoriStore{
             })
         }
     }
-    deletePacientiDoktori = async (pacientiId: string, doktoriid: string, id: number) => {
+    deletePacientiDoktori = async (pacientiId: string, doktoriid: string) => {
         this.loading = true;
         try {
             await agent.PacientiDoktori.delete(pacientiId, doktoriid);
-            runInAction(() => {
-                this.pacientiDoktoriRegistry.delete(id);
-                this.loading = false;
-            })
+            // runInAction(() => {
+            //     this.pacientiDoktoriRegistry.delete(id);
+            //     this.loading = false;
+            // })
         } catch (error) {
             console.log(error);
             runInAction(() => {

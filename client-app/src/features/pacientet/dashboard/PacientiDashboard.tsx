@@ -8,7 +8,8 @@ import RegisterForm from '../../users/RegisterForm';
 import PacientiList from './PacientiList';
 
 export default observer( function PacientiDashboard(){
-    const {pacientiStore, modalStore} = useStore();
+    const {pacientiStore, modalStore, userStore} = useStore();
+    const {user} = userStore;
     const {loadPacientet} = pacientiStore;
   
 
@@ -28,8 +29,13 @@ export default observer( function PacientiDashboard(){
                 </Button>
             </Grid.Column>
             <Grid.Column width ='16'>
-                        <Header style={{color:'teal'}}>Doktoret e pacienteve specifike</Header>
+            {user?.discriminator==="Doktori" ? (
+                    <>
+                    <Header style={{color:'teal'}}>Doktoret e pacienteve specifike</Header>
                         <Button as={NavLink} to='/pacientiDoktoriForm' primary positive>+Vendosi pacientin doktorit</Button>
+                        
+                    </>) : null}
+                        
             </Grid.Column>
         </Grid>
         </>

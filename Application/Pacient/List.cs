@@ -30,7 +30,7 @@ namespace Application.Pacient
             public async Task<Result<List<PacientiDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var pacientet = await _context.Pacientet.Include(x => x.Doktoret).ThenInclude(x => x.Doktori)
-                                                            .Include(x => x.Tretmanet)
+                                                            .Include(x => x.Tretmanet).Include(x=>x.Terminet)
                                                         .ToListAsync();
                 var pacientetList = _mapper.Map<List<PacientiDto>>(pacientet);
                 return Result<List<PacientiDto>>.Success(pacientetList);

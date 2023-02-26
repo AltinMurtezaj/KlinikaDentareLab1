@@ -203,9 +203,14 @@ namespace Persistence.Migrations
                     b.Property<string>("Koha")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PacientiId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DoktoriId");
+
+                    b.HasIndex("PacientiId");
 
                     b.ToTable("Terminet");
                 });
@@ -479,11 +484,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.PacientiDoktori", b =>
                 {
                     b.HasOne("Domain.Doktori", "Doktori")
-                        .WithMany("PacientiDoktoret")
+                        .WithMany("Pacientet")
                         .HasForeignKey("DoktoriId");
 
                     b.HasOne("Domain.Pacienti", "Pacienti")
-                        .WithMany("PacientiDoktoret")
+                        .WithMany("Doktoret")
                         .HasForeignKey("PacientiId");
 
                     b.Navigation("Doktori");
@@ -507,6 +512,12 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Doktori", null)
                         .WithMany("Terminet")
                         .HasForeignKey("DoktoriId");
+
+                    b.HasOne("Domain.Pacienti", "Pacienti")
+                        .WithMany("Terminet")
+                        .HasForeignKey("PacientiId");
+
+                    b.Navigation("Pacienti");
                 });
 
             modelBuilder.Entity("Domain.Tretmani", b =>
@@ -581,7 +592,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Doktori", b =>
                 {
-                    b.Navigation("PacientiDoktoret");
+                    b.Navigation("Pacientet");
 
                     b.Navigation("Terminet");
 
@@ -595,7 +606,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Pacienti", b =>
                 {
-                    b.Navigation("PacientiDoktoret");
+                    b.Navigation("Doktoret");
+
+                    b.Navigation("Terminet");
 
                     b.Navigation("Tretmanet");
 

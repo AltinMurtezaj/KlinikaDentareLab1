@@ -13,21 +13,21 @@ import LoadingComponent from "../../../app/layout/LoadingComponents";
 
 export default observer(function PacientiDoktoriForm(){
      
-   const {pacientiStore,doktoriStore,pacientiDoktoriStore}=useStore();
+   const {pacientiStore,pacientiDoktoriStore, userStore}=useStore();
     const{loading,loadingInitial,pacientiByEmri
     ,loadPacientet}=pacientiStore;
+    const {user} = userStore
     const{createPacientiDoktori}=pacientiDoktoriStore;
-    const{doktoriByEmri,loadDoktoret}=doktoriStore;
     const navigate = useNavigate();
     const [doktoriPacienti] = useState<PacientiDoktoriDTO>({
-        DoktoriId:'',
+        DoktoriId:user?.id,
         PacientiId:'',
     });
 
     useEffect(()=>{
         loadPacientet();
-        loadDoktoret();
-    },[loadPacientet,loadDoktoret])
+
+    },[loadPacientet])
     const validationSchema = Yup.object({
         PacientiId:Yup.string().required('Pacienti eshte i detyrueshem'),
         DoktoriId:Yup.string().required('Doktori eshte i detyrueshem')
@@ -56,11 +56,7 @@ export default observer(function PacientiDoktoriForm(){
                <MySelectInput options={pacientiByEmri.map((pacienti)=>{
                             return {text:pacienti.emri,value:pacienti.id}
                         })}  placeholder='Pacienti' name="PacientiId"/>
-                        <MySelectInput options={doktoriByEmri.map((doktori)=>{
-                            return {text:doktori.emri+' '+doktori.mbiemri,value:doktori.id}
-                        })}  placeholder='Doktori' name="DoktoriId"/>
                         
-
                 <Button loading={loading} floated="right" positive type="submit" content='Submit'/>
                 <Button as={NavLink} to='/pacientet' floated="right"  type="button" content='Cancel'/>
                 </Form> 

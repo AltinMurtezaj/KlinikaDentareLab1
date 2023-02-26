@@ -31,11 +31,11 @@ namespace Application.Pacient
             }
             public async Task<Result<PacientiDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pacienti = await _context.Pacientet.Include(x => x.Doktoret).SingleOrDefaultAsync(x => x.Id == request.Id);
+                var pacienti = await _context.Pacientet.Include(x => x.Doktoret).Include(x=>x.Tretmanet).Include(b=>b.XRays).Include(x=>x.Terminet)
+                .SingleOrDefaultAsync(x => x.Id == request.Id);
                 var pacientiToReturn = _mapper.Map<PacientiDto>(pacienti);
                 if(pacienti ==null) return null;
                 return Result<PacientiDto>.Success(pacientiToReturn);           }
-
         }
 
     }

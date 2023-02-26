@@ -17,5 +17,6 @@ namespace Application.TretmaniCourse
         public float Cmimi { get; set; }
         public ICollection<UdhezimiDto> Udhezimet { get; set; } = new List<UdhezimiDto>();
         public ICollection<XRayDto> XRays { get; set; } = new List<XRayDto>(); 
+        public int KontrollaId {get; set;}
     }
 }
