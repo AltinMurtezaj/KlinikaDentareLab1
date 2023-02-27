@@ -30,8 +30,7 @@ namespace Application.XRayFolder
             }
             public async Task<Result<List<XRayDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var xray = await _context.XRays
-         .ToListAsync();
+                var xray = await _context.XRays.Include(x=>x.Pacienti).ToListAsync();
                 var xrayList = _mapper.Map<List<XRayDto>>(xray);
                 return Result<List<XRayDto>>.Success(xrayList);
             }

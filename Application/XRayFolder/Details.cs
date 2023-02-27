@@ -28,7 +28,7 @@ namespace Application.XRayFolder
             public async Task<XRay> Handle(Query request, CancellationToken cancellationToken)
 
             {
-                return await _context.XRays.Include(x=>x.Tretmani).SingleOrDefaultAsync(x=>x.Id == request.Id);
+                return await _context.XRays.FindAsync(request.Id);
                 
             }
 

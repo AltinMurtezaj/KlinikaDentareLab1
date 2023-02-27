@@ -20,13 +20,16 @@ export default observer(function CreateUdhezimiForm(){
         Data: Yup.string().required('Data duhet plotesuar'),
 
     });
-   const {udhezimiStore}=useStore();
+   const {udhezimiStore, pacientiStore, tretmaniStore}=useStore();
+   const {loadPacientet, pacientiRegistry, pacientiByEmri}=pacientiStore;
+    const {loadTretmanet, tretmaniRegistry, tretmaniById}=tretmaniStore;
     const{loading,loadingInitial,createUdhezimi}=udhezimiStore;
     const navigate = useNavigate();
     const [udhezimi] = useState<Udhezimi>({
        Emri: '',
        Doza: '',
-       TretmaniId: ''
+       TretmaniId: '',
+       pacientiId: '',
     });
      function handleFormSubmit(udhezimi: Udhezimi){
      let newUdhezimi = {
@@ -50,7 +53,13 @@ export default observer(function CreateUdhezimiForm(){
                               placeholderText='Data'
                               name='Data'
                               dateFormat='d MMMM yyyy'
-                         />                
+                         />  
+                         <MySelectInput options={pacientiByEmri.map((pacienti)=>{
+                            return {text:pacienti.emri,value:pacienti.id}
+                        })}  placeholder='Pacienti' name="pacientiId"/>
+                        <MySelectInput options={tretmaniById.map((tretmani)=>{
+                            return {text:tretmani.emri,value:tretmani.id}
+                        })}  placeholder='Tretmani' name="TretmaniId"/>            
                 <Button loading={loading} floated="right" positive type="submit" content='Submit'/>
                 <Button as={NavLink} to='/Udhezimi' floated="right"  type="button" content='Cancel'/>
                 </Form> 

@@ -14,6 +14,8 @@ namespace Domain
         public string Doza { get; set; }
         public int TretmaniId { get; set; }
         public Tretmani Tretmani { get; set; }
+        public string PacientiId { get; set; }
+        public Pacienti Pacienti { get; set; }
     
     }
 }

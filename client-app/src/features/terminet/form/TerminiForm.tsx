@@ -18,10 +18,11 @@ import internal from 'stream';
 
 
 export default observer( function TerminiForm(){
-    const {terminiStore, pacientiStore} = useStore();
+    const {terminiStore, pacientiStore, tretmaniStore} = useStore();
     
     const {updateTermini,loading,loadTermini,loadingInitial} = terminiStore;
     const {loadPacientet, pacientiByEmri} = pacientiStore;
+    const {loadTretmanet, tretmaniById} = tretmaniStore;
      const{id} = useParams<{id:string}>();   
      const navigate = useNavigate();
      const [termini,setTermini] = useState<Termini>({
@@ -65,6 +66,9 @@ export default observer( function TerminiForm(){
                         <MySelectInput options={pacientiByEmri.map((pacienti)=>{
                             return {text:pacienti.emri,value:pacienti.id}
                         })}  placeholder='Pacienti' name="pacientiId"/>
+                        <MySelectInput options={tretmaniById.map((tretmani)=>{
+                            return {text:tretmani.emri,value:tretmani.id}
+                        })}  placeholder='Tretmani' name="TretmaniId"/>    
                         <Button 
                         disabled={isSubmitting || !dirty || !isValid}
                         loading={loading} 

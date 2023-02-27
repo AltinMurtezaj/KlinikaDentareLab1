@@ -9,6 +9,7 @@ using Application.TerminiFolder;
 using Application.KontrollaFolder;
 using Application.XRayFolder;
 using Application.Doctor;
+using Application.UdhezimetCourse;
 
 namespace Application.Pacient
 {
@@ -28,5 +29,6 @@ namespace Application.Pacient
         public ICollection<XRayDto> XRays { get; set; }
         public ICollection<DoktoriDto> Doktoret { get; set; }
         public ICollection<TerminiDto> Terminet { get; set; }
+        public ICollection<UdhezimiDto> Udhezimet { get; set; }
     }
 }

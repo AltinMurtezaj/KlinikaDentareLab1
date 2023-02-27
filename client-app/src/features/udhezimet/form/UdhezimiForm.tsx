@@ -8,15 +8,17 @@ import { Formik,Form} from 'formik';
 import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { Udhezimi } from '../../../app/models/udhezimi';
+import MySelectInput from './MySelectInput';
 
 
 
 
 
 export default observer( function UdhezimiForm(){
-    const {udhezimiStore} = useStore();
+    const {udhezimiStore, pacientiStore} = useStore();
     
     const {updateUdhezimi,loading,loadUdhezimi,loadingInitial} = udhezimiStore;
+    const {loadPacientet, pacientiByEmri} = pacientiStore;
      const{id} = useParams<{id:string}>();
      const navigate = useNavigate();
      const [udhezimi,setUdhezimi] = useState<Udhezimi>({
@@ -24,6 +26,7 @@ export default observer( function UdhezimiForm(){
         Emri: '',
         Doza: '',
         TretmaniId: '',
+        pacientiId: ''
 
      });
      const validationSchema = Yup.object({
@@ -56,7 +59,9 @@ export default observer( function UdhezimiForm(){
                         
                         <MyTextInput placeholder='Emri'  name='emri'/> 
                         <MyTextInput placeholder='Doza'  name='doza'/>
-
+                        <MySelectInput options={pacientiByEmri.map((pacienti)=>{
+                            return {text:pacienti.emri,value:pacienti.id}
+                        })}  placeholder='Pacienti' name="pacientiId"/>
                         <Button 
                         disabled={isSubmitting || !dirty || !isValid}
                         loading={loading} 

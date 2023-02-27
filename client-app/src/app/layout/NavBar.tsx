@@ -26,14 +26,15 @@ export default observer(function NavBar(){
                 <Menu.Item as={NavLink} to='/kontrollat' name ='Kontrollat' />
                 <Menu.Item as={NavLink} to='/tretmanet' name ='Tretmanet' />
                 <Menu.Item as={NavLink} to='/xrays' name ='XRays' />
+                <Menu.Item as={NavLink} to='/udhezimet' name='Udhezimet'/>
                 </>) : null}
 
                 {user?.discriminator==="Pacienti" ? (
                     <>
                 <Menu.Item as={NavLink} to='/termini' name='Termini'/>
-                <Menu.Item as={NavLink} to='/kontrollat' name='Kontrollat'/>
+                <Menu.Item as={NavLink} to='/udhezimi' name='Udhezimi'/>
                 <Menu.Item as={NavLink} to='/tretmani' name='Tretmani'/>
-                <Menu.Item as={NavLink} to='/xrays' name ='XRays' />
+                <Menu.Item as={NavLink} to='/xray' name ='xray' />
                 </>) : null}
 
 

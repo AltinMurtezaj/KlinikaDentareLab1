@@ -20,29 +20,40 @@ export default observer(function HomePage(){
                     <>
                     <Header as='h2' inverted content='Welcome to Dental Clinic'/>
                     {user?.discriminator==="Pacienti" ?(
-                        <Button as ={Link} to='/terminet' size='huge' inverted>
-                                Go to Appointments
+                        <>
+                        <Button as ={Link} to='/pacientet' size='huge' inverted>
+                                Go to Pacienti Details
                         </Button>
-                            ):
-                            <>
+                            </>):null}
+
+                        {user?.discriminator==="Doktori" ?(
+                        <>
+                            
+                        <Button as ={Link} to='/doktoret' size='huge' inverted>
+                            Go to Doctor Details
+                        </Button>
+
+                        </>):null}
+                        {user?.discriminator==="AppUser" ?(
+                        <>
+                            
                         <Button as ={Link} to='/doktoret' size='huge' inverted>
                             Go to Doctors
                         </Button>
-
+                        <Button as ={Link} to='/pacientet' size='huge' inverted>
+                            Go to Patients
+                        </Button>
+                        <Button as ={Link} to='/laborantet' size='huge' inverted>
+                            Go to Laborants
+                        </Button>
                         <Button as ={Link} to='/infermjeret' size='huge' inverted>
                             Go to Nurses
                         </Button>
 
-                        <Button as ={Link} to='/pacientet' size='huge' inverted>
-                            Go to Pacients
-                        </Button>
-
-                        <Button as ={Link} to='/laborantet' size='huge' inverted>
-                            Go to Laborant's
-                        </Button>
+                        </>):null}
                         </>
-                        }
-                    </>
+                        
+                    
                     
                 ) : (
                     <>

@@ -12,5 +12,6 @@ namespace Application.XRayFolder
     {
          public int Id { get; set; }
         public DateTime Data { get; set; }
+        public string PacientiId { get; set; }
     }
 }

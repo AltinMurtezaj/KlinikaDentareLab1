@@ -2,6 +2,8 @@ import { Doktori } from "./doktori";
 import { Kontrolla } from "./kontrolla";
 import { Pacienti } from "./pacienti";
 import { Pagesa } from "./pagesa";
+import { Udhezimi } from "./udhezimi";
+import { XRay } from "./xray";
 
 export interface Tretmani {
     id?: string;
@@ -16,4 +18,6 @@ export interface Tretmani {
     pacienti?: Pacienti;
     kontrollaId?: string;
     kontrollat?: Kontrolla[];
+    udhezimet?: Udhezimi[];
+    xrays?: XRay[];
 }

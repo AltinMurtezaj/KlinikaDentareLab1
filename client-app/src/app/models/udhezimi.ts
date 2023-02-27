@@ -5,5 +5,6 @@ export interface Udhezimi {
     Emri: string;
     Doza: string;
     TretmaniId: string;
-    Tretmani?: Tretmani;
+    Tretmani?: string;
+    pacientiId?: string;
   }

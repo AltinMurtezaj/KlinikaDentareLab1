@@ -5,4 +5,5 @@ export interface XRay {
     Data: string;
     TretmaniId?: string | undefined;
     Tretmani?: Tretmani;
+    pacientiId?: string;
 }

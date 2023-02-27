@@ -9,25 +9,30 @@ import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { XRay } from '../../../app/models/xray';
 import MyDateInput from './MyDateInput';
+import MySelectInput from './MySelectInput';
 
 
 export default observer( function XRayForm(){
-    const {xrayStore} = useStore();
+    const {xrayStore, pacientiStore} = useStore();
 
     const {updateXRay,loading,loadXRay,loadingInitial} = xrayStore;
+    const {pacientiByEmri, loadPacientet} = pacientiStore;
      const{id} = useParams<{id:string}>();
      const navigate = useNavigate();
      const [xray,setXRay] = useState<XRay>({
         Id: '',
         Data: '',
+        pacientiId:'',
      });
      const validationSchema = Yup.object({
         
         data: Yup.string().required('Data duhet plotesuar'),
+        pacientiId:Yup.string().required('Pacienti duhet plotesuar'),
      })
      useEffect(()=>{
+        loadPacientet();
         if(id) loadXRay(id).then(xray =>setXRay(xray!))
-     },[id, loadXRay]);
+     },[id, loadXRay, loadPacientet]);
       
     function handleFormSubmit(XRay: XRay){
     updateXRay(XRay).then(() =>navigate(`/XRays`))
@@ -52,6 +57,9 @@ export default observer( function XRayForm(){
                               name='data'
                               dateFormat='d MMMM yyyy'
                          />
+                          <MySelectInput options={pacientiByEmri.map((pacienti)=>{
+                            return {text:pacienti.emri,value:pacienti.id}
+                        })}  placeholder='Pacienti' name="pacientiId"/>
                     
 
                         <Button 

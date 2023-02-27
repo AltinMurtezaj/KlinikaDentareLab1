@@ -95,6 +95,22 @@ public class DataContext : IdentityDbContext<AppUser>
                 .HasOne(t => t.Pacienti)
                 .WithMany(p => p.Terminet)
                 .HasForeignKey(t => t.PacientiId);
+            builder.Entity<Pacienti>()
+                .HasMany(p => p.Terminet)
+                .WithOne(t => t.Pacienti)
+                .HasForeignKey(t => t.PacientiId);
+            builder.Entity<Pacienti>()
+                .HasMany(p => p.XRays)
+                .WithOne(t => t.Pacienti)
+                .HasForeignKey(t => t.PacientiId);
+            builder.Entity<Pacienti>()
+                .HasMany(p => p.Udhezimet)
+                .WithOne(t => t.Pacienti)
+                .HasForeignKey(t => t.PacientiId);
+            builder.Entity<Udhezimi>()
+                .HasOne(u => u.Pacienti)
+                .WithMany(p => p.Udhezimet)
+                .HasForeignKey(u => u.PacientiId);
            
                
         }

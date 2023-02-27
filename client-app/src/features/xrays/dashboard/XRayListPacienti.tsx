@@ -22,16 +22,11 @@ export default observer(function XRayListPacienti() {
     useEffect(() => {
         if (id) loadPacienti(id);
         if (state) setState(false);
+        console.log(pacienti);
+        
     }, [id, loadPacienti, state, setState]);
     
 
-    function MyComponent({ Data }: { Data: Date | null }) {
-      return (
-        <CardContent>
-          {Data ? Data.toLocaleDateString() : 'No date'}
-        </CardContent>
-      );
-    }
     
     
     function handleDeleteTermini(e:SyntheticEvent<HTMLButtonElement>, id: string){
@@ -39,19 +34,23 @@ export default observer(function XRayListPacienti() {
         xrayStore.deleteXRay(id);
         setState(true);
     }
-
     if (loadingInitial || !pacienti)
         return <LoadingComponent content={""} />;
     return (
         <Card fluid style={{marginTop: "2em"}}>
-     <Card.Header className="lendaTitle">{pacienti?.emri}</Card.Header>
-                    {pacienti?.xrays?.map((xray) => (
-                      <Card>
-                        <Card.Header>Termini</Card.Header>
-                        <Card.Content>{xray.Id}</Card.Content>
-                        <Card.Content>{xray.Data}</Card.Content>         
-                      </Card>
-                    ))}
-        </Card>
+  <Card.Header className="lendaTitle" style={{ fontSize: "24px", fontWeight: "bold" }}>{pacienti?.emri}</Card.Header>
+  {pacienti?.xrays && pacienti.xrays.length > 0 ? (
+    pacienti.xrays.map((xray) => (
+      <Card key={xray.Id}>
+        <Card.Header>X-Rays</Card.Header>
+        <Card.Content>{xray.Id}</Card.Content>
+        <Card.Content>{xray.Data}</Card.Content>         
+      </Card>
+    ))
+  ) : (
+    <Card.Content>No X-Rays found</Card.Content>
+  )}
+</Card>
+
     )
  }) 

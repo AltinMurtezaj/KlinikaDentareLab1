@@ -31,7 +31,7 @@ function handleDeletePacientiDoktori(e:SyntheticEvent<HTMLButtonElement>,Pacient
 
     return (
       <Card fluid style={{marginTop:'50px'}}>
-          <Card.Header className="lendaTitle">{pacienti?.emri}</Card.Header>
+           <Card.Header className="lendaTitle" style={{ fontSize: "24px", fontWeight: "bold" }}>{pacienti?.emri}</Card.Header>
           
                   <Table>
                     <Table.Header>
@@ -39,7 +39,6 @@ function handleDeletePacientiDoktori(e:SyntheticEvent<HTMLButtonElement>,Pacient
                           <Table.HeaderCell>Emri </Table.HeaderCell>
                           <Table.HeaderCell>Pershkrimi</Table.HeaderCell>
                           <Table.HeaderCell>Cmimi</Table.HeaderCell>
-                          <Table.HeaderCell colSpan="1">Operations</Table.HeaderCell>
                       </Table.Row>
                   </Table.Header>
                   <Table.Body>

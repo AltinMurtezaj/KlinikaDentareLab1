@@ -1,6 +1,6 @@
 import { Formik,} from "formik";
 import { observer } from "mobx-react-lite";
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
@@ -17,14 +17,21 @@ export default observer(function CreateXrayForm(){
     const validationSchema = Yup.object({
        
         Data: Yup.string().required('Data duhet plotesuar'),
+        pacientiId:Yup.string().required('Pacienti duhet plotesuar'),
 
     });
-   const {xrayStore}=useStore();
+   const {xrayStore, pacientiStore}=useStore();
     const{loading,loadingInitial,createXRay}=xrayStore;
+    const{pacientiByEmri, loadPacientet} = pacientiStore;
     const navigate = useNavigate();
     const [xray] = useState<XRay>({
        Data: '',
+       pacientiId:'',
     });
+    useEffect(()=>{
+        loadPacientet();
+    }
+    , [loadPacientet]);
      function handleFormSubmit(xray: XRay){
      let newXray = {
         ...xray,
@@ -47,7 +54,10 @@ export default observer(function CreateXrayForm(){
                               placeholderText='Data'
                               name='Data'
                               dateFormat='d MMMM yyyy'
-                         />                
+                         /> 
+                <MySelectInput options={pacientiByEmri.map((pacienti)=>{
+                            return {text:pacienti.emri,value:pacienti.id}
+                        })}  placeholder='Pacienti' name="pacientiId"/>           
                 <Button loading={loading} floated="right" positive type="submit" content='Submit'/>
                 <Button as={NavLink} to='/XRays' floated="right"  type="button" content='Cancel'/>
                 </Form> 

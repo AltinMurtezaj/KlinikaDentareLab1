@@ -54,6 +54,8 @@ import PacientiRoute from './PacientiRoute';
 import TretmaniListPacienti from '../../features/tretmani/Dashboard/TretmaniListPacienti';
 import JoinRoutePacientiDoktori from './JoinRoutePacientiDoktori';
 import TerminiListPacienti from '../../features/terminet/Dashboard/TerminiListPacienti';
+import XRayListPacienti from '../../features/xrays/dashboard/XRayListPacienti';
+import UdhezimiListPacienti from '../../features/udhezimet/dashboard/UdhezimiListPacienti';
 
 function App() {
   const location = useLocation();
@@ -88,7 +90,6 @@ function App() {
           <Routes>
             <Route element={<DoktoriRoute/>}>
             <Route path='/Tretmanet' element={<TretmaniDashboard/>}/>
-
             <Route  path='/udhezimet' element={<UdhezimiDashboard/>}/>
             <Route key={location.key}path='/manageUdhezimi/:id' element={<UdhezimiForm/>}/>
             <Route key={location.key}path='/UdhezimiDetails/:id' element={<UdhezimiDetails/> }/>
@@ -109,18 +110,29 @@ function App() {
             <Route  path='/pacientet' element={<PacientiDashboard/>}/>
             <Route key={location.key}path='/managePacienti/:id' element={<PacientiForm/>}/>
             <Route key={location.key}path='/DoktoriDetails/:id' element={<DoktoriDetails/>}/>
+            <Route key={location.key}path='/PacientiDetails/:id' element={<PacientiDetails/>}/>
+
 
             </Route>
 
             <Route element={<PacientiRoute/>}>
             <Route key={location.key}path='/PacientiDetails/:id' element={<PacientiDetails/> }/>
             <Route  path='/TretmaniPacienti/:id' element={<TretmaniListPacienti/>}/>
+            <Route  path='/TerminiPacienti/:id' element={<TerminiListPacienti/>}/>
+            <Route  path='/XRayPacienti/:id' element={<XRayListPacienti/>}/>
+            <Route  path='/UdhezimiPacienti/:id' element={<UdhezimiListPacienti/>}/>
+
+
+
+
             </Route>
 
 
             <Route element={<JoinRoutePacientiDoktori/>}>
             <Route path='/Tretmani' element={<TretmaniListPacienti/>}/>
             <Route path='/Termini' element={<TerminiListPacienti/>}/>
+            <Route path='/xray' element={<XRayListPacienti/>}/>
+            <Route path='/udhezimi' element={<UdhezimiListPacienti/>}/>
             </Route>
     
 
